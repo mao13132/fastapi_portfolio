@@ -6,6 +6,9 @@
 # 1.0       2023    Initial Version
 #
 # ---------------------------------------------
-from src.sql.bd import DBCore
+from pydantic import BaseModel
 
-DB = DBCore()
+
+class newUserTypes(BaseModel):
+    login: str
+    password: str

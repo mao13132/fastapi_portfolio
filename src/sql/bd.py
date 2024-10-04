@@ -23,39 +23,30 @@ class Users(Base):
 
     id = Column(Integer, primary_key=True, nullable=False)
 
-    email = Column(String, nullable=False)
+    login = Column(String, nullable=False)
 
     hashed_password = Column(String, nullable=False)
 
     roles = Column(String, default='["user"]')
 
 
-class DBCore:
-    __instance = None
+engine = create_async_engine(SQL_URL)
 
-    def __new__(cls, *args, **kwargs):
-        if cls.__instance is None:
-            cls.__instance = super().__new__(cls)
+# Создаём сессию
+async_session_maker = sessionmaker(engine, class_=AsyncSession, expire_on_commit=False)
 
-        return cls.__instance
 
-    def __init__(self):
-        self.engine = create_async_engine(SQL_URL)
+async def init_bases():
+    try:
+        async with engine.begin() as conn:
+            # await conn.run_sync(Base.metadata.drop_all)
+            await conn.run_sync(Base.metadata.create_all)
 
-        # Создаём сессию
-        self.async_session_maker = sessionmaker(self.engine, class_=AsyncSession, expire_on_commit=False)
+            return True
+    except Exception as es:
+        error_ = f'SQL Postgres: Ошибка не могу подключиться к базе данных "{es}"\n' \
+                 f'"{SQL_URL}"'
 
-    async def init_bases(self):
-        try:
-            async with self.engine.begin() as conn:
-                # await conn.run_sync(Base.metadata.drop_all)
-                await conn.run_sync(Base.metadata.create_all)
+        await logger_msg(error_, push=True)
 
-                return True
-        except Exception as es:
-            error_ = f'SQL Postgres: Ошибка не могу подключиться к базе данных "{es}"\n' \
-                     f'"{SQL_URL}"'
-
-            await logger_msg(error_, push=True)
-
-            return False
+        return False
