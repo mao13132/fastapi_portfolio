@@ -1,0 +1,10 @@
+version: "3.9"
+services:
+  postgres:
+    image: postgres:13.3
+    environment:
+      POSTGRES_DB: "portfolio"
+      POSTGRES_USER: "postgres_user"
+      POSTGRES_PASSWORD: "123123"
+    ports:
+      - "5433:5432"
