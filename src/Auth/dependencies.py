@@ -14,6 +14,7 @@ from jose import jwt, JWTError
 from settings import SECRET_JWT, ALGO_CRYPT, NAME_TOKEN
 from src.Users.UsersService import UsersService
 from src.exceptions import NoTokenException, TokenExpiredException, NoUserException
+from src.sql.bd import Users
 
 
 async def get_token_by_cookies(request: Request):
@@ -55,6 +56,15 @@ async def check_token(token: str = Depends(get_token_by_cookies)):
         raise TokenExpiredException
 
     return payload
+
+
+async def check_role(user: Users):
+    role = user.roles
+
+    if 'is_admin' not in role:
+        return False
+
+    return True
 
 
 async def get_current_user(payload: dict = Depends(check_token)):
