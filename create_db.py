@@ -6,9 +6,8 @@
 # 1.0       2023    Initial Version
 #
 # ---------------------------------------------
-from pydantic import BaseModel, Field
+import asyncio
 
+from src.sql.bd import init_bases
 
-class newUserTypes(BaseModel):
-    login: str = Field(..., description='Имя пользователя')
-    password: str
+asyncio.run(init_bases())

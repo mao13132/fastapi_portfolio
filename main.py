@@ -6,17 +6,27 @@
 # 1.0       2023    Initial Version
 #
 # ---------------------------------------------
-import asyncio
-
 import uvicorn
 from fastapi import FastAPI
+from starlette.middleware.cors import CORSMiddleware
 
-from src.Routers.routerAuth import routerAuth
-from src.sql.bd import init_bases
+from src.Routers.LoginRouter import loginRouter
+from src.Routers.routerRegister import routerRegister
 
 app = FastAPI()
 
-app.include_router(routerAuth)
+app.include_router(routerRegister)
+app.include_router(loginRouter)
+
+origins = [
+    "http://localhost",
+    "http://localhost:8082",
+    "http://localhost:3000",
+    "http://127.0.0.1"
+]
+
+app.add_middleware(CORSMiddleware,
+                   allow_origins=['*'], allow_credentials=True, allow_methods=["*"], allow_headers=["*"], )
 
 
 @app.get('/')
@@ -25,6 +35,4 @@ async def index():
 
 
 if __name__ == '__main__':
-    # asyncio.run(init_bases())
-
     uvicorn.run(app, host="127.0.0.1", port=8000)

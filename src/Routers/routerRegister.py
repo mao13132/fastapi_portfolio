@@ -10,16 +10,16 @@ from fastapi import APIRouter, Response
 
 from src.Auth.auth_core import password_hash
 from src.exceptions import UserErrorReg, UserExistsException
-from src.sql.services.UsersService import UsersService
+from src.Users.UsersService import UsersService
 from src.types.Users import newUserTypes
 
-routerAuth = APIRouter(
+routerRegister = APIRouter(
     prefix='/auth',
     tags=['Регистрация']
 )
 
 
-@routerAuth.post('/register')
+@routerRegister.post('/register', status_code=201)
 async def register_user(response: Response, data_user: newUserTypes) -> newUserTypes:
     existing_user = await UsersService.find_one_or_none(login=data_user.login)
 
@@ -33,6 +33,4 @@ async def register_user(response: Response, data_user: newUserTypes) -> newUserT
     if not res_add_user:
         raise UserErrorReg
 
-    response.status_code = 201
-
-    return {'login': data_user.login, 'password': data_user.password}
+    return data_user
