@@ -9,8 +9,9 @@
 from fastapi import APIRouter, Response, Depends
 from pydantic import BaseModel
 
+from settings import NAME_TOKEN
 from src.Auth.auth_core import authenticate_user, create_token
-from src.Users.dependencies import get_current_user
+from src.Auth.dependencies import get_current_user
 from src.exceptions import IncorrectLoginOrPasException
 from src.sql.bd import Users
 
@@ -34,7 +35,7 @@ async def login(response: Response, user_data: IUserAuth):
 
     access_token = create_token({'sub': str(user.id)})
 
-    response.set_cookie("access_token", access_token, httponly=True)
+    response.set_cookie(NAME_TOKEN, access_token, httponly=True)
 
     return access_token
 

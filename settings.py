@@ -22,4 +22,6 @@ SECRET_JWT = os.getenv('SECRET_JWT')
 
 ALGO_CRYPT = os.getenv('ALGO_CRYPT')
 
+NAME_TOKEN = 'access_token'
+
 ADMIN_ERROR = 1422194909
