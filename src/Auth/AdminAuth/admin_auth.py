@@ -12,7 +12,7 @@ from fastapi import Request
 from settings import NAME_TOKEN
 from src.Auth.auth_core import authenticate_user, create_token
 from src.Auth.dependencies import _check_token, _check_expired, check_role
-from src.Users.UsersService import UsersService
+from src.business.Users.UsersService import UsersService
 
 
 class AdminAuth(AuthenticationBackend):

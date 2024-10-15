@@ -12,7 +12,7 @@ from jose import jwt
 from passlib.context import CryptContext
 
 from settings import SECRET_JWT, ALGO_CRYPT
-from src.Users.UsersService import UsersService
+from src.business.Users.UsersService import UsersService
 
 hash_core = CryptContext(schemes=['bcrypt'], deprecated='auto')
 

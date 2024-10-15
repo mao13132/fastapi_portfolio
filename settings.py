@@ -9,10 +9,15 @@
 import os
 
 from dotenv import load_dotenv
+from fastapi_storages import FileSystemStorage
 
 dotenv_path = os.path.join(os.path.dirname(__file__), 'src', '.env')
 
+static_path = os.path.join(os.path.dirname(__file__), 'media')
+
 load_dotenv(dotenv_path)
+
+storage = FileSystemStorage(path=static_path)
 
 TOKEN = os.getenv('TOKEN')
 

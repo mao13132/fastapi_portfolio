@@ -10,6 +10,10 @@ from sqladmin import ModelView
 
 from src.sql.bd import Users
 
+"""
+Иконки https://fontawesome.com/
+"""
+
 
 class UserAdmin(ModelView, model=Users):
     column_list = [title.name for title in Users.__table__.columns if title.name != 'hashed_password']
@@ -22,7 +26,7 @@ class UserAdmin(ModelView, model=Users):
 
     icon = "fa-solid fa-user"
 
-    category = "Пользователи"
+    # category = "Пользователи"
 
     column_default_sort = [(Users.login, True), (Users.roles, False)]
 

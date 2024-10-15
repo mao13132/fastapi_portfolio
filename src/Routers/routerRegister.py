@@ -10,7 +10,7 @@ from fastapi import APIRouter, Response
 
 from src.Auth.auth_core import password_hash
 from src.exceptions import UserErrorReg, UserExistsException
-from src.Users.UsersService import UsersService
+from src.business.Users.UsersService import UsersService
 from src.types.Users import newUserTypes
 
 routerRegister = APIRouter(
