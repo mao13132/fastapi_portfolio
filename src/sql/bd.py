@@ -6,64 +6,29 @@
 # 1.0       2023    Initial Version
 #
 # ---------------------------------------------
-from fastapi_storages.integrations.sqlalchemy import FileType
 from sqlalchemy.ext.asyncio import create_async_engine, AsyncSession
-from sqlalchemy.orm import sessionmaker, DeclarativeBase
-from sqlalchemy import Column, Integer, String
+from sqlalchemy.orm import sessionmaker
+from sqlalchemy import Column, Integer, String, NullPool
 
-from settings import SQL_URL, storage
-from src.utils._logger import logger_msg
+from settings import SQL_URL, MODE, TEST_SQL_URL
 
+from src.business.Category.category_table import Category
+from src.business.Users.user_table import Users
 
-class Base(DeclarativeBase):
-    pass
+if MODE == 'TEST':
+    engine = create_async_engine(TEST_SQL_URL)
 
+    DATABASE_PARAM = {
+        'class_': AsyncSession, 'expire_on_commit': False, "poolclass": NullPool
+    }
+else:
+    engine = create_async_engine(SQL_URL)
 
-class Category(Base):
-    __tablename__ = f'category'
-
-    id = Column(Integer, primary_key=True, nullable=False)
-
-    title = Column(String, nullable=False)
-
-    description = Column(String, nullable=False)
-
-    sort_id = Column(Integer, nullable=True)
-
-    image = Column(FileType(storage=storage))
-
-    slug = Column(String, nullable=False)
-
-
-class Users(Base):
-    __tablename__ = 'users'
-
-    id = Column(Integer, primary_key=True, nullable=False)
-
-    login = Column(String, nullable=False)
-
-    hashed_password = Column(String, nullable=False)
-
-    roles = Column(String, default='["user", "admin"]')
-
-
-engine = create_async_engine(SQL_URL)
+    DATABASE_PARAM = {
+        'class_': AsyncSession, 'expire_on_commit': False
+    }
 
 # Создаём сессию
-async_session_maker = sessionmaker(engine, class_=AsyncSession, expire_on_commit=False)
+async_session_maker = sessionmaker(engine, **DATABASE_PARAM)
 
-
-async def init_bases():
-    try:
-        async with engine.begin() as conn:
-            # await conn.run_sync(Base.metadata.drop_all)
-            await conn.run_sync(Base.metadata.create_all)
-
-            return True
-    except Exception as es:
-        error_ = f'SQL Postgres: Ошибка не могу подключиться к базе данных "{es}"\n' \
-                 f'"{SQL_URL}"'
-
-        await logger_msg(error_, push=True)
-
-        return False
+# async_session_maker = sessionmaker(engine, class_=AsyncSession, expire_on_commit=False)

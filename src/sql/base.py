@@ -50,6 +50,40 @@ class BaseService:
             return False
 
     @classmethod
+    async def get_by_filters(cls, **filters):
+        try:
+            async with async_session_maker() as session:
+                query = select(cls.model).filter_by(**filters)
+
+                response = await session.execute(query)
+
+                result = response.scalars().all()
+
+                return result
+
+        except Exception as es:
+            await logger_msg(f'SQL ошибка при find_by_filters {cls.model} "{es}"', push=True)
+
+            return False
+
+    @classmethod
+    async def get_all(cls):
+        try:
+            async with async_session_maker() as session:
+                query = select(cls.model)
+
+                response = await session.execute(query)
+
+                result = response.scalars().all()
+
+                return result
+
+        except Exception as es:
+            await logger_msg(f'SQL ошибка при get_all {cls.model} "{es}"', push=True)
+
+            return False
+
+    @classmethod
     async def find_by_id(cls, model_id: int):
         async with async_session_maker() as session:
             query = select(cls.model).filter_by(id=model_id)

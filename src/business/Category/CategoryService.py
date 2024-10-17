@@ -6,9 +6,9 @@
 # 1.0       2023    Initial Version
 #
 # ---------------------------------------------
-from src.sql.bd import Users
+from src.business.Category.category_table import Category
 from src.sql.base import BaseService
 
 
-class UsersService(BaseService):
-    model = Users
+class CategoryService(BaseService):
+    model = Category
