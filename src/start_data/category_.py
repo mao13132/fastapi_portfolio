@@ -11,7 +11,7 @@
         "title": '',
         "description": "",
         "sort_id": "",
-        "image": r"",
+        "image": "",
         "slug": "",
     }
 """
@@ -28,9 +28,9 @@ category_ = [
                        "Модерация ваших чатов и каналов. Автоприем заявок. "
                        "Внедрение телеграм в ваш бизнес",
         "sort_id": 0,
-        "image": r"http://127.0.0.1:8000/media/l3P96_jJDMQ.jpg",
+        "image": "http://127.0.0.1:8000/media/category/telegram.jpg",
         "slug": "telegram_bots",
-        "icon": '',
+        "icon": 'bx bxl-telegram',
     },
     {
         "title": 'Маркетплейсы',
@@ -39,9 +39,9 @@ category_ = [
                        "Парсинг данных любой сложности. Увеличивайте кратно свой доход получая актуальную "
                        "и понятную информацию. Могу реализовать любую логику.",
         "sort_id": 1,
-        "image": r"http://127.0.0.1:8000/media/l3P96_jJDMQ.jpg",
+        "image": "http://127.0.0.1:8000/media/category/marketplace.jpg",
         "slug": "marketplaces",
-        "icon": '',
+        "icon": 'bx bxs-store',
     },
     {
         "title": 'API сервисы',
@@ -49,9 +49,9 @@ category_ = [
                        "Разработаю BACKEND части для вашего сайта или бота. Расширяю возможности "
                        "вашего приложения или бизнеса",
         "sort_id": 2,
-        "image": r"http://127.0.0.1:8000/media/l3P96_jJDMQ.jpg",
+        "image": "http://127.0.0.1:8000/media/category/api.jpg",
         "slug": "api_services",
-        "icon": '',
+        "icon": 'bx bx-reflect-vertical',
     },
     {
         "title": 'Android автоматизация',
@@ -61,9 +61,9 @@ category_ = [
                        "Забываете во время платить за телефон? "
                        "Автоматизирую платежи за телефон с банковского приложения!",
         "sort_id": 3,
-        "image": r"http://127.0.0.1:8000/media/l3P96_jJDMQ.jpg",
+        "image": "http://127.0.0.1:8000/media/category/android.jpg",
         "slug": "android_auto",
-        "icon": '',
+        "icon": 'bx bxl-android',
     },
     {
         "title": 'Парсинг сайтов',
@@ -71,9 +71,9 @@ category_ = [
                        "Реализую бота для сбора данных. "
                        "Автоматическое получение данных с сайтов популярных маркетплейсов WB, OZONб, YA и другие ",
         "sort_id": 4,
-        "image": r"http://127.0.0.1:8000/media/l3P96_jJDMQ.jpg",
+        "image": "http://127.0.0.1:8000/media/category/parsing.jpg",
         "slug": "parsing_sites",
-        "icon": '',
+        "icon": 'bx bx-search-alt',
     },
     {
         "title": 'Автоматизация сайтов',
@@ -82,9 +82,9 @@ category_ = [
                        "Можно не нанимать огромный штат сотрудников, можно 1 раз написать под конкретные задачи ботов! "
                        "Например работу с маркетплейсами или социальными сетями! От AVITO до HH.Ru",
         "sort_id": 5,
-        "image": r"http://127.0.0.1:8000/media/l3P96_jJDMQ.jpg",
+        "image": "http://127.0.0.1:8000/media/category/automate_site.jpg",
         "slug": "auto_sites",
-        "icon": '',
+        "icon": 'bx bx-planet',
     },
     {
         "title": 'Сайты',
@@ -92,27 +92,27 @@ category_ = [
                        "или же современный по последним технологиям на JS, REACT, NEXT JS. "
                        "SEO оптимизированный SINGLE-PAGE! Разработка Online калькуляторов и сквизов (опросников)",
         "sort_id": 6,
-        "image": r"http://127.0.0.1:8000/media/l3P96_jJDMQ.jpg",
+        "image": "http://127.0.0.1:8000/media/category/sites.jpg",
         "slug": "sites",
-        "icon": '',
+        "icon": 'bx bx-planet',
     },
     {
         "title": 'EXCEL ТАБЛИЦЫ GOOGLE ТАБЛИЦЫ',
         "description": "Создам и сформирую удобные для вас таблицы с автоматическим получением и вычислением нужных данных. "
                        "Любой просчет вашей бизнес логике, любые формулы и любое оформление",
         "sort_id": 7,
-        "image": r"http://127.0.0.1:8000/media/l3P96_jJDMQ.jpg",
+        "image": "http://127.0.0.1:8000/media/category/sheets.jpg",
         "slug": "excel_google",
-        "icon": '',
+        "icon": 'bx bxs-spreadsheet',
     },
     {
-        "title": 'ИИ автоматизация',
+        "title": 'Внедрение ИИ',
         "description": "Внедрю современные решения в области ИИ в ваш бизнес. Автоматизация по API в вашего бота или ваш сайт. "
                        "Необходимо создавать посты, "
                        "то можно автоматизировать получение картинок и текста и все это без вашего участия!",
         "sort_id": 8,
-        "image": r"http://127.0.0.1:8000/media/l3P96_jJDMQ.jpg",
+        "image": "http://127.0.0.1:8000/media/category/neiro.jpg",
         "slug": "ii_auto",
-        "icon": '',
+        "icon": 'bx bxs-brain',
     }
 ]
