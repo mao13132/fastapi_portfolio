@@ -6,21 +6,22 @@
 # 1.0       2023    Initial Version
 #
 # ---------------------------------------------
-from fastapi_storages.integrations.sqlalchemy import FileType
-from sqlalchemy import Integer, Column, String
+from sqlalchemy import Integer, Column, String, ForeignKey
 from sqlalchemy.orm import relationship
 
-from settings import storage, Base
+from settings import Base
 
 
-class Category(Base):
-    __tablename__ = f'category'
+class Works(Base):
+    __tablename__ = 'works'
 
-    id = Column(Integer, primary_key=True, nullable=False, autoincrement=True)
+    id = Column(Integer, primary_key=True, nullable=False)
 
     title = Column(String, nullable=False)
 
-    description = Column(String, nullable=False)
+    text = Column(String, nullable=False)
+
+    short_text = Column(String, nullable=False)
 
     sort_id = Column(Integer, nullable=True)
 
@@ -30,8 +31,10 @@ class Category(Base):
 
     icon = Column(String, nullable=False)
 
-    works = relationship('Works', back_populates='categories')
+    category = Column(ForeignKey('category.id'), nullable=False)
+
+    categories = relationship('Category', back_populates='works')
 
     def __str__(self):
-        return f"{self.title}"
+        return f'{self.title}'
 

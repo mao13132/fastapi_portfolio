@@ -8,7 +8,7 @@
 # ---------------------------------------------
 from typing import List, Optional
 
-from fastapi import APIRouter
+from fastapi import APIRouter, HTTPException
 from pydantic import BaseModel
 
 from src.business.Category.CategoryService import CategoryService
@@ -29,9 +29,24 @@ class ICategory(BaseModel):
     icon: str
 
 
-@categoryRouter.get('/get')
-async def get_category():
-
+@categoryRouter.get('/all')
+async def get_all():
     category = await CategoryService.get_all()
+
+    return category
+
+
+class InCategory(BaseModel):
+    slug: str
+
+
+@categoryRouter.post('/get')
+async def get_current_category(data: InCategory):
+    category = await CategoryService.get_by_filters(slug=data.slug)
+
+    try:
+        category = category[0]
+    except:
+        raise HTTPException(status_code=400, detail=f'Нет такой категории')
 
     return category
