@@ -33,8 +33,28 @@ class IGetWork(BaseModel):
     id_category: int
 
 
+class ICurrentWork(BaseModel):
+    slug: str
+
+
 @worksRouter.post('/get')
-async def get_current(data: IGetWork):
+async def get_work(data: IGetWork):
     works = await WorksService.get_by_filters(category=data.id_category)
+
+    return works
+
+
+@worksRouter.post('/current')
+async def get_current(data: ICurrentWork):
+    works = await WorksService.get_by_filters(slug=data.slug)
+
+    work = works[0]
+
+    return work
+
+
+@worksRouter.get('/all')
+async def get_all_works():
+    works = await WorksService.get_all()
 
     return works
