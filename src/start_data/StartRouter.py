@@ -25,7 +25,7 @@ class IStartData(BaseModel):
 
 
 @startRouter.get('')
-async def get_start_data() -> IStartData:
+async def get_start_data():
     category = await CategoryService.get_all()
 
     return_start_data = {

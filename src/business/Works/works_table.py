@@ -23,6 +23,8 @@ class Works(Base):
 
     short_text = Column(String, nullable=False)
 
+    descriptions = Column(String, nullable=False)
+
     sort_id = Column(Integer, nullable=True)
 
     image = Column(String, nullable=True)
@@ -30,6 +32,8 @@ class Works(Base):
     slug = Column(String, nullable=False)
 
     icon = Column(String, nullable=False)
+
+    video = Column(String, nullable=False)
 
     category = Column(ForeignKey('category.id'), nullable=False)
 
