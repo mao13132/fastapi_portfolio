@@ -24,10 +24,10 @@ async def init_bases():
         async with engine.begin() as conn:
             # await conn.run_sync(Base.metadata.drop_all)
             await conn.run_sync(Base.metadata.create_all)
-            for data in category_:
-                query = insert(Category).values(**data)
-
-                response = await conn.execute(query)
+            # for data in category_:
+            #     query = insert(Category).values(**data)
+            #
+            #     response = await conn.execute(query)
 
             for work in works_list:
                 query = insert(Works).values(**work)

@@ -34,8 +34,6 @@ class Works(Base):
 
     video = Column(String, nullable=False)
 
-    category = Column(ForeignKey('category.id'), nullable=False)
-
     categories = relationship('Category', secondary=works_category_association, back_populates='works')
 
     def __str__(self):

@@ -38,7 +38,7 @@ class WorksService(BaseService):
     async def get_by_categories(cls, category_id):
         try:
             async with async_session_maker() as session:
-                query = select(cls.model).filter(cls.model.categories.any(id=category_id))
+                query = select(cls.model).filter(cls.model.categories.any(id=category_id)).order_by(cls.model.sort_id)
 
                 response = await session.execute(query)
 
