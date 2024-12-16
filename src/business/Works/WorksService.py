@@ -33,3 +33,20 @@ class WorksService(BaseService):
             await logger_msg(f'SQL ошибка при WorksService find_by_filters {cls.model} "{es}"', push=True)
 
             return False
+
+    @classmethod
+    async def get_by_categories(cls, category_id):
+        try:
+            async with async_session_maker() as session:
+                query = select(cls.model).filter(cls.model.categories.any(id=category_id))
+
+                response = await session.execute(query)
+
+                result = response.scalars().all()
+
+                return result
+
+        except Exception as es:
+            await logger_msg(f'SQL ошибка при WorksService find_by_filters {cls.model} "{es}"', push=True)
+
+            return False

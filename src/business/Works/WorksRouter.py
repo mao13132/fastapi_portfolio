@@ -38,8 +38,9 @@ class ICurrentWork(BaseModel):
 
 
 @worksRouter.post('/get')
-async def get_work(data: IGetWork):
-    works = await WorksService.get_by_filters(category=data.id_category)
+async def get_work_by_id(data: IGetWork):
+    """Получение работ по ID категории"""
+    works = await WorksService.get_by_categories(data.id_category)
 
     return works
 

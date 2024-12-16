@@ -11,6 +11,7 @@ from sqlalchemy import Integer, Column, String
 from sqlalchemy.orm import relationship
 
 from settings import storage, Base
+from src.business.ManyToMany.works_category_association_ import works_category_association
 
 
 class Category(Base):
@@ -30,7 +31,7 @@ class Category(Base):
 
     icon = Column(String, nullable=False)
 
-    works = relationship('Works', back_populates='categories')
+    works = relationship('Works', secondary=works_category_association, back_populates='categories')
 
     def __str__(self):
         return f"{self.title}"

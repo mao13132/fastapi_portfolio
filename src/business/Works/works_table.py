@@ -10,6 +10,7 @@ from sqlalchemy import Integer, Column, String, ForeignKey
 from sqlalchemy.orm import relationship
 
 from settings import Base
+from src.business.ManyToMany.works_category_association_ import works_category_association
 
 
 class Works(Base):
@@ -31,13 +32,11 @@ class Works(Base):
 
     slug = Column(String, nullable=False)
 
-    icon = Column(String, nullable=False)
-
     video = Column(String, nullable=False)
 
     category = Column(ForeignKey('category.id'), nullable=False)
 
-    categories = relationship('Category', back_populates='works')
+    categories = relationship('Category', secondary=works_category_association, back_populates='works')
 
     def __str__(self):
         return f'{self.title}'
