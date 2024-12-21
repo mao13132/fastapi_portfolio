@@ -29,12 +29,12 @@ async def init_bases():
             #
             #     response = await conn.execute(query)
 
-            for work in works_list:
-                query = insert(Works).values(**work)
-
-                response = await conn.execute(query)
-
-            await conn.commit()
+            # for work in works_list:
+            #     query = insert(Works).values(**work)
+            #
+            #     response = await conn.execute(query)
+            #
+            # await conn.commit()
 
             return True
     except Exception as es:

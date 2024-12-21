@@ -15,6 +15,7 @@ from settings import SQL_URL, MODE, TEST_SQL_URL
 from src.business.Category.category_table import Category
 from src.business.Users.user_table import Users
 from src.business.Works.works_table import Works
+from src.business.Contact.contact_table import Contact
 
 if MODE == 'TEST':
     engine = create_async_engine(TEST_SQL_URL)
