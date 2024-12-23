@@ -43,7 +43,12 @@ async def send_order(request: Request, data: ContactModel):
         more_info += f'Email: <code>{data.email}</code>%0A'
 
     if data.url:
-        more_info += f'Url: <code>{data.url}</code>%0A'
+        url = data.url
+
+        if '#' in url:
+            url = url.replace('#', '_')
+
+        more_info += f'Url: <code>{url}</code>%0A'
 
     try:
         ip_address = f'{request.client.host}:{request.client.port}'

@@ -18,6 +18,8 @@ from src.Routers.LoginRouter import loginRouter
 from src.Routers.routerRegister import routerRegister
 from src.business.Category.CategoryRouter import categoryRouter
 from src.business.Category.categoryAdmin import CategoryAdmin
+from src.business.Click.clickRouter import clickRouter
+from src.business.Click.clicksAdmin import ClicksAdmin
 from src.business.Contact.contactAdmin import ContactAdmin
 from src.business.Contact.contactRouter import contactRouter
 from src.business.Users.userAdmin import UserAdmin
@@ -36,9 +38,21 @@ app.include_router(categoryRouter)
 app.include_router(startRouter)
 app.include_router(worksRouter)
 app.include_router(contactRouter)
+app.include_router(clickRouter)
+
+origins = [
+    "http://localhost",
+    "http://localhost:8000",
+    "http://localhost:3000",
+    "http://127.0.0.1",
+    "http://127.0.0.1:3000",
+    "https://dima-razrab.ru",
+    "http://dima-razrab.ru",
+    "http://91.239.206.123:29382",
+]
 
 app.add_middleware(CORSMiddleware,
-                   allow_origins=['*'], allow_credentials=True, allow_methods=["*"], allow_headers=["*"], )
+                   allow_origins=origins, allow_credentials=True, allow_methods=["*"], allow_headers=["*"], )
 
 # Админка
 authentication_backend = AdminAuth(secret_key=SECRET_JWT)
@@ -48,6 +62,7 @@ admin.add_view(UserAdmin)
 admin.add_view(CategoryAdmin)
 admin.add_view(WorksAdmin)
 admin.add_view(ContactAdmin)
+admin.add_view(ClicksAdmin)
 
 if __name__ == '__main__':
     uvicorn.run(app, host="127.0.0.1", port=8000)

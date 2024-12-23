@@ -34,6 +34,8 @@ class Works(Base):
 
     video = Column(String, nullable=False)
 
+    views = Column(Integer, default=0, nullable=True)
+
     categories = relationship('Category', secondary=works_category_association, back_populates='works')
 
     def __str__(self):

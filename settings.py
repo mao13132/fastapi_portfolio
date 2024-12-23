@@ -40,3 +40,5 @@ NAME_TOKEN = 'access_token'
 ADMIN_ERROR = 1422194909
 
 MODE = 'DEV'
+
+CLICK_IN_TG = True

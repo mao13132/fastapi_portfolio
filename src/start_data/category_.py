@@ -19,16 +19,14 @@ from src.business.Category.CategoryService import CategoryService
 
 category_ = [
     {
-        "title": 'TELEGRAM боты, USER TELEGRAM боты',
+        "title": 'TELEGRAM боты, USER TG боты',
         "description": "Создание ИИ ассистентов. Написание ботов любой сложности. "
-                       "Автоматизацию пользовательских аккаунтов. "
-                       "Парсинг информации, мониторинг сообщений. "
+                       "Автоматизация пользовательских аккаунтов. "
                        "Сбор заявок в ваш бизнес по ключевым словам! "
                        "Копирование постов. Публикация постов по расписанию. "
-                       "Модерация ваших чатов и каналов. Автоприем заявок. "
-                       "Внедрение телеграм в ваш бизнес",
+                       "Модерация ваших чатов и каналов",
         "sort_id": 0,
-        "image": "http://127.0.0.1:8000/media/category/telegram.jpg",
+        "image": "media/category/telegram.jpg",
         "slug": "telegram_bots",
         "icon": 'bx bxl-telegram',
     },
@@ -39,7 +37,7 @@ category_ = [
                        "Парсинг данных любой сложности. Увеличивайте кратно свой доход получая актуальную "
                        "и понятную информацию. Могу реализовать любую логику.",
         "sort_id": 1,
-        "image": "http://127.0.0.1:8000/media/category/marketplace.jpg",
+        "image": "media/category/marketplace.jpg",
         "slug": "marketplaces",
         "icon": 'bx bxs-store',
     },
@@ -49,19 +47,17 @@ category_ = [
                        "Разработаю BACKEND части для вашего сайта или бота. Расширяю возможности "
                        "вашего приложения или бизнеса",
         "sort_id": 2,
-        "image": "http://127.0.0.1:8000/media/category/api.jpg",
+        "image": "media/category/api.jpg",
         "slug": "api_services",
         "icon": 'bx bx-reflect-vertical',
     },
     {
         "title": 'Android автоматизация',
         "description": "Автоматизирую любое приложение на android. "
-                       "Необходимо работать соц сетях с мобильного приложения, но нет времени или денег на сотрудника? "
                        "Автоматизация Tik Tok, Youtube, VK и любых других Android приложений! "
-                       "Забываете во время платить за телефон? "
                        "Автоматизирую платежи за телефон с банковского приложения!",
         "sort_id": 3,
-        "image": "http://127.0.0.1:8000/media/category/android.jpg",
+        "image": "media/category/android.jpg",
         "slug": "android_auto",
         "icon": 'bx bxl-android',
     },
@@ -71,18 +67,17 @@ category_ = [
                        "Реализую бота для сбора данных. "
                        "Автоматическое получение данных с сайтов популярных маркетплейсов WB, OZONб, YA и другие ",
         "sort_id": 4,
-        "image": "http://127.0.0.1:8000/media/category/parsing.jpg",
+        "image": "media/category/parsing.jpg",
         "slug": "parsing_sites",
         "icon": 'bx bx-search-alt',
     },
     {
         "title": 'Автоматизация сайтов',
         "description": "Необходимо автоматизировать работу на каком-нибудь сайте? "
-                       "Разработаю для вас бота который будет заменять человека. "
                        "Можно не нанимать огромный штат сотрудников, можно 1 раз написать под конкретные задачи ботов! "
                        "Например работу с маркетплейсами или социальными сетями! От AVITO до HH.Ru",
         "sort_id": 5,
-        "image": "http://127.0.0.1:8000/media/category/automate_site.jpg",
+        "image": "media/category/automate_site.jpg",
         "slug": "auto_sites",
         "icon": 'bx bx-planet',
     },
@@ -92,16 +87,16 @@ category_ = [
                        "или же современный по последним технологиям на JS, REACT, NEXT JS. "
                        "SEO оптимизированный SINGLE-PAGE! Разработка Online калькуляторов и сквизов (опросников)",
         "sort_id": 6,
-        "image": "http://127.0.0.1:8000/media/category/sites.jpg",
+        "image": "media/category/sites.jpg",
         "slug": "sites",
         "icon": 'bx bx-planet',
     },
     {
-        "title": 'EXCEL ТАБЛИЦЫ GOOGLE ТАБЛИЦЫ',
+        "title": 'EXCEL, GOOGLE ТАБЛИЦЫ',
         "description": "Создам и сформирую удобные для вас таблицы с автоматическим получением и вычислением нужных данных. "
                        "Любой просчет вашей бизнес логике, любые формулы и любое оформление",
         "sort_id": 7,
-        "image": "http://127.0.0.1:8000/media/category/sheets.jpg",
+        "image": "media/category/sheets.jpg",
         "slug": "excel_google",
         "icon": 'bx bxs-spreadsheet',
     },
@@ -111,7 +106,7 @@ category_ = [
                        "Необходимо создавать посты, "
                        "то можно автоматизировать получение картинок и текста и все это без вашего участия!",
         "sort_id": 8,
-        "image": "http://127.0.0.1:8000/media/category/neiro.jpg",
+        "image": "media/category/neiro.jpg",
         "slug": "ii_auto",
         "icon": 'bx bxs-brain',
     }

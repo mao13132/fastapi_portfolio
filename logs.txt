@@ -1,0 +1,4 @@
+main.py:81 #INFO     [2024-12-22 Sunday 21:32:41] - root - I'm logging
+main.py:82 #WARNING  [2024-12-22 Sunday 21:32:41] - root - some warnings
+main.py:81 #INFO     [2024-12-22 Sunday 21:32:52] - root - I'm logging
+main.py:82 #WARNING  [2024-12-22 Sunday 21:33:00] - root - some warnings
