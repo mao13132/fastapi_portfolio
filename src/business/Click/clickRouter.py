@@ -49,5 +49,5 @@ async def send_order(request: Request, data: ClickProps):
 
     await ClicksService.add(url=url, useragent=user_agent, referer=referer, ip=ip_address)
 
-    if CLICK_IN_TG:
+    if CLICK_IN_TG and user_agent and 'bot' not in str(user_agent).lower():
         res_send = await send_text_telegram(msg)
