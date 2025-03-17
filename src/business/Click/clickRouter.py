@@ -9,7 +9,9 @@
 from typing import Optional
 
 from fastapi import APIRouter, Request, HTTPException, status
+from fastapi.exceptions import RequestValidationError
 from pydantic import BaseModel
+from starlette.responses import JSONResponse
 
 from settings import CLICK_IN_TG
 from src.business.Click.ClicksService import ClicksService
@@ -23,7 +25,8 @@ clickRouter = APIRouter(
 
 
 class ClickProps(BaseModel):
-    url: str
+    url: Optional[str] = None
+    utm_source: Optional[str] = None
 
 
 @clickRouter.post('')
@@ -32,7 +35,9 @@ async def send_order(request: Request, data: ClickProps):
 
     referer = request.headers.get("referer")
 
-    url = data.url
+    url = getattr(data, 'url', 'Нет')
+
+    utm_source = getattr(data, 'utm_source', 'Нет')
 
     if '#' in url:
         url = url.replace('#', '_')
@@ -45,7 +50,8 @@ async def send_order(request: Request, data: ClickProps):
     msg = f'Клик: {url}%0A' \
           f'IP адрес: {ip_address} %0A ' \
           f'User Agent: <code>{user_agent}</code>%0A' \
-          f'Refer: {referer}'
+          f'Refer: {referer}%0A%0A' \
+          f'utm_source: {utm_source}'
 
     await ClicksService.add(url=url, useragent=user_agent, referer=referer, ip=ip_address)
 
