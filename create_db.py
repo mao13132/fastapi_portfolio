@@ -8,7 +8,7 @@
 # ---------------------------------------------
 import asyncio
 
-from sqlalchemy import insert
+from sqlalchemy import insert, select
 
 from settings import Base, SQL_URL
 from src.business.Category.category_table import Category
@@ -19,20 +19,38 @@ from src.start_data.works_ import works_list
 from src.utils._logger import logger_msg
 
 
+async def check_exists(conn, model, slug):
+    """Проверяет существование записи по slug"""
+    query = select(model).where(model.slug == slug)
+    result = await conn.execute(query)
+    return result.scalar_one_or_none() is not None
+
+
 async def init_bases():
     try:
         async with engine.begin() as conn:
             # await conn.run_sync(Base.metadata.drop_all)
             await conn.run_sync(Base.metadata.create_all)
+            
+            # Добавляем категории
             for data in category_:
-                query = insert(Category).values(**data)
+                # Проверяем существование категории по slug
+                if not await check_exists(conn, Category, data['slug']):
+                    query = insert(Category).values(**data)
+                    await conn.execute(query)
+                    print(f"Добавлена категория: {data['title']}")
+                else:
+                    print(f"Категория уже существует: {data['title']}")
 
-                response = await conn.execute(query)
-
+            # Добавляем работы
             for work in works_list:
-                query = insert(Works).values(**work)
-
-                response = await conn.execute(query)
+                # Проверяем существование работы по slug
+                if not await check_exists(conn, Works, work['slug']):
+                    query = insert(Works).values(**work)
+                    await conn.execute(query)
+                    print(f"Добавлена работа: {work['title']}")
+                else:
+                    print(f"Работа уже существует: {work['title']}")
 
             await conn.commit()
 
