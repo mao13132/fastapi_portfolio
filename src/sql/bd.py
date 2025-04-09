@@ -17,6 +17,7 @@ from src.business.Users.user_table import Users
 from src.business.Works.works_table import Works
 from src.business.Contact.contact_table import Contact
 from src.business.Click.click_table import Clicks
+from src.business.Quiz.quiz_table import Quiz, QuizResult
 
 if MODE == 'TEST':
     engine = create_async_engine(TEST_SQL_URL)

@@ -22,6 +22,8 @@ from src.business.Click.clickRouter import clickRouter
 from src.business.Click.clicksAdmin import ClicksAdmin
 from src.business.Contact.contactAdmin import ContactAdmin
 from src.business.Contact.contactRouter import contactRouter
+from src.business.Quiz.quizAdmin import QuizAdmin, QuizResultAdmin
+from src.business.Quiz.quizRouter import quizRouter
 from src.business.Users.userAdmin import UserAdmin
 from src.business.Works.WorksRouter import worksRouter
 from src.business.Works.worksAdmin import WorksAdmin
@@ -39,6 +41,7 @@ app.include_router(startRouter)
 app.include_router(worksRouter)
 app.include_router(contactRouter)
 app.include_router(clickRouter)
+app.include_router(quizRouter)
 
 origins = [
     "http://localhost",
@@ -61,6 +64,8 @@ admin = Admin(app, engine=engine, authentication_backend=authentication_backend)
 admin.add_view(UserAdmin)
 admin.add_view(CategoryAdmin)
 admin.add_view(WorksAdmin)
+admin.add_view(QuizResultAdmin)
+admin.add_view(QuizAdmin)
 admin.add_view(ContactAdmin)
 admin.add_view(ClicksAdmin)
 

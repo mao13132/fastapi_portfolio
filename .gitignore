@@ -5,3 +5,4 @@ src/__pycache__/
 venv/
 src/.env
 media/
+temp/
