@@ -27,6 +27,7 @@ from src.business.Quiz.quizRouter import quizRouter
 from src.business.Users.userAdmin import UserAdmin
 from src.business.Works.WorksRouter import worksRouter
 from src.business.Works.worksAdmin import WorksAdmin
+from src.business.visits.visitsRouter import visitsRouter
 from src.sql.bd import engine
 from src.start_data.StartRouter import startRouter
 
@@ -42,6 +43,7 @@ app.include_router(worksRouter)
 app.include_router(contactRouter)
 app.include_router(clickRouter)
 app.include_router(quizRouter)
+app.include_router(visitsRouter)
 
 origins = [
     "http://localhost",
@@ -49,13 +51,16 @@ origins = [
     "http://localhost:3000",
     "http://127.0.0.1",
     "http://127.0.0.1:3000",
+    "http://127.0.0.1:5500",
     "https://dima-razrab.ru",
     "http://dima-razrab.ru",
     "http://91.239.206.123:29382",
 ]
 
 app.add_middleware(CORSMiddleware,
-                   allow_origins=origins, allow_credentials=True, allow_methods=["*"], allow_headers=["*"], )
+                   # allow_origins=origins,
+                   allow_origins=['*'],
+                   allow_credentials=True, allow_methods=["*"], allow_headers=["*"], )
 
 # Админка
 authentication_backend = AdminAuth(secret_key=SECRET_JWT)
