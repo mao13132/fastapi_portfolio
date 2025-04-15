@@ -19,6 +19,16 @@ from src.business.Category.CategoryService import CategoryService
 
 category_ = [
     {
+        "title": 'WebApp Mini Telegram',
+        "description": "Telegram WebApp Mini — это мини-приложение, которое открывается прямо внутри Telegram, "
+                       "без необходимости устанавливать что-либо дополнительно. Оно работает как обычный сайт, "
+                       "но встраивается прямо в чат с ботом или кнопкой в сообщении",
+        "sort_id": -1,
+        "image": "media/category/web_app_telegram.jpg",
+        "slug": "telegram_webapp",
+        "icon": 'bx bxl-telegram',
+    },
+    {
         "title": 'TELEGRAM боты, USER TG боты',
         "description": "Создание ИИ ассистентов. Написание ботов любой сложности. "
                        "Автоматизация пользовательских аккаунтов. "
