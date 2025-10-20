@@ -15,7 +15,7 @@ from src.business.Category.category_table import Category
 from src.business.Works.works_table import Works
 from src.sql.bd import engine
 from src.start_data.category_ import category_
-from src.start_data.works_ import works_list
+from src.start_data.bad_works_ import works_list
 from src.utils._logger import logger_msg
 
 
