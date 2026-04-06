@@ -24,7 +24,7 @@ category_ = [
                        "без необходимости устанавливать что-либо дополнительно. Оно работает как обычный сайт, "
                        "но встраивается прямо в чат с ботом или кнопкой в сообщении",
         "sort_id": -1,
-        "image": "media/category/web_app_telegram.jpg",
+        "image": "/media/category/web_app_telegram.jpg",
         "slug": "telegram_webapp",
         "icon": 'bx bxl-telegram',
     },
@@ -36,7 +36,7 @@ category_ = [
                        "Копирование постов. Публикация постов по расписанию. "
                        "Модерация ваших чатов и каналов",
         "sort_id": 0,
-        "image": "media/category/telegram.jpg",
+        "image": "/media/category/telegram.jpg",
         "slug": "telegram_bots",
         "icon": 'bx bxl-telegram',
     },
@@ -47,7 +47,7 @@ category_ = [
                        "Парсинг данных любой сложности. Увеличивайте кратно свой доход получая актуальную "
                        "и понятную информацию. Могу реализовать любую логику.",
         "sort_id": 1,
-        "image": "media/category/marketplace.jpg",
+        "image": "/media/category/marketplace.jpg",
         "slug": "marketplaces",
         "icon": 'bx bxs-store',
     },
@@ -57,7 +57,7 @@ category_ = [
                        "Разработаю BACKEND части для вашего сайта или бота. Расширяю возможности "
                        "вашего приложения или бизнеса",
         "sort_id": 2,
-        "image": "media/category/api.jpg",
+        "image": "/media/category/api.jpg",
         "slug": "api_services",
         "icon": 'bx bx-reflect-vertical',
     },
@@ -67,7 +67,7 @@ category_ = [
                        "Автоматизация Tik Tok, Youtube, VK и любых других Android приложений! "
                        "Автоматизирую платежи за телефон с банковского приложения!",
         "sort_id": 3,
-        "image": "media/category/android.jpg",
+        "image": "/media/category/android.jpg",
         "slug": "android_auto",
         "icon": 'bx bxl-android',
     },
@@ -77,7 +77,7 @@ category_ = [
                        "Реализую бота для сбора данных. "
                        "Автоматическое получение данных с сайтов популярных маркетплейсов WB, OZONб, YA и другие ",
         "sort_id": 4,
-        "image": "media/category/parsing.jpg",
+        "image": "/media/category/parsing.jpg",
         "slug": "parsing_sites",
         "icon": 'bx bx-search-alt',
     },
@@ -87,7 +87,7 @@ category_ = [
                        "Можно не нанимать огромный штат сотрудников, можно 1 раз написать под конкретные задачи ботов! "
                        "Например работу с маркетплейсами или социальными сетями! От AVITO до HH.Ru",
         "sort_id": 5,
-        "image": "media/category/automate_site.jpg",
+        "image": "/media/category/automate_site.jpg",
         "slug": "auto_sites",
         "icon": 'bx bx-planet',
     },
@@ -97,7 +97,7 @@ category_ = [
                        "или же современный по последним технологиям на JS, REACT, NEXT JS. "
                        "SEO оптимизированный SINGLE-PAGE! Разработка Online калькуляторов и сквизов (опросников)",
         "sort_id": 6,
-        "image": "media/category/sites.jpg",
+        "image": "/media/category/sites.jpg",
         "slug": "sites",
         "icon": 'bx bx-planet',
     },
@@ -106,7 +106,7 @@ category_ = [
         "description": "Создам и сформирую удобные для вас таблицы с автоматическим получением и вычислением нужных данных. "
                        "Любой просчет вашей бизнес логике, любые формулы и любое оформление",
         "sort_id": 7,
-        "image": "media/category/sheets.jpg",
+        "image": "/media/category/sheets.jpg",
         "slug": "excel_google",
         "icon": 'bx bxs-spreadsheet',
     },
@@ -116,7 +116,7 @@ category_ = [
                        "Необходимо создавать посты, "
                        "то можно автоматизировать получение картинок и текста и все это без вашего участия!",
         "sort_id": 8,
-        "image": "media/category/neiro.jpg",
+        "image": "/media/category/neiro.jpg",
         "slug": "ii_auto",
         "icon": 'bx bxs-brain',
     }
