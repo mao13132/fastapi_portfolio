@@ -30,6 +30,7 @@ from src.business.Works.worksAdmin import WorksAdmin
 from src.business.visits.visitsRouter import visitsRouter
 from src.sql.bd import engine
 from src.start_data.StartRouter import startRouter
+from src.business.Seo.seoRouter import seoRouter
 
 app = FastAPI()
 
@@ -44,6 +45,7 @@ app.include_router(contactRouter)
 app.include_router(clickRouter)
 app.include_router(quizRouter)
 app.include_router(visitsRouter)
+app.include_router(seoRouter)
 
 origins = [
     "http://localhost",

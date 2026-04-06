@@ -42,3 +42,5 @@ ADMIN_ERROR = 1422194909
 MODE = 'DEV'
 
 CLICK_IN_TG = True
+
+BASE_URL = os.getenv('BASE_URL', 'https://dima-razrab.ru')
