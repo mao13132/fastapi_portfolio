@@ -43,4 +43,4 @@ MODE = 'DEV'
 
 CLICK_IN_TG = True
 
-BASE_URL = os.getenv('BASE_URL', 'https://dima-razrab.ru')
+BASE_URL = os.getenv('BASE_URL', 'https://dima-razrab.com')

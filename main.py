@@ -56,6 +56,8 @@ origins = [
     "http://127.0.0.1:5500",
     "https://dima-razrab.ru",
     "http://dima-razrab.ru",
+    "https://dima-razrab.com",
+    "http://dima-razrab.com",
     "http://91.239.206.123:29382",
 ]
 

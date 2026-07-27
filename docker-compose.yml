@@ -1,4 +1,4 @@
-version: "3.9"
+
 services:
   postgres:
     image: postgres:13.3
@@ -8,3 +8,5 @@ services:
       POSTGRES_PASSWORD: "123123"
     ports:
       - "5433:5432"
+    volumes:
+      - ./pg_portfolio_storage:/var/lib/postgresql/data

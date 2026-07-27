@@ -9,7 +9,6 @@ from fastapi import APIRouter, Response
 from fastapi.responses import PlainTextResponse
 
 from settings import BASE_URL
-from src.business.Works.WorksService import WorksService
 
 seoRouter = APIRouter(
     tags=['SEO']
@@ -18,11 +17,16 @@ seoRouter = APIRouter(
 
 @seoRouter.get('/robots.txt', response_class=PlainTextResponse)
 async def get_robots():
-    """robots.txt - разрешает/запрещает доступ бтам"""
+    """robots.txt - разрешает/запрещает доступ ботам"""
     robots_txt = f"""User-agent: *
 Allow: /
 
 Sitemap: {BASE_URL}/sitemap.xml
+
+Disallow: /api/
+Disallow: /login
+Disallow: /register
+Disallow: /_next/
 """
     return robots_txt
 
@@ -37,13 +41,33 @@ async def get_sitemap():
     categories = await CategoryService.get_all()
 
     urls = []
+
+    # 18 статических URL
     static_urls = [
         {'loc': f'{BASE_URL}/', 'changefreq': 'weekly', 'priority': '1.0'},
+        {'loc': f'{BASE_URL}/razrabotka-botov', 'changefreq': 'monthly', 'priority': '0.9'},
+        {'loc': f'{BASE_URL}/razrabotka-servisov', 'changefreq': 'monthly', 'priority': '0.8'},
+        {'loc': f'{BASE_URL}/razrabotka-crm', 'changefreq': 'monthly', 'priority': '0.8'},
+        {'loc': f'{BASE_URL}/avtomatizaciya-biznesa', 'changefreq': 'monthly', 'priority': '0.8'},
+        {'loc': f'{BASE_URL}/blog', 'changefreq': 'weekly', 'priority': '0.8'},
+        {'loc': f'{BASE_URL}/blog/telegram-boty', 'changefreq': 'weekly', 'priority': '0.9'},
+        {'loc': f'{BASE_URL}/blog/telegram-bot-dlya-biznesa', 'changefreq': 'monthly', 'priority': '0.8'},
+        {'loc': f'{BASE_URL}/blog/skolko-stoit-razrabotka-telegram-bota', 'changefreq': 'monthly', 'priority': '0.8'},
+        {'loc': f'{BASE_URL}/blog/kak-sdelat-telegram-bota-na-python', 'changefreq': 'monthly', 'priority': '0.7'},
+        {'loc': f'{BASE_URL}/blog/telegram-bot-dlya-priyoma-zayavok', 'changefreq': 'monthly', 'priority': '0.7'},
+        {'loc': f'{BASE_URL}/blog/telegram-bot-dlya-internet-magazina', 'changefreq': 'monthly', 'priority': '0.7'},
+        {'loc': f'{BASE_URL}/blog/telegram-bot-dlya-zapisi-klientov', 'changefreq': 'monthly', 'priority': '0.7'},
+        {'loc': f'{BASE_URL}/blog/telegram-bot-dlya-prodazh', 'changefreq': 'monthly', 'priority': '0.7'},
+        {'loc': f'{BASE_URL}/blog/ai-telegram-bot-dlya-biznesa', 'changefreq': 'monthly', 'priority': '0.7'},
+        {'loc': f'{BASE_URL}/blog/razrabotka-telegram-bota-pod-klyuch', 'changefreq': 'monthly', 'priority': '0.7'},
+        {'loc': f'{BASE_URL}/blog/kak-sozdat-ai-bot-telegram', 'changefreq': 'monthly', 'priority': '0.7'},
+        {'loc': f'{BASE_URL}/privacy', 'changefreq': 'yearly', 'priority': '0.3'},
     ]
 
     for url in static_urls:
         urls.append(url)
 
+    # Динамические категории из БД
     if categories:
         for category in categories:
             urls.append({
@@ -52,6 +76,7 @@ async def get_sitemap():
                 'priority': '0.9'
             })
 
+    # Динамические работы из БД
     if works:
         for work in works:
             urls.append({

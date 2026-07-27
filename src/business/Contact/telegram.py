@@ -13,7 +13,7 @@ from aiohttp_socks import ProxyConnector
 from settings import TOKEN, ADMIN_ERROR
 from src.utils._logger import logger_msg
 
-PROXY = 'socks5://Sr47Up:ydQ45z@45.154.59.149:8000'
+PROXY = 'socks5://aZyuad:wgxW05@72.56.186.1:8000'
 
 RETRY_COUNT = 3
 
