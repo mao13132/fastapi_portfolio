@@ -27,6 +27,14 @@ Disallow: /api/
 Disallow: /login
 Disallow: /register
 Disallow: /_next/
+
+User-agent: Yandex
+Allow: /
+Disallow: /api/
+Disallow: /login
+Disallow: /register
+Disallow: /_next/
+Crawl-delay: 1
 """
     return robots_txt
 
@@ -42,7 +50,7 @@ async def get_sitemap():
 
     urls = []
 
-    # 18 статических URL
+    # 24 статических URL
     static_urls = [
         {'loc': f'{BASE_URL}/', 'changefreq': 'weekly', 'priority': '1.0'},
         {'loc': f'{BASE_URL}/razrabotka-botov', 'changefreq': 'monthly', 'priority': '0.9'},
@@ -61,6 +69,12 @@ async def get_sitemap():
         {'loc': f'{BASE_URL}/blog/ai-telegram-bot-dlya-biznesa', 'changefreq': 'monthly', 'priority': '0.7'},
         {'loc': f'{BASE_URL}/blog/razrabotka-telegram-bota-pod-klyuch', 'changefreq': 'monthly', 'priority': '0.7'},
         {'loc': f'{BASE_URL}/blog/kak-sozdat-ai-bot-telegram', 'changefreq': 'monthly', 'priority': '0.7'},
+        {'loc': f'{BASE_URL}/blog/avtomatizaciya-biznesa', 'changefreq': 'monthly', 'priority': '0.7'},
+        {'loc': f'{BASE_URL}/blog/avtomatizaciya-malogo-biznesa', 'changefreq': 'monthly', 'priority': '0.7'},
+        {'loc': f'{BASE_URL}/blog/ai-avtomatizaciya-biznesa', 'changefreq': 'monthly', 'priority': '0.7'},
+        {'loc': f'{BASE_URL}/blog/avtomatizaciya-otdela-prodazh', 'changefreq': 'monthly', 'priority': '0.7'},
+        {'loc': f'{BASE_URL}/blog/primery-avtomatizacii-biznesa', 'changefreq': 'monthly', 'priority': '0.7'},
+        {'loc': f'{BASE_URL}/blog/avtomatizaciya-biznesa-pod-klyuch', 'changefreq': 'monthly', 'priority': '0.7'},
         {'loc': f'{BASE_URL}/privacy', 'changefreq': 'yearly', 'priority': '0.3'},
     ]
 
