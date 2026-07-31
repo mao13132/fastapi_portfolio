@@ -50,7 +50,6 @@ async def get_sitemap():
 
     urls = []
 
-    # 24 статических URL
     static_urls = [
         {'loc': f'{BASE_URL}/', 'changefreq': 'weekly', 'priority': '1.0'},
         {'loc': f'{BASE_URL}/razrabotka-botov', 'changefreq': 'monthly', 'priority': '0.9'},
@@ -59,8 +58,8 @@ async def get_sitemap():
         {'loc': f'{BASE_URL}/avtomatizaciya-biznesa', 'changefreq': 'monthly', 'priority': '0.8'},
         {'loc': f'{BASE_URL}/blog', 'changefreq': 'weekly', 'priority': '0.8'},
         {'loc': f'{BASE_URL}/blog/telegram-boty', 'changefreq': 'weekly', 'priority': '0.9'},
-        {'loc': f'{BASE_URL}/blog/telegram-bot-dlya-biznesa', 'changefreq': 'monthly', 'priority': '0.8'},
-        {'loc': f'{BASE_URL}/blog/skolko-stoit-razrabotka-telegram-bota', 'changefreq': 'monthly', 'priority': '0.8'},
+        {'loc': f'{BASE_URL}/blog/telegram-bot-dlya-biznesa', 'changefreq': 'monthly', 'priority': '0.8', 'lastmod': '2026-07-31'},
+        {'loc': f'{BASE_URL}/blog/skolko-stoit-razrabotka-telegram-bota', 'changefreq': 'monthly', 'priority': '0.8', 'lastmod': '2026-07-31'},
         {'loc': f'{BASE_URL}/blog/kak-sdelat-telegram-bota-na-python', 'changefreq': 'monthly', 'priority': '0.7'},
         {'loc': f'{BASE_URL}/blog/telegram-bot-dlya-priyoma-zayavok', 'changefreq': 'monthly', 'priority': '0.7'},
         {'loc': f'{BASE_URL}/blog/telegram-bot-dlya-internet-magazina', 'changefreq': 'monthly', 'priority': '0.7'},
@@ -75,6 +74,12 @@ async def get_sitemap():
         {'loc': f'{BASE_URL}/blog/avtomatizaciya-otdela-prodazh', 'changefreq': 'monthly', 'priority': '0.7'},
         {'loc': f'{BASE_URL}/blog/primery-avtomatizacii-biznesa', 'changefreq': 'monthly', 'priority': '0.7'},
         {'loc': f'{BASE_URL}/blog/avtomatizaciya-biznesa-pod-klyuch', 'changefreq': 'monthly', 'priority': '0.7'},
+        # 5 новых статей (добавлены 2026-07-31)
+        {'loc': f'{BASE_URL}/blog/telegram-webapp-razrabotka', 'changefreq': 'monthly', 'priority': '0.7', 'lastmod': '2026-07-31'},
+        {'loc': f'{BASE_URL}/blog/telegram-bot-ili-mobilnoe-prilozhenie', 'changefreq': 'monthly', 'priority': '0.7', 'lastmod': '2026-07-31'},
+        {'loc': f'{BASE_URL}/blog/razrabotka-telegram-bota-s-nulya', 'changefreq': 'monthly', 'priority': '0.7', 'lastmod': '2026-07-31'},
+        {'loc': f'{BASE_URL}/blog/zakazat-telegram-bota', 'changefreq': 'monthly', 'priority': '0.7', 'lastmod': '2026-07-31'},
+        {'loc': f'{BASE_URL}/blog/telegram-bot-dlya-priyoma-zakazov', 'changefreq': 'monthly', 'priority': '0.7', 'lastmod': '2026-07-31'},
         {'loc': f'{BASE_URL}/privacy', 'changefreq': 'yearly', 'priority': '0.3'},
     ]
 
@@ -103,8 +108,9 @@ async def get_sitemap():
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
 """
     for url in urls:
+        lastmod_line = f'\n    <lastmod>{url["lastmod"]}</lastmod>' if url.get('lastmod') else ''
         sitemap_xml += f"""  <url>
-    <loc>{url['loc']}</loc>
+    <loc>{url['loc']}</loc>{lastmod_line}
     <changefreq>{url['changefreq']}</changefreq>
     <priority>{url['priority']}</priority>
   </url>
