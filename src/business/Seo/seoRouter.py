@@ -3,25 +3,38 @@
 #
 # Version   Date        Info
 # 1.0       2023    Initial Version
+# 2.0       2026    AI-Friendly SEO: llms.txt, llms-full.txt, ai.txt
 #
 # ---------------------------------------------
 from fastapi import APIRouter, Response
 from fastapi.responses import PlainTextResponse
 
 from settings import BASE_URL
+from src.business.Seo.seoContent import (
+    LLMS_TXT_SHORT,
+    SITEMAP_STATIC_URLS,
+    build_llms_full_txt,
+)
 
 seoRouter = APIRouter(
     tags=['SEO']
 )
 
 
+# ──────────────────────────────────────────────────────────────────────
+# /robots.txt — разрешает/запрещает доступ ботам (включая AI-ботов)
+# ──────────────────────────────────────────────────────────────────────
 @seoRouter.get('/robots.txt', response_class=PlainTextResponse)
 async def get_robots():
-    """robots.txt - разрешает/запрещает доступ ботам"""
+    """robots.txt — разрешает/запрещает доступ ботам"""
     robots_txt = f"""User-agent: *
 Allow: /
 
 Sitemap: {BASE_URL}/sitemap.xml
+
+# AI-системы — разрешить доступ
+Allow: /llms.txt
+Allow: /llms-full.txt
 
 Disallow: /api/
 Disallow: /login
@@ -35,10 +48,29 @@ Disallow: /login
 Disallow: /register
 Disallow: /_next/
 Crawl-delay: 1
+
+# AI-боты
+User-agent: GPTBot
+Allow: /
+
+User-agent: ChatGPT-User
+Allow: /
+
+User-agent: Claude-Web
+Allow: /
+
+User-agent: PerplexityBot
+Allow: /
+
+User-agent: Google-Extended
+Allow: /
 """
     return robots_txt
 
 
+# ──────────────────────────────────────────────────────────────────────
+# /sitemap.xml — карта сайта для поисковых систем
+# ──────────────────────────────────────────────────────────────────────
 @seoRouter.get('/sitemap.xml', response_class=Response)
 async def get_sitemap():
     """sitemap.xml - карта сайта для поисковых систем"""
@@ -48,60 +80,7 @@ async def get_sitemap():
     works = await WorksService.get_all()
     categories = await CategoryService.get_all()
 
-    urls = []
-
-    static_urls = [
-        {'loc': f'{BASE_URL}/', 'changefreq': 'weekly', 'priority': '1.0', 'lastmod': '2026-08-02'},
-        {'loc': f'{BASE_URL}/razrabotka-botov', 'changefreq': 'monthly', 'priority': '0.9', 'lastmod': '2026-08-02'},
-        {'loc': f'{BASE_URL}/razrabotka-servisov', 'changefreq': 'monthly', 'priority': '0.8', 'lastmod': '2026-08-02'},
-        {'loc': f'{BASE_URL}/razrabotka-crm', 'changefreq': 'monthly', 'priority': '0.8', 'lastmod': '2026-08-02'},
-        {'loc': f'{BASE_URL}/avtomatizaciya-biznesa', 'changefreq': 'monthly', 'priority': '0.8', 'lastmod': '2026-08-02'},
-        {'loc': f'{BASE_URL}/blog', 'changefreq': 'weekly', 'priority': '0.8'},
-        {'loc': f'{BASE_URL}/blog/telegram-boty', 'changefreq': 'weekly', 'priority': '0.9'},
-        {'loc': f'{BASE_URL}/blog/telegram-bot-dlya-biznesa', 'changefreq': 'monthly', 'priority': '0.8', 'lastmod': '2026-08-02'},
-        {'loc': f'{BASE_URL}/blog/skolko-stoit-razrabotka-telegram-bota', 'changefreq': 'monthly', 'priority': '0.8', 'lastmod': '2026-08-02'},
-        {'loc': f'{BASE_URL}/blog/kak-sdelat-telegram-bota-na-python', 'changefreq': 'monthly', 'priority': '0.7', 'lastmod': '2026-08-02'},
-        {'loc': f'{BASE_URL}/blog/telegram-bot-dlya-priyoma-zayavok', 'changefreq': 'monthly', 'priority': '0.7', 'lastmod': '2026-08-02'},
-        {'loc': f'{BASE_URL}/blog/telegram-bot-dlya-internet-magazina', 'changefreq': 'monthly', 'priority': '0.7', 'lastmod': '2026-08-02'},
-        {'loc': f'{BASE_URL}/blog/telegram-bot-dlya-zapisi-klientov', 'changefreq': 'monthly', 'priority': '0.7', 'lastmod': '2026-08-02'},
-        {'loc': f'{BASE_URL}/blog/telegram-bot-dlya-prodazh', 'changefreq': 'monthly', 'priority': '0.7', 'lastmod': '2026-08-02'},
-        {'loc': f'{BASE_URL}/blog/ai-telegram-bot-dlya-biznesa', 'changefreq': 'monthly', 'priority': '0.7', 'lastmod': '2026-08-02'},
-        {'loc': f'{BASE_URL}/blog/razrabotka-telegram-bota-pod-klyuch', 'changefreq': 'monthly', 'priority': '0.7', 'lastmod': '2026-08-02'},
-        {'loc': f'{BASE_URL}/blog/kak-sozdat-ai-bot-telegram', 'changefreq': 'monthly', 'priority': '0.7', 'lastmod': '2026-08-02'},
-        {'loc': f'{BASE_URL}/blog/avtomatizaciya-biznesa', 'changefreq': 'monthly', 'priority': '0.7'},
-        {'loc': f'{BASE_URL}/blog/avtomatizaciya-malogo-biznesa', 'changefreq': 'monthly', 'priority': '0.7'},
-        {'loc': f'{BASE_URL}/blog/ai-avtomatizaciya-biznesa', 'changefreq': 'monthly', 'priority': '0.7'},
-        {'loc': f'{BASE_URL}/blog/avtomatizaciya-otdela-prodazh', 'changefreq': 'monthly', 'priority': '0.7', 'lastmod': '2026-08-02'},
-        {'loc': f'{BASE_URL}/blog/primery-avtomatizacii-biznesa', 'changefreq': 'monthly', 'priority': '0.7'},
-        {'loc': f'{BASE_URL}/blog/avtomatizaciya-biznesa-pod-klyuch', 'changefreq': 'monthly', 'priority': '0.7'},
-        {'loc': f'{BASE_URL}/blog/telegram-webapp-razrabotka', 'changefreq': 'monthly', 'priority': '0.7', 'lastmod': '2026-08-02'},
-        {'loc': f'{BASE_URL}/blog/telegram-bot-ili-mobilnoe-prilozhenie', 'changefreq': 'monthly', 'priority': '0.7', 'lastmod': '2026-08-02'},
-        {'loc': f'{BASE_URL}/blog/razrabotka-telegram-bota-s-nulya', 'changefreq': 'monthly', 'priority': '0.7', 'lastmod': '2026-08-02'},
-        {'loc': f'{BASE_URL}/blog/zakazat-telegram-bota', 'changefreq': 'monthly', 'priority': '0.7', 'lastmod': '2026-08-02'},
-        {'loc': f'{BASE_URL}/blog/telegram-bot-dlya-priyoma-zakazov', 'changefreq': 'monthly', 'priority': '0.7', 'lastmod': '2026-08-02'},
-        {'loc': f'{BASE_URL}/parsery-marketplejsov', 'changefreq': 'monthly', 'priority': '0.8', 'lastmod': '2026-08-02'},
-        {'loc': f'{BASE_URL}/lidogeneraciya-telegram', 'changefreq': 'monthly', 'priority': '0.8', 'lastmod': '2026-08-02'},
-        {'loc': f'{BASE_URL}/blog/stoimost-telegram-bota', 'changefreq': 'monthly', 'priority': '0.7', 'lastmod': '2026-08-02'},
-        {'loc': f'{BASE_URL}/blog/telegram-bot-dlya-magazina', 'changefreq': 'monthly', 'priority': '0.7', 'lastmod': '2026-08-02'},
-        {'loc': f'{BASE_URL}/blog/bot-dlya-zapisi-klientov', 'changefreq': 'monthly', 'priority': '0.7', 'lastmod': '2026-08-02'},
-        {'loc': f'{BASE_URL}/blog/telegram-bot-ili-mobilnoe-prilozhenie-dlya-biznesa', 'changefreq': 'monthly', 'priority': '0.7', 'lastmod': '2026-08-02'},
-        {'loc': f'{BASE_URL}/blog/kak-telegram-bot-uvelichivaet-prodazhi', 'changefreq': 'monthly', 'priority': '0.7', 'lastmod': '2026-08-02'},
-        {'loc': f'{BASE_URL}/blog/telegram-mini-app-chto-eto', 'changefreq': 'monthly', 'priority': '0.7', 'lastmod': '2026-08-02'},
-        {'loc': f'{BASE_URL}/blog/aiogram-vs-pyrogram', 'changefreq': 'monthly', 'priority': '0.7', 'lastmod': '2026-08-02'},
-        {'loc': f'{BASE_URL}/blog/telegram-bot-dlya-priyoma-zakazov-2', 'changefreq': 'monthly', 'priority': '0.7', 'lastmod': '2026-08-02'},
-        {'loc': f'{BASE_URL}/blog/chto-mozhno-avtomatizirovat-v-malom-biznese', 'changefreq': 'monthly', 'priority': '0.7', 'lastmod': '2026-08-02'},
-        {'loc': f'{BASE_URL}/blog/avtomatizaciya-dokumentooborota', 'changefreq': 'monthly', 'priority': '0.7', 'lastmod': '2026-08-02'},
-        {'loc': f'{BASE_URL}/blog/integraciya-crm-s-telegram', 'changefreq': 'monthly', 'priority': '0.7', 'lastmod': '2026-08-02'},
-        {'loc': f'{BASE_URL}/blog/kak-vnedrit-chatgpt-v-biznes', 'changefreq': 'monthly', 'priority': '0.7', 'lastmod': '2026-08-02'},
-        {'loc': f'{BASE_URL}/blog/ai-agenty-dlya-biznesa', 'changefreq': 'monthly', 'priority': '0.7', 'lastmod': '2026-08-02'},
-        {'loc': f'{BASE_URL}/blog/nejroseti-dlya-biznesa', 'changefreq': 'monthly', 'priority': '0.7', 'lastmod': '2026-08-02'},
-        {'loc': f'{BASE_URL}/blog/razrabotka-crm-pod-klyuch', 'changefreq': 'monthly', 'priority': '0.7', 'lastmod': '2026-08-02'},
-        {'loc': f'{BASE_URL}/blog/crm-dlya-malogo-biznesa', 'changefreq': 'monthly', 'priority': '0.7', 'lastmod': '2026-08-02'},
-        {'loc': f'{BASE_URL}/privacy', 'changefreq': 'yearly', 'priority': '0.3'},
-    ]
-
-    for url in static_urls:
-        urls.append(url)
+    urls = list(SITEMAP_STATIC_URLS)
 
     # Динамические категории из БД
     if categories:
@@ -135,3 +114,53 @@ async def get_sitemap():
     sitemap_xml += "</urlset>"
 
     return Response(content=sitemap_xml, media_type="application/xml")
+
+
+# ──────────────────────────────────────────────────────────────────────
+# /llms.txt — краткая версия для AI-систем
+# ──────────────────────────────────────────────────────────────────────
+@seoRouter.get('/llms.txt', response_class=PlainTextResponse)
+async def llms_txt():
+    """Краткая версия llms.txt для AI-систем"""
+    return PlainTextResponse(
+        content=LLMS_TXT_SHORT.strip(),
+        media_type="text/plain; charset=utf-8",
+        headers={
+            "Cache-Control": "public, max-age=86400",  # кеш 24 часа
+            "X-Robots-Tag": "index, follow",
+        }
+    )
+
+
+# ──────────────────────────────────────────────────────────────────────
+# /llms-full.txt — полная версия с динамическим контентом из БД
+# ──────────────────────────────────────────────────────────────────────
+@seoRouter.get('/llms-full.txt', response_class=PlainTextResponse)
+async def llms_full_txt():
+    """Полная версия llms-full.txt для AI-систем (динамический контент из БД)"""
+    from src.business.Works.WorksService import WorksService
+
+    works = await WorksService.get_all()
+
+    content = await build_llms_full_txt(works if works else [])
+
+    return PlainTextResponse(
+        content=content,
+        media_type="text/plain; charset=utf-8",
+        headers={
+            "Cache-Control": "public, max-age=3600",  # кеш 1 час (динамический)
+            "X-Robots-Tag": "index, follow",
+        }
+    )
+
+
+# ──────────────────────────────────────────────────────────────────────
+# /ai.txt — альтернативный стандарт site.ai (алиас llms.txt)
+# ──────────────────────────────────────────────────────────────────────
+@seoRouter.get('/ai.txt', response_class=PlainTextResponse)
+async def ai_txt():
+    """Альтернативный ai.txt — совместимость с site.ai стандартом"""
+    return PlainTextResponse(
+        content=LLMS_TXT_SHORT.strip(),
+        media_type="text/plain; charset=utf-8",
+    )
