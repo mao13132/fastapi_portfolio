@@ -31,26 +31,41 @@ LLMS_TXT_SHORT = f"""# DimaRazrab — Фриланс-разработчик
 ### Telegram-боты
 - [Telegram-боты (хаб)]({BASE_URL}/blog/telegram-boty)
 - [Бизнес на Telegram-ботах]({BASE_URL}/blog/telegram-bot-dlya-biznesa)
-- [Сколько стоит разработка бота]({BASE_URL}/blog/skolko-stoit-razrabotka-telegram-bota)
+- [Стоимость разработки бота]({BASE_URL}/blog/stoimost-razrabotki)
 - [Бот для приёма заявок]({BASE_URL}/blog/telegram-bot-dlya-priyoma-zayavok)
 - [Бот для интернет-магазина]({BASE_URL}/blog/telegram-bot-dlya-internet-magazina)
-- [Бот для записи клиентов]({BASE_URL}/blog/telegram-bot-dlya-zapisi-klientov)
 - [Бот для продаж]({BASE_URL}/blog/telegram-bot-dlya-prodazh)
-- [AI-бот для бизнеса]({BASE_URL}/blog/ai-telegram-bot-dlya-biznesa)
 - [Разработка бота под ключ]({BASE_URL}/blog/razrabotka-telegram-bota-pod-klyuch)
 - [Как создать AI-бота]({BASE_URL}/blog/kak-sozdat-ai-bot-telegram)
 - [Telegram WebApp разработка]({BASE_URL}/blog/telegram-webapp-razrabotka)
-- [Бот или мобильное приложение]({BASE_URL}/blog/telegram-bot-ili-mobilnoe-prilozhenie)
 - [Разработка бота с нуля]({BASE_URL}/blog/razrabotka-telegram-bota-s-nulya)
 - [Заказать Telegram-бота]({BASE_URL}/blog/zakazat-telegram-bota)
-- [Бот для приёма заказов]({BASE_URL}/blog/telegram-bot-dlya-priyoma-zakazov)
-- [Стоимость Telegram-бота]({BASE_URL}/blog/stoimost-telegram-bota)
 - [Бот для магазина]({BASE_URL}/blog/telegram-bot-dlya-magazina)
 - [Бот для записи клиентов (гайд)]({BASE_URL}/blog/bot-dlya-zapisi-klientov)
 - [Бот или приложение для бизнеса]({BASE_URL}/blog/telegram-bot-ili-mobilnoe-prilozhenie-dlya-biznesa)
 - [Как бот увеличивает продажи]({BASE_URL}/blog/kak-telegram-bot-uvelichivaet-prodazhi)
 - [Telegram Mini App]({BASE_URL}/blog/telegram-mini-app-chto-eto)
 - [Aiogram vs Pyrogram]({BASE_URL}/blog/aiogram-vs-pyrogram)
+- [AI Telegram-бот для бизнеса]({BASE_URL}/blog/ai-telegram-bot-dlya-biznesa)
+- [AI-бот для ведения Telegram-канала]({BASE_URL}/blog/ai-bot-dlya-vedeniya-telegram-kanala)
+- [Бот для автоматизации продаж]({BASE_URL}/blog/bot-dlya-avtomatizacii-prodazh)
+- [Бот-менеджер по продажам]({BASE_URL}/blog/bot-menedzher-po-prodazham)
+- [Бот обратной связи Telegram]({BASE_URL}/blog/bot-obratnoj-svyazi-telegram)
+- [Бот Telegram для курьеров]({BASE_URL}/blog/bot-telegram-dlya-kurerov)
+- [Как быстро отвечать клиентам]({BASE_URL}/blog/kak-bystro-otvechat-klientam)
+- [Конструкторы Telegram-ботов]({BASE_URL}/blog/konstruktory-telegram-botov)
+- [Корпоративный Telegram-бот]({BASE_URL}/blog/korporativnyj-telegram-bot)
+- [Личный кабинет в Telegram-боте]({BASE_URL}/blog/lichnyj-kabinet-v-telegram-bote)
+- [Личный Telegram-бот]({BASE_URL}/blog/lichnyj-telegram-bot)
+- [Настройка Telegram-бота]({BASE_URL}/blog/nastrojka-telegram-bota)
+- [Разработка бота для Telegram]({BASE_URL}/blog/razrabotka-bota-dlya-telegram)
+- [Создание и настройка Telegram-каналов и ботов]({BASE_URL}/blog/sozdanie-i-nastrojka-telegram-kanalov-i-botov)
+- [Telegram-бот для Avito]({BASE_URL}/blog/telegram-bot-dlya-avito)
+- [Telegram-бот для приёма заказов]({BASE_URL}/blog/telegram-bot-dlya-priyoma-zakazov)
+- [Telegram-бот для приёма заказов (ч.2)]({BASE_URL}/blog/telegram-bot-dlya-priyoma-zakazov-2)
+- [Telegram-бот для Wildberries]({BASE_URL}/blog/telegram-bot-dlya-wildberries)
+- [Telegram-бот рассылка]({BASE_URL}/blog/telegram-bot-rassylka)
+- [Telegram-бот с оплатой]({BASE_URL}/blog/telegram-bot-s-oplatoj)
 
 ### Парсинг маркетплейсов
 - [Парсинг маркетплейсов (хаб)]({BASE_URL}/blog/parsery-marketplejsov)
@@ -85,6 +100,12 @@ LLMS_TXT_SHORT = f"""# DimaRazrab — Фриланс-разработчик
 - [Нейросети для бизнеса]({BASE_URL}/blog/nejroseti-dlya-biznesa)
 - [Разработка CRM под ключ]({BASE_URL}/blog/razrabotka-crm-pod-klyuch)
 - [CRM для малого бизнеса]({BASE_URL}/blog/crm-dlya-malogo-biznesa)
+- [Анализ автоматизации бизнес-процессов]({BASE_URL}/blog/analiz-avtomatizacii-biznes-processov)
+- [Автоматизация клиентов]({BASE_URL}/blog/avtomatizaciya-klientov)
+- [Автоматизация воронки продаж]({BASE_URL}/blog/avtomatizaciya-voronki-prodazh)
+- [Автоматизация заявок]({BASE_URL}/blog/avtomatizaciya-zayavok)
+- [Цифровизация малого бизнеса]({BASE_URL}/blog/cifrovizaciya-malogo-biznesa)
+- [Система автоматизации бизнес-процессов]({BASE_URL}/blog/sistema-avtomatizacii-biznes-processov)
 
 ### AI и нейросети
 - [AI и нейросети (хаб)]({BASE_URL}/blog/ai-integracii)
@@ -160,28 +181,42 @@ SITEMAP_STATIC_URLS = [
     {'loc': f'{BASE_URL}/blog/razrabotka-api', 'changefreq': 'weekly', 'priority': '0.8'},
     # Блог — статьи: Telegram-боты
     {'loc': f'{BASE_URL}/blog/telegram-bot-dlya-biznesa', 'changefreq': 'monthly', 'priority': '0.8', 'lastmod': '2026-08-02'},
-    {'loc': f'{BASE_URL}/blog/skolko-stoit-razrabotka-telegram-bota', 'changefreq': 'monthly', 'priority': '0.8', 'lastmod': '2026-08-02'},
+    {'loc': f'{BASE_URL}/blog/stoimost-razrabotki', 'changefreq': 'monthly', 'priority': '0.7', 'lastmod': '2026-08-02'},
     {'loc': f'{BASE_URL}/blog/kak-sdelat-telegram-bota-na-python', 'changefreq': 'monthly', 'priority': '0.7', 'lastmod': '2026-08-02'},
     {'loc': f'{BASE_URL}/blog/telegram-bot-dlya-priyoma-zayavok', 'changefreq': 'monthly', 'priority': '0.7', 'lastmod': '2026-08-02'},
     {'loc': f'{BASE_URL}/blog/telegram-bot-dlya-internet-magazina', 'changefreq': 'monthly', 'priority': '0.7', 'lastmod': '2026-08-02'},
-    {'loc': f'{BASE_URL}/blog/telegram-bot-dlya-zapisi-klientov', 'changefreq': 'monthly', 'priority': '0.7', 'lastmod': '2026-08-02'},
     {'loc': f'{BASE_URL}/blog/telegram-bot-dlya-prodazh', 'changefreq': 'monthly', 'priority': '0.7', 'lastmod': '2026-08-02'},
-    {'loc': f'{BASE_URL}/blog/ai-telegram-bot-dlya-biznesa', 'changefreq': 'monthly', 'priority': '0.7', 'lastmod': '2026-08-02'},
     {'loc': f'{BASE_URL}/blog/razrabotka-telegram-bota-pod-klyuch', 'changefreq': 'monthly', 'priority': '0.7', 'lastmod': '2026-08-02'},
     {'loc': f'{BASE_URL}/blog/kak-sozdat-ai-bot-telegram', 'changefreq': 'monthly', 'priority': '0.7', 'lastmod': '2026-08-02'},
     {'loc': f'{BASE_URL}/blog/telegram-webapp-razrabotka', 'changefreq': 'monthly', 'priority': '0.7', 'lastmod': '2026-08-02'},
-    {'loc': f'{BASE_URL}/blog/telegram-bot-ili-mobilnoe-prilozhenie', 'changefreq': 'monthly', 'priority': '0.7', 'lastmod': '2026-08-02'},
     {'loc': f'{BASE_URL}/blog/razrabotka-telegram-bota-s-nulya', 'changefreq': 'monthly', 'priority': '0.7', 'lastmod': '2026-08-02'},
     {'loc': f'{BASE_URL}/blog/zakazat-telegram-bota', 'changefreq': 'monthly', 'priority': '0.7', 'lastmod': '2026-08-02'},
-    {'loc': f'{BASE_URL}/blog/telegram-bot-dlya-priyoma-zakazov', 'changefreq': 'monthly', 'priority': '0.7', 'lastmod': '2026-08-02'},
-    {'loc': f'{BASE_URL}/blog/stoimost-telegram-bota', 'changefreq': 'monthly', 'priority': '0.7', 'lastmod': '2026-08-02'},
     {'loc': f'{BASE_URL}/blog/telegram-bot-dlya-magazina', 'changefreq': 'monthly', 'priority': '0.7', 'lastmod': '2026-08-02'},
     {'loc': f'{BASE_URL}/blog/bot-dlya-zapisi-klientov', 'changefreq': 'monthly', 'priority': '0.7', 'lastmod': '2026-08-02'},
     {'loc': f'{BASE_URL}/blog/telegram-bot-ili-mobilnoe-prilozhenie-dlya-biznesa', 'changefreq': 'monthly', 'priority': '0.7', 'lastmod': '2026-08-02'},
     {'loc': f'{BASE_URL}/blog/kak-telegram-bot-uvelichivaet-prodazhi', 'changefreq': 'monthly', 'priority': '0.7', 'lastmod': '2026-08-02'},
     {'loc': f'{BASE_URL}/blog/telegram-mini-app-chto-eto', 'changefreq': 'monthly', 'priority': '0.7', 'lastmod': '2026-08-02'},
     {'loc': f'{BASE_URL}/blog/aiogram-vs-pyrogram', 'changefreq': 'monthly', 'priority': '0.7', 'lastmod': '2026-08-02'},
-    {'loc': f'{BASE_URL}/blog/telegram-bot-dlya-priyoma-zakazov-2', 'changefreq': 'monthly', 'priority': '0.7', 'lastmod': '2026-08-02'},
+    {'loc': f'{BASE_URL}/blog/ai-telegram-bot-dlya-biznesa', 'changefreq': 'monthly', 'priority': '0.7', 'lastmod': '2026-08-04'},
+    {'loc': f'{BASE_URL}/blog/ai-bot-dlya-vedeniya-telegram-kanala', 'changefreq': 'monthly', 'priority': '0.7', 'lastmod': '2026-08-04'},
+    {'loc': f'{BASE_URL}/blog/bot-dlya-avtomatizacii-prodazh', 'changefreq': 'monthly', 'priority': '0.7', 'lastmod': '2026-08-04'},
+    {'loc': f'{BASE_URL}/blog/bot-menedzher-po-prodazham', 'changefreq': 'monthly', 'priority': '0.7', 'lastmod': '2026-08-04'},
+    {'loc': f'{BASE_URL}/blog/bot-obratnoj-svyazi-telegram', 'changefreq': 'monthly', 'priority': '0.7', 'lastmod': '2026-08-04'},
+    {'loc': f'{BASE_URL}/blog/bot-telegram-dlya-kurerov', 'changefreq': 'monthly', 'priority': '0.7', 'lastmod': '2026-08-04'},
+    {'loc': f'{BASE_URL}/blog/kak-bystro-otvechat-klientam', 'changefreq': 'monthly', 'priority': '0.7', 'lastmod': '2026-08-04'},
+    {'loc': f'{BASE_URL}/blog/konstruktory-telegram-botov', 'changefreq': 'monthly', 'priority': '0.7', 'lastmod': '2026-08-04'},
+    {'loc': f'{BASE_URL}/blog/korporativnyj-telegram-bot', 'changefreq': 'monthly', 'priority': '0.7', 'lastmod': '2026-08-04'},
+    {'loc': f'{BASE_URL}/blog/lichnyj-kabinet-v-telegram-bote', 'changefreq': 'monthly', 'priority': '0.7', 'lastmod': '2026-08-04'},
+    {'loc': f'{BASE_URL}/blog/lichnyj-telegram-bot', 'changefreq': 'monthly', 'priority': '0.7', 'lastmod': '2026-08-04'},
+    {'loc': f'{BASE_URL}/blog/nastrojka-telegram-bota', 'changefreq': 'monthly', 'priority': '0.7', 'lastmod': '2026-08-04'},
+    {'loc': f'{BASE_URL}/blog/razrabotka-bota-dlya-telegram', 'changefreq': 'monthly', 'priority': '0.7', 'lastmod': '2026-08-04'},
+    {'loc': f'{BASE_URL}/blog/sozdanie-i-nastrojka-telegram-kanalov-i-botov', 'changefreq': 'monthly', 'priority': '0.7', 'lastmod': '2026-08-04'},
+    {'loc': f'{BASE_URL}/blog/telegram-bot-dlya-avito', 'changefreq': 'monthly', 'priority': '0.7', 'lastmod': '2026-08-04'},
+    {'loc': f'{BASE_URL}/blog/telegram-bot-dlya-priyoma-zakazov', 'changefreq': 'monthly', 'priority': '0.7', 'lastmod': '2026-08-04'},
+    {'loc': f'{BASE_URL}/blog/telegram-bot-dlya-priyoma-zakazov-2', 'changefreq': 'monthly', 'priority': '0.7', 'lastmod': '2026-08-04'},
+    {'loc': f'{BASE_URL}/blog/telegram-bot-dlya-wildberries', 'changefreq': 'monthly', 'priority': '0.7', 'lastmod': '2026-08-04'},
+    {'loc': f'{BASE_URL}/blog/telegram-bot-rassylka', 'changefreq': 'monthly', 'priority': '0.7', 'lastmod': '2026-08-04'},
+    {'loc': f'{BASE_URL}/blog/telegram-bot-s-oplatoj', 'changefreq': 'monthly', 'priority': '0.7', 'lastmod': '2026-08-04'},
     # Блог — статьи: Парсинг маркетплейсов
     {'loc': f'{BASE_URL}/blog/parser-wildberries', 'changefreq': 'monthly', 'priority': '0.7', 'lastmod': '2026-08-03'},
     {'loc': f'{BASE_URL}/blog/parser-ozon', 'changefreq': 'monthly', 'priority': '0.7', 'lastmod': '2026-08-03'},
@@ -211,6 +246,12 @@ SITEMAP_STATIC_URLS = [
     {'loc': f'{BASE_URL}/blog/nejroseti-dlya-biznesa', 'changefreq': 'monthly', 'priority': '0.7', 'lastmod': '2026-08-02'},
     {'loc': f'{BASE_URL}/blog/razrabotka-crm-pod-klyuch', 'changefreq': 'monthly', 'priority': '0.7', 'lastmod': '2026-08-02'},
     {'loc': f'{BASE_URL}/blog/crm-dlya-malogo-biznesa', 'changefreq': 'monthly', 'priority': '0.7', 'lastmod': '2026-08-02'},
+    {'loc': f'{BASE_URL}/blog/analiz-avtomatizacii-biznes-processov', 'changefreq': 'monthly', 'priority': '0.7', 'lastmod': '2026-08-04'},
+    {'loc': f'{BASE_URL}/blog/avtomatizaciya-klientov', 'changefreq': 'monthly', 'priority': '0.7', 'lastmod': '2026-08-04'},
+    {'loc': f'{BASE_URL}/blog/avtomatizaciya-voronki-prodazh', 'changefreq': 'monthly', 'priority': '0.7', 'lastmod': '2026-08-04'},
+    {'loc': f'{BASE_URL}/blog/avtomatizaciya-zayavok', 'changefreq': 'monthly', 'priority': '0.7', 'lastmod': '2026-08-04'},
+    {'loc': f'{BASE_URL}/blog/cifrovizaciya-malogo-biznesa', 'changefreq': 'monthly', 'priority': '0.7', 'lastmod': '2026-08-04'},
+    {'loc': f'{BASE_URL}/blog/sistema-avtomatizacii-biznes-processov', 'changefreq': 'monthly', 'priority': '0.7', 'lastmod': '2026-08-04'},
     # Блог — статьи: AI и нейросети
     {'loc': f'{BASE_URL}/blog/chatgpt-dlya-biznesa', 'changefreq': 'monthly', 'priority': '0.7', 'lastmod': '2026-08-03'},
     {'loc': f'{BASE_URL}/blog/integraciya-openai-api', 'changefreq': 'monthly', 'priority': '0.7', 'lastmod': '2026-08-03'},
@@ -297,27 +338,41 @@ SERVICES = [
 BLOG_CLUSTERS = [
     ("Telegram-боты", [
         ("Бизнес на Telegram-ботах", "/blog/telegram-bot-dlya-biznesa"),
-        ("Сколько стоит разработка бота", "/blog/skolko-stoit-razrabotka-telegram-bota"),
+        ("Стоимость разработки бота", "/blog/stoimost-razrabotki"),
         ("Бот для приёма заявок", "/blog/telegram-bot-dlya-priyoma-zayavok"),
         ("Бот для интернет-магазина", "/blog/telegram-bot-dlya-internet-magazina"),
-        ("Бот для записи клиентов", "/blog/telegram-bot-dlya-zapisi-klientov"),
         ("Бот для продаж", "/blog/telegram-bot-dlya-prodazh"),
-        ("AI-бот для бизнеса", "/blog/ai-telegram-bot-dlya-biznesa"),
         ("Разработка бота под ключ", "/blog/razrabotka-telegram-bota-pod-klyuch"),
         ("Как создать AI-бота", "/blog/kak-sozdat-ai-bot-telegram"),
         ("Telegram WebApp разработка", "/blog/telegram-webapp-razrabotka"),
-        ("Бот или мобильное приложение", "/blog/telegram-bot-ili-mobilnoe-prilozhenie"),
         ("Разработка бота с нуля", "/blog/razrabotka-telegram-bota-s-nulya"),
         ("Заказать Telegram-бота", "/blog/zakazat-telegram-bota"),
-        ("Бот для приёма заказов", "/blog/telegram-bot-dlya-priyoma-zakazov"),
-        ("Стоимость Telegram-бота", "/blog/stoimost-telegram-bota"),
         ("Бот для магазина", "/blog/telegram-bot-dlya-magazina"),
         ("Бот для записи клиентов (гайд)", "/blog/bot-dlya-zapisi-klientov"),
         ("Бот или приложение для бизнеса", "/blog/telegram-bot-ili-mobilnoe-prilozhenie-dlya-biznesa"),
         ("Как бот увеличивает продажи", "/blog/kak-telegram-bot-uvelichivaet-prodazhi"),
         ("Telegram Mini App", "/blog/telegram-mini-app-chto-eto"),
         ("Aiogram vs Pyrogram", "/blog/aiogram-vs-pyrogram"),
-        ("Бот для приёма заказов v2", "/blog/telegram-bot-dlya-priyoma-zakazov-2"),
+        ("AI Telegram-бот для бизнеса", "/blog/ai-telegram-bot-dlya-biznesa"),
+        ("AI-бот для ведения Telegram-канала", "/blog/ai-bot-dlya-vedeniya-telegram-kanala"),
+        ("Бот для автоматизации продаж", "/blog/bot-dlya-avtomatizacii-prodazh"),
+        ("Бот-менеджер по продажам", "/blog/bot-menedzher-po-prodazham"),
+        ("Бот обратной связи Telegram", "/blog/bot-obratnoj-svyazi-telegram"),
+        ("Бот Telegram для курьеров", "/blog/bot-telegram-dlya-kurerov"),
+        ("Как быстро отвечать клиентам", "/blog/kak-bystro-otvechat-klientam"),
+        ("Конструкторы Telegram-ботов", "/blog/konstruktory-telegram-botov"),
+        ("Корпоративный Telegram-бот", "/blog/korporativnyj-telegram-bot"),
+        ("Личный кабинет в Telegram-боте", "/blog/lichnyj-kabinet-v-telegram-bote"),
+        ("Личный Telegram-бот", "/blog/lichnyj-telegram-bot"),
+        ("Настройка Telegram-бота", "/blog/nastrojka-telegram-bota"),
+        ("Разработка бота для Telegram", "/blog/razrabotka-bota-dlya-telegram"),
+        ("Создание и настройка Telegram-каналов и ботов", "/blog/sozdanie-i-nastrojka-telegram-kanalov-i-botov"),
+        ("Telegram-бот для Avito", "/blog/telegram-bot-dlya-avito"),
+        ("Telegram-бот для приёма заказов", "/blog/telegram-bot-dlya-priyoma-zakazov"),
+        ("Telegram-бот для приёма заказов (ч.2)", "/blog/telegram-bot-dlya-priyoma-zakazov-2"),
+        ("Telegram-бот для Wildberries", "/blog/telegram-bot-dlya-wildberries"),
+        ("Telegram-бот рассылка", "/blog/telegram-bot-rassylka"),
+        ("Telegram-бот с оплатой", "/blog/telegram-bot-s-oplatoj"),
     ]),
     ("Парсинг маркетплейсов", [
         ("Парсер Wildberries", "/blog/parser-wildberries"),
@@ -349,6 +404,12 @@ BLOG_CLUSTERS = [
         ("Нейросети для бизнеса", "/blog/nejroseti-dlya-biznesa"),
         ("Разработка CRM под ключ", "/blog/razrabotka-crm-pod-klyuch"),
         ("CRM для малого бизнеса", "/blog/crm-dlya-malogo-biznesa"),
+        ("Анализ автоматизации бизнес-процессов", "/blog/analiz-avtomatizacii-biznes-processov"),
+        ("Автоматизация клиентов", "/blog/avtomatizaciya-klientov"),
+        ("Автоматизация воронки продаж", "/blog/avtomatizaciya-voronki-prodazh"),
+        ("Автоматизация заявок", "/blog/avtomatizaciya-zayavok"),
+        ("Цифровизация малого бизнеса", "/blog/cifrovizaciya-malogo-biznesa"),
+        ("Система автоматизации бизнес-процессов", "/blog/sistema-avtomatizacii-biznes-processov"),
     ]),
     ("AI и нейросети", [
         ("ChatGPT для бизнеса", "/blog/chatgpt-dlya-biznesa"),
