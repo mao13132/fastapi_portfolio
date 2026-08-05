@@ -26,6 +26,7 @@ LLMS_TXT_SHORT = f"""# DimaRazrab — Фриланс-разработчик
 - [Python-разработка]({BASE_URL}/python-razrabotka) — от 15 000 ₽
 - [Next.js разработка]({BASE_URL}/nextjs-razrabotka) — от 30 000 ₽
 - [Веб-сервисы и приложения]({BASE_URL}/razrabotka-servisov) — от 50 000 ₽
+- [Калькулятор стоимости]({BASE_URL}/kalkulyator-stoimosti)
 
 ## Блог
 ### Telegram-боты
@@ -142,6 +143,53 @@ LLMS_TXT_SHORT = f"""# DimaRazrab — Фриланс-разработчик
 - [Next.js vs React]({BASE_URL}/blog/nextjs-vs-react)
 - [Создание сайта на Next.js]({BASE_URL}/blog/sozdanie-sajta-nextjs)
 
+### Парсинг данных
+- [Парсинг данных]({BASE_URL}/blog/parser-dannyh)
+- [Парсинг отзывов]({BASE_URL}/blog/parser-otzyvov)
+
+### API-интеграции
+- [Интеграция API маркетплейсов]({BASE_URL}/blog/integraciya-api-marketplejsov)
+- [Интеграция API доставки]({BASE_URL}/blog/integraciya-api-dostavki)
+- [Интеграция API с CRM]({BASE_URL}/blog/integraciya-api-s-crm)
+- [Интеграция нишевых API]({BASE_URL}/blog/integraciya-nichevyh-api)
+
+### CRM и ERP
+- [Разработка CRM и ERP]({BASE_URL}/blog/razrabotka-crm-erp)
+
+### Веб-разработка
+- [Веб-разработка (хаб)]({BASE_URL}/blog/veb-razrabotka)
+- [Сайты на заказ]({BASE_URL}/blog/sajty-na-zakaz)
+- [Создание лендинга]({BASE_URL}/blog/sozdanie-lendinga)
+- [Разработка сайта под ключ]({BASE_URL}/blog/razrabotka-sajta-pod-klyuch-veb)
+- [Создание интернет-магазина]({BASE_URL}/blog/sozdanie-internet-magazina)
+- [Создание сайта-каталога]({BASE_URL}/blog/sozdanie-sajta-kataloga)
+- [Заказать сайт на Tilde]({BASE_URL}/blog/zakazat-sajt-na-tilde)
+- [Заказать сайт на Bitrix]({BASE_URL}/blog/zakazat-sajt-na-bitrix)
+
+### Мобильная разработка
+- [Мобильные приложения (хаб)]({BASE_URL}/blog/mobilnye-prilozheniya)
+- [Разработка мобильных приложений]({BASE_URL}/blog/razrabotka-mobilnyh-prilozhenij)
+- [Сколько стоит мобильное приложение]({BASE_URL}/blog/skolko-stoit-mobilnoe-prilozhenie)
+- [Кроссплатформенная разработка приложений]({BASE_URL}/blog/krossplatformennaya-razrabotka-prilozhenij)
+- [Разработка приложений для бизнеса]({BASE_URL}/blog/razrabotka-prilozhenij-dlya-biznesa)
+- [Разработка приложений Android и iOS]({BASE_URL}/blog/razrabotka-prilozhenij-android-ios)
+
+### Конструкторы сайтов
+- [Создание сайта на WordPress]({BASE_URL}/blog/sozdanie-sajta-na-wordpress)
+- [Создание сайта на 1С-Битрикс]({BASE_URL}/blog/sozdanie-sajta-na-1s-bitrix)
+- [Создание сайта на Tilda]({BASE_URL}/blog/sozdanie-sajta-na-tilda-konstruktor)
+
+### Автоматизация склада
+- [Автоматизация склада]({BASE_URL}/blog/avtomatizaciya-sklada)
+- [Автоматизация склада 1С]({BASE_URL}/blog/avtomatizaciya-sklada-1s)
+- [WMS системы автоматизации]({BASE_URL}/blog/wms-sistemy-avtomatizacii)
+- [Автоматизация склада для маркетплейсов]({BASE_URL}/blog/avtomatizaciya-sklada-marketplejsy)
+
+### Telegram-боты (доп.)
+- [Стоимость Telegram-бота]({BASE_URL}/blog/stoimost-telegram-bota)
+- [Telegram-бот для записи клиентов]({BASE_URL}/blog/telegram-bot-dlya-zapisi-klientov)
+- [Telegram-бот или мобильное приложение]({BASE_URL}/blog/telegram-bot-ili-mobilnoe-prilozhenie)
+
 ## Портфолио
 Все работы: {BASE_URL}/work/
 
@@ -170,6 +218,7 @@ SITEMAP_STATIC_URLS = [
     {'loc': f'{BASE_URL}/nextjs-razrabotka', 'changefreq': 'monthly', 'priority': '0.9', 'lastmod': '2026-08-03'},
     {'loc': f'{BASE_URL}/parsery-marketplejsov', 'changefreq': 'monthly', 'priority': '0.8', 'lastmod': '2026-08-02'},
     {'loc': f'{BASE_URL}/lidogeneraciya-telegram', 'changefreq': 'monthly', 'priority': '0.8', 'lastmod': '2026-08-02'},
+    {'loc': f'{BASE_URL}/kalkulyator-stoimosti', 'changefreq': 'monthly', 'priority': '0.7', 'lastmod': '2026-08-05'},
     # Блог — главная и хабы
     {'loc': f'{BASE_URL}/blog', 'changefreq': 'weekly', 'priority': '0.8'},
     {'loc': f'{BASE_URL}/blog/telegram-boty', 'changefreq': 'weekly', 'priority': '0.9'},
@@ -179,6 +228,8 @@ SITEMAP_STATIC_URLS = [
     {'loc': f'{BASE_URL}/blog/nextjs-razrabotka', 'changefreq': 'weekly', 'priority': '0.8'},
     {'loc': f'{BASE_URL}/blog/ai-integracii', 'changefreq': 'weekly', 'priority': '0.8'},
     {'loc': f'{BASE_URL}/blog/razrabotka-api', 'changefreq': 'weekly', 'priority': '0.8'},
+    {'loc': f'{BASE_URL}/blog/mobilnye-prilozheniya', 'changefreq': 'weekly', 'priority': '0.8'},
+    {'loc': f'{BASE_URL}/blog/veb-razrabotka', 'changefreq': 'weekly', 'priority': '0.8'},
     # Блог — статьи: Telegram-боты
     {'loc': f'{BASE_URL}/blog/telegram-bot-dlya-biznesa', 'changefreq': 'monthly', 'priority': '0.8', 'lastmod': '2026-08-02'},
     {'loc': f'{BASE_URL}/blog/stoimost-razrabotki', 'changefreq': 'monthly', 'priority': '0.7', 'lastmod': '2026-08-02'},
@@ -279,6 +330,43 @@ SITEMAP_STATIC_URLS = [
     {'loc': f'{BASE_URL}/blog/saas-razrabotka-nextjs', 'changefreq': 'monthly', 'priority': '0.7', 'lastmod': '2026-08-03'},
     {'loc': f'{BASE_URL}/blog/nextjs-vs-react', 'changefreq': 'monthly', 'priority': '0.7', 'lastmod': '2026-08-03'},
     {'loc': f'{BASE_URL}/blog/sozdanie-sajta-nextjs', 'changefreq': 'monthly', 'priority': '0.7', 'lastmod': '2026-08-03'},
+    # Блог — статьи: Парсинг данных
+    {'loc': f'{BASE_URL}/blog/parser-dannyh', 'changefreq': 'monthly', 'priority': '0.7', 'lastmod': '2026-08-05'},
+    {'loc': f'{BASE_URL}/blog/parser-otzyvov', 'changefreq': 'monthly', 'priority': '0.7', 'lastmod': '2026-08-05'},
+    # Блог — статьи: API-интеграции (новые)
+    {'loc': f'{BASE_URL}/blog/integraciya-api-marketplejsov', 'changefreq': 'monthly', 'priority': '0.7', 'lastmod': '2026-08-05'},
+    {'loc': f'{BASE_URL}/blog/integraciya-api-dostavki', 'changefreq': 'monthly', 'priority': '0.7', 'lastmod': '2026-08-05'},
+    {'loc': f'{BASE_URL}/blog/integraciya-api-s-crm', 'changefreq': 'monthly', 'priority': '0.7', 'lastmod': '2026-08-05'},
+    {'loc': f'{BASE_URL}/blog/integraciya-nichevyh-api', 'changefreq': 'monthly', 'priority': '0.7', 'lastmod': '2026-08-05'},
+    # Блог — статьи: CRM и ERP
+    {'loc': f'{BASE_URL}/blog/razrabotka-crm-erp', 'changefreq': 'monthly', 'priority': '0.7', 'lastmod': '2026-08-05'},
+    # Блог — статьи: Веб-разработка
+    {'loc': f'{BASE_URL}/blog/sajty-na-zakaz', 'changefreq': 'monthly', 'priority': '0.7', 'lastmod': '2026-08-05'},
+    {'loc': f'{BASE_URL}/blog/sozdanie-lendinga', 'changefreq': 'monthly', 'priority': '0.7', 'lastmod': '2026-08-05'},
+    {'loc': f'{BASE_URL}/blog/razrabotka-sajta-pod-klyuch-veb', 'changefreq': 'monthly', 'priority': '0.7', 'lastmod': '2026-08-05'},
+    {'loc': f'{BASE_URL}/blog/sozdanie-internet-magazina', 'changefreq': 'monthly', 'priority': '0.7', 'lastmod': '2026-08-05'},
+    {'loc': f'{BASE_URL}/blog/sozdanie-sajta-kataloga', 'changefreq': 'monthly', 'priority': '0.7', 'lastmod': '2026-08-05'},
+    {'loc': f'{BASE_URL}/blog/zakazat-sajt-na-tilde', 'changefreq': 'monthly', 'priority': '0.7', 'lastmod': '2026-08-05'},
+    {'loc': f'{BASE_URL}/blog/zakazat-sajt-na-bitrix', 'changefreq': 'monthly', 'priority': '0.7', 'lastmod': '2026-08-05'},
+    # Блог — статьи: Мобильная разработка
+    {'loc': f'{BASE_URL}/blog/razrabotka-mobilnyh-prilozhenij', 'changefreq': 'monthly', 'priority': '0.7', 'lastmod': '2026-08-05'},
+    {'loc': f'{BASE_URL}/blog/skolko-stoit-mobilnoe-prilozhenie', 'changefreq': 'monthly', 'priority': '0.7', 'lastmod': '2026-08-05'},
+    {'loc': f'{BASE_URL}/blog/krossplatformennaya-razrabotka-prilozhenij', 'changefreq': 'monthly', 'priority': '0.7', 'lastmod': '2026-08-05'},
+    {'loc': f'{BASE_URL}/blog/razrabotka-prilozhenij-dlya-biznesa', 'changefreq': 'monthly', 'priority': '0.7', 'lastmod': '2026-08-05'},
+    {'loc': f'{BASE_URL}/blog/razrabotka-prilozhenij-android-ios', 'changefreq': 'monthly', 'priority': '0.7', 'lastmod': '2026-08-05'},
+    # Блог — статьи: Конструкторы сайтов
+    {'loc': f'{BASE_URL}/blog/sozdanie-sajta-na-wordpress', 'changefreq': 'monthly', 'priority': '0.7', 'lastmod': '2026-08-05'},
+    {'loc': f'{BASE_URL}/blog/sozdanie-sajta-na-1s-bitrix', 'changefreq': 'monthly', 'priority': '0.7', 'lastmod': '2026-08-05'},
+    {'loc': f'{BASE_URL}/blog/sozdanie-sajta-na-tilda-konstruktor', 'changefreq': 'monthly', 'priority': '0.7', 'lastmod': '2026-08-05'},
+    # Блог — статьи: Автоматизация склада
+    {'loc': f'{BASE_URL}/blog/avtomatizaciya-sklada', 'changefreq': 'monthly', 'priority': '0.7', 'lastmod': '2026-08-05'},
+    {'loc': f'{BASE_URL}/blog/avtomatizaciya-sklada-1s', 'changefreq': 'monthly', 'priority': '0.7', 'lastmod': '2026-08-05'},
+    {'loc': f'{BASE_URL}/blog/wms-sistemy-avtomatizacii', 'changefreq': 'monthly', 'priority': '0.7', 'lastmod': '2026-08-05'},
+    {'loc': f'{BASE_URL}/blog/avtomatizaciya-sklada-marketplejsy', 'changefreq': 'monthly', 'priority': '0.7', 'lastmod': '2026-08-05'},
+    # Блог — статьи: Telegram-боты (доп.)
+    {'loc': f'{BASE_URL}/blog/stoimost-telegram-bota', 'changefreq': 'monthly', 'priority': '0.7', 'lastmod': '2026-08-05'},
+    {'loc': f'{BASE_URL}/blog/telegram-bot-dlya-zapisi-klientov', 'changefreq': 'monthly', 'priority': '0.7', 'lastmod': '2026-08-05'},
+    {'loc': f'{BASE_URL}/blog/telegram-bot-ili-mobilnoe-prilozhenie', 'changefreq': 'monthly', 'priority': '0.7', 'lastmod': '2026-08-05'},
     # Служебные
     {'loc': f'{BASE_URL}/privacy', 'changefreq': 'yearly', 'priority': '0.3'},
     {'loc': f'{BASE_URL}/llms.txt', 'changefreq': 'weekly', 'priority': '0.5'},
@@ -441,6 +529,53 @@ BLOG_CLUSTERS = [
         ("SaaS разработка на Next.js", "/blog/saas-razrabotka-nextjs"),
         ("Next.js vs React", "/blog/nextjs-vs-react"),
         ("Создание сайта на Next.js", "/blog/sozdanie-sajta-nextjs"),
+    ]),
+    ("Парсинг данных", [
+        ("Парсинг данных", "/blog/parser-dannyh"),
+        ("Парсинг отзывов", "/blog/parser-otzyvov"),
+    ]),
+    ("API-интеграции", [
+        ("Интеграция API маркетплейсов", "/blog/integraciya-api-marketplejsov"),
+        ("Интеграция API доставки", "/blog/integraciya-api-dostavki"),
+        ("Интеграция API с CRM", "/blog/integraciya-api-s-crm"),
+        ("Интеграция нишевых API", "/blog/integraciya-nichevyh-api"),
+    ]),
+    ("CRM и ERP", [
+        ("Разработка CRM и ERP", "/blog/razrabotka-crm-erp"),
+    ]),
+    ("Веб-разработка", [
+        ("Веб-разработка (хаб)", "/blog/veb-razrabotka"),
+        ("Сайты на заказ", "/blog/sajty-na-zakaz"),
+        ("Создание лендинга", "/blog/sozdanie-lendinga"),
+        ("Разработка сайта под ключ", "/blog/razrabotka-sajta-pod-klyuch-veb"),
+        ("Создание интернет-магазина", "/blog/sozdanie-internet-magazina"),
+        ("Создание сайта-каталога", "/blog/sozdanie-sajta-kataloga"),
+        ("Заказать сайт на Tilde", "/blog/zakazat-sajt-na-tilde"),
+        ("Заказать сайт на Bitrix", "/blog/zakazat-sajt-na-bitrix"),
+    ]),
+    ("Мобильная разработка", [
+        ("Мобильные приложения (хаб)", "/blog/mobilnye-prilozheniya"),
+        ("Разработка мобильных приложений", "/blog/razrabotka-mobilnyh-prilozhenij"),
+        ("Сколько стоит мобильное приложение", "/blog/skolko-stoit-mobilnoe-prilozhenie"),
+        ("Кроссплатформенная разработка приложений", "/blog/krossplatformennaya-razrabotka-prilozhenij"),
+        ("Разработка приложений для бизнеса", "/blog/razrabotka-prilozhenij-dlya-biznesa"),
+        ("Разработка приложений Android и iOS", "/blog/razrabotka-prilozhenij-android-ios"),
+    ]),
+    ("Конструкторы сайтов", [
+        ("Создание сайта на WordPress", "/blog/sozdanie-sajta-na-wordpress"),
+        ("Создание сайта на 1С-Битрикс", "/blog/sozdanie-sajta-na-1s-bitrix"),
+        ("Создание сайта на Tilda", "/blog/sozdanie-sajta-na-tilda-konstruktor"),
+    ]),
+    ("Автоматизация склада", [
+        ("Автоматизация склада", "/blog/avtomatizaciya-sklada"),
+        ("Автоматизация склада 1С", "/blog/avtomatizaciya-sklada-1s"),
+        ("WMS системы автоматизации", "/blog/wms-sistemy-avtomatizacii"),
+        ("Автоматизация склада для маркетплейсов", "/blog/avtomatizaciya-sklada-marketplejsy"),
+    ]),
+    ("Telegram-боты (доп.)", [
+        ("Стоимость Telegram-бота", "/blog/stoimost-telegram-bota"),
+        ("Telegram-бот для записи клиентов", "/blog/telegram-bot-dlya-zapisi-klientov"),
+        ("Telegram-бот или мобильное приложение", "/blog/telegram-bot-ili-mobilnoe-prilozhenie"),
     ]),
 ]
 
