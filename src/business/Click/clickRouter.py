@@ -47,10 +47,10 @@ async def send_order(request: Request, data: ClickProps):
     except:
         ip_address = '-'
 
-    msg = f'Клик: {url}%0A' \
-          f'IP адрес: {ip_address} %0A ' \
-          f'User Agent: <code>{user_agent}</code>%0A' \
-          f'Refer: {referer}%0A%0A' \
+    msg = f'Клик: {url}\n' \
+          f'IP адрес: {ip_address}\n' \
+          f'User Agent: {user_agent}\n' \
+          f'Refer: {referer}\n\n' \
           f'utm_source: {utm_source}'
 
     await ClicksService.add(url=url, useragent=user_agent, referer=referer, ip=ip_address)

@@ -27,11 +27,11 @@ def format_dict(data: Dict[str, Any], indent: int = 0) -> str:
     for key, value in data.items():
         if isinstance(value, dict):
             nested = format_dict(value, indent + 1)
-            result.append(f"{'  ' * indent}📌 {key}:%0A{nested}")
+            result.append(f"{'  ' * indent}📌 {key}:\n{nested}")
         else:
             formatted_value = format_value(value)
             result.append(f"{'  ' * indent}📌 {key}: {formatted_value}")
-    return "%0A".join(result)
+    return "\n".join(result)
 
 
 def get_action_emoji(action: str) -> str:
@@ -59,34 +59,34 @@ async def track_visit(request: Request):
         
         # Формируем заголовок сообщения
         current_time = datetime.now().strftime("%Y-%m-%d %H:%M:%S")
-        msg = f"📊 Новое посещение ({current_time})%0A%0A"
+        msg = f"📊 Новое посещение ({current_time})\n\n"
         
         # Блок с действием пользователя
         action = data.get('action', 'Неизвестное действие')
         action_emoji = get_action_emoji(action)
-        msg += f"🎯 {action_emoji} Действие:%0A{action}%0A%0A"
+        msg += f"🎯 {action_emoji} Действие:\n{action}\n\n"
         
         # Блок с информацией о пользователе
         if 'user' in data:
             user = data['user']
-            msg += f"👤 Информация о пользователе:%0A"
-            msg += f"   👤 Имя: {user.get('first_name', 'Не указано')} {user.get('last_name', '')}%0A"
-            msg += f"   📱 Username: {user.get('username', 'Не указан')}%0A"
-            msg += f"   🌐 Язык: {user.get('language_code', 'Не указан')}%0A%0A"
+            msg += f"👤 Информация о пользователе:\n"
+            msg += f"   👤 Имя: {user.get('first_name', 'Не указано')} {user.get('last_name', '')}\n"
+            msg += f"   📱 Username: {user.get('username', 'Не указан')}\n"
+            msg += f"   🌐 Язык: {user.get('language_code', 'Не указан')}\n\n"
         
         # Блок с информацией об элементе
         if 'element' in data:
             element = data['element']
-            msg += f"🔍 Информация об элементе:%0A"
-            msg += f"   📝 Текст: {element.get('text', 'Нет')}%0A"
-            msg += f"   🏷️ Тип: {element.get('type', 'Нет')}%0A"
-            msg += f"   🔗 Ссылка: {element.get('href', 'Нет')}%0A%0A"
+            msg += f"🔍 Информация об элементе:\n"
+            msg += f"   📝 Текст: {element.get('text', 'Нет')}\n"
+            msg += f"   🏷️ Тип: {element.get('type', 'Нет')}\n"
+            msg += f"   🔗 Ссылка: {element.get('href', 'Нет')}\n\n"
         
         # Техническая информация
-        msg += f"⚙️ Техническая информация:%0A"
-        msg += f"   🌐 URL: {data.get('url', 'Не указан')}%0A"
-        msg += f"   💻 Платформа: {data.get('platform', 'Не указана')}%0A"
-        msg += f"   ⏰ Время: {data.get('timestamp', 'Не указано')}%0A"
+        msg += f"⚙️ Техническая информация:\n"
+        msg += f"   🌐 URL: {data.get('url', 'Не указан')}\n"
+        msg += f"   💻 Платформа: {data.get('platform', 'Не указана')}\n"
+        msg += f"   ⏰ Время: {data.get('timestamp', 'Не указано')}\n"
         
         # Отправляем сообщение в Telegram
         res_send = await send_text_telegram(msg)
