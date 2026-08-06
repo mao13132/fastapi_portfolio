@@ -43,4 +43,12 @@ MODE = 'DEV'
 
 CLICK_IN_TG = True
 
+# --- Click notification settings ---
+# Отправлять ВСЕ клики в Telegram (True) или только «горячие» (False)
+CLICK_NOTIFY_ALL = True
+
+# Пороговые значения для «горячих» визитов (используются при CLICK_NOTIFY_ALL=False)
+CLICK_HOT_MIN_VISITS = 3        # Минимум визитов
+CLICK_HOT_MIN_TIME = 300        # Минимальное суммарное время на сайте (секунд, 5 мин)
+
 BASE_URL = os.getenv('BASE_URL', 'https://dima-razrab.com')

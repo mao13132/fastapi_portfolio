@@ -580,3 +580,106 @@ def format_contact_message_legacy(data: dict, ip_address: str = "-") -> str:
     )
 
     return msg
+
+
+# ============================================================
+# Click-уведомления (горячие визиты)
+# ============================================================
+
+def _format_time_on_page(seconds: int) -> str:
+    """Форматирует время на странице в читаемый вид."""
+    if seconds >= 60:
+        return f"{seconds // 60} мин {seconds % 60} сек"
+    return f"{seconds} сек"
+
+
+def is_hot_visit(attribution: Optional[dict],
+                 min_visits: int = 3,
+                 min_time: int = 300) -> bool:
+    """
+    Определяет, является ли визит «горячим».
+    Критерии (любой из):
+      - visits >= min_visits
+      - form.started == true
+      - суммарное timeOnPage по journey > min_time
+    """
+    if not attribution:
+        return False
+
+    # Количество визитов
+    if (attribution.get("visits") or 0) >= min_visits:
+        return True
+
+    # Форма начата
+    form = attribution.get("form")
+    if form and form.get("started"):
+        return True
+
+    # Суммарное время на сайте
+    journey = attribution.get("journey", [])
+    total_time = sum(v.get("timeOnPage", 0) for v in journey)
+    if total_time > min_time:
+        return True
+
+    return False
+
+
+def format_click_message(url: str, attribution: Optional[dict] = None,
+                         utm_source: Optional[str] = None,
+                         ip_address: str = "-",
+                         is_hot: bool = False) -> str:
+    """
+    Форматирует сообщение для /click.
+    Если is_hot=True — заголовок «🔥 Горячий визит», иначе «📊 Новый клик».
+    """
+    if is_hot:
+        lines = ["🔥 Горячий визит", ""]
+    else:
+        lines = ["📊 Новый клик", ""]
+
+    if url:
+        lines.append(f"🔗 Страница: {url}")
+
+    lines.append(f"🕐 Время: {get_msk_now()}")
+
+    if attribution:
+        # Путь клиента
+        journey_str = format_journey(attribution)
+        if journey_str:
+            lines.append("")
+            lines.append(journey_str)
+
+        # Устройство
+        device_str = format_device(attribution)
+        if device_str:
+            lines.append(f"  {device_str}")
+
+        # Источник
+        entry_str = format_entry(attribution)
+        if entry_str:
+            lines.append(entry_str)
+
+        # UTM из query-параметра (запасной вариант)
+        if not entry_str and utm_source:
+            lines.append(f"🏷 UTM source: {utm_source}")
+
+        # Визиты
+        visits_str = format_visits(attribution)
+        if visits_str:
+            lines.append(visits_str)
+
+        # Суммарное время на сайте
+        journey = attribution.get("journey", [])
+        if journey:
+            total_time = sum(v.get("timeOnPage", 0) for v in journey)
+            if total_time > 0:
+                lines.append(f"⏱ Общее время на сайте: {_format_time_on_page(total_time)}")
+    else:
+        # Без attribution — базовая информация
+        if utm_source:
+            lines.append(f"🏷 UTM source: {utm_source}")
+
+    if ip_address and ip_address != "-":
+        lines.append(f"💻 IP: {ip_address}")
+
+    return "\n".join(lines)
