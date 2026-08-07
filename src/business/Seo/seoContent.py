@@ -68,6 +68,63 @@ LLMS_TXT_SHORT = f"""# DimaRazrab — Фриланс-разработчик
 - [Telegram-бот рассылка]({BASE_URL}/blog/telegram-bot-rassylka)
 - [Telegram-бот с оплатой]({BASE_URL}/blog/telegram-bot-s-oplatoj)
 
+### Telegram-боты для бизнеса (по нишам)
+- [Telegram-боты для отраслей (хаб)]({BASE_URL}/blog/telegram-boty-dlya-otraslej)
+- [Бот для аптеки]({BASE_URL}/blog/bot-dlya-apteki)
+- [Бот для ателье]({BASE_URL}/blog/bot-dlya-atelye)
+- [Бот для продавца Avito]({BASE_URL}/blog/bot-dlya-avito-prodavca)
+- [Бот для автодилера]({BASE_URL}/blog/bot-dlya-avtodilera)
+- [Бот для автосервиса]({BASE_URL}/blog/bot-dlya-avtoservisa)
+- [Бот для Автослон]({BASE_URL}/blog/bot-dlya-avtoslona)
+- [Бот для барбершопа]({BASE_URL}/blog/bot-dlya-barbershopa)
+- [Бот для бухгалтера]({BASE_URL}/blog/bot-dlya-buhgaltera)
+- [Бот для детского сада]({BASE_URL}/blog/bot-dlya-detskogo-sada)
+- [Бот для дизайн-студии]({BASE_URL}/blog/bot-dlya-dizajn-studii)
+- [Бот для доставки еды]({BASE_URL}/blog/bot-dlya-dostavki-edy)
+- [Бот для дропшиппинга]({BASE_URL}/blog/bot-dlya-dropshippinga)
+- [Бот для ивент-агентства]({BASE_URL}/blog/bot-dlya-eventa)
+- [Бот для фитнес-клуба]({BASE_URL}/blog/bot-dlya-fitnes-kluba)
+- [Бот для фотографа]({BASE_URL}/blog/bot-dlya-fotografa)
+- [Бот для химчистки]({BASE_URL}/blog/bot-dlya-himchistki)
+- [Бот для HR]({BASE_URL}/blog/bot-dlya-hr)
+- [Бот для йога-студии]({BASE_URL}/blog/bot-dlya-joga-studii)
+- [Бот для киберспорта]({BASE_URL}/blog/bot-dlya-kibersporta)
+- [Бот для клининга]({BASE_URL}/blog/bot-dlya-klininga)
+- [Бот для коуча]({BASE_URL}/blog/bot-dlya-koucha)
+- [Бот для логистики]({BASE_URL}/blog/bot-dlya-logistiki)
+- [Бот для маркетингового агентства]({BASE_URL}/blog/bot-dlya-marketingovogo-agentstva)
+- [Бот для массажа]({BASE_URL}/blog/bot-dlya-massazha)
+- [Бот для мебельного магазина]({BASE_URL}/blog/bot-dlya-mebeli)
+- [Бот для медицинской клиники]({BASE_URL}/blog/bot-dlya-medkliniki)
+- [Бот для музыканта]({BASE_URL}/blog/bot-dlya-muzyki)
+- [Бот для нотариуса]({BASE_URL}/blog/bot-dlya-notariusa)
+- [Бот для образовательного сообщества]({BASE_URL}/blog/bot-dlya-obrazovatelnogo-soobshchestva)
+- [Бот для онлайн-школы]({BASE_URL}/blog/bot-dlya-onlajn-shkoly)
+- [Бот для парикмахерской]({BASE_URL}/blog/bot-dlya-parikmaxerskoj)
+- [Бот для пекарни]({BASE_URL}/blog/bot-dlya-pekarni)
+- [Бот для проката]({BASE_URL}/blog/bot-dlya-prokata)
+- [Бот для психолога]({BASE_URL}/blog/bot-dlya-psihologa)
+- [Бот для ремонта техники]({BASE_URL}/blog/bot-dlya-remonta-tekhniki)
+- [Бот для репетитора]({BASE_URL}/blog/bot-dlya-repetitora)
+- [Бот для ресторана]({BASE_URL}/blog/bot-dlya-restorana)
+- [Бот для риелтора]({BASE_URL}/blog/bot-dlya-rieltora)
+- [Бот для салона красоты]({BASE_URL}/blog/bot-dlya-salona-krasoty)
+- [Бот для селера Ozon]({BASE_URL}/blog/bot-dlya-selera-ozon)
+- [Бот для селера Wildberries]({BASE_URL}/blog/bot-dlya-selera-wildberries)
+- [Бот для SMM-агентства]({BASE_URL}/blog/bot-dlya-smm-agentstva)
+- [Бот для стоматологии]({BASE_URL}/blog/bot-dlya-stomatologii)
+- [Бот для страхования]({BASE_URL}/blog/bot-dlya-strahovki)
+- [Бот для стройки]({BASE_URL}/blog/bot-dlya-strojki)
+- [Бот для студии загара]({BASE_URL}/blog/bot-dlya-studii-zagara)
+- [Бот для свадьбы]({BASE_URL}/blog/bot-dlya-svadby)
+- [Бот для танцев]({BASE_URL}/blog/bot-dlya-tancev)
+- [Бот для тренера]({BASE_URL}/blog/bot-dlya-trenera)
+- [Бот для цветочного магазина]({BASE_URL}/blog/bot-dlya-tsvetochnogo)
+- [Бот для турагентства]({BASE_URL}/blog/bot-dlya-turagentstva)
+- [Бот для ветклиники]({BASE_URL}/blog/bot-dlya-vetkliniki)
+- [Бот для видеографа]({BASE_URL}/blog/bot-dlya-videografa)
+- [Бот для юриста]({BASE_URL}/blog/bot-dlya-yurista)
+
 ### Парсинг маркетплейсов
 - [Парсинг маркетплейсов (хаб)]({BASE_URL}/blog/parsery-marketplejsov)
 - [Парсер Wildberries]({BASE_URL}/blog/parser-wildberries)
@@ -367,6 +424,62 @@ SITEMAP_STATIC_URLS = [
     {'loc': f'{BASE_URL}/blog/stoimost-telegram-bota', 'changefreq': 'monthly', 'priority': '0.7', 'lastmod': '2026-08-05'},
     {'loc': f'{BASE_URL}/blog/telegram-bot-dlya-zapisi-klientov', 'changefreq': 'monthly', 'priority': '0.7', 'lastmod': '2026-08-05'},
     {'loc': f'{BASE_URL}/blog/telegram-bot-ili-mobilnoe-prilozhenie', 'changefreq': 'monthly', 'priority': '0.7', 'lastmod': '2026-08-05'},
+    # Блог — статьи: Telegram-боты для бизнеса (по нишам)
+    {'loc': f'{BASE_URL}/blog/telegram-boty-dlya-otraslej', 'changefreq': 'weekly', 'priority': '0.8', 'lastmod': '2026-08-07'},
+    {'loc': f'{BASE_URL}/blog/bot-dlya-apteki', 'changefreq': 'monthly', 'priority': '0.7', 'lastmod': '2026-08-07'},
+    {'loc': f'{BASE_URL}/blog/bot-dlya-atelye', 'changefreq': 'monthly', 'priority': '0.7', 'lastmod': '2026-08-07'},
+    {'loc': f'{BASE_URL}/blog/bot-dlya-avito-prodavca', 'changefreq': 'monthly', 'priority': '0.7', 'lastmod': '2026-08-07'},
+    {'loc': f'{BASE_URL}/blog/bot-dlya-avtodilera', 'changefreq': 'monthly', 'priority': '0.7', 'lastmod': '2026-08-07'},
+    {'loc': f'{BASE_URL}/blog/bot-dlya-avtoservisa', 'changefreq': 'monthly', 'priority': '0.7', 'lastmod': '2026-08-07'},
+    {'loc': f'{BASE_URL}/blog/bot-dlya-avtoslona', 'changefreq': 'monthly', 'priority': '0.7', 'lastmod': '2026-08-07'},
+    {'loc': f'{BASE_URL}/blog/bot-dlya-barbershopa', 'changefreq': 'monthly', 'priority': '0.7', 'lastmod': '2026-08-07'},
+    {'loc': f'{BASE_URL}/blog/bot-dlya-buhgaltera', 'changefreq': 'monthly', 'priority': '0.7', 'lastmod': '2026-08-07'},
+    {'loc': f'{BASE_URL}/blog/bot-dlya-detskogo-sada', 'changefreq': 'monthly', 'priority': '0.7', 'lastmod': '2026-08-07'},
+    {'loc': f'{BASE_URL}/blog/bot-dlya-dizajn-studii', 'changefreq': 'monthly', 'priority': '0.7', 'lastmod': '2026-08-07'},
+    {'loc': f'{BASE_URL}/blog/bot-dlya-dostavki-edy', 'changefreq': 'monthly', 'priority': '0.7', 'lastmod': '2026-08-07'},
+    {'loc': f'{BASE_URL}/blog/bot-dlya-dropshippinga', 'changefreq': 'monthly', 'priority': '0.7', 'lastmod': '2026-08-07'},
+    {'loc': f'{BASE_URL}/blog/bot-dlya-eventa', 'changefreq': 'monthly', 'priority': '0.7', 'lastmod': '2026-08-07'},
+    {'loc': f'{BASE_URL}/blog/bot-dlya-fitnes-kluba', 'changefreq': 'monthly', 'priority': '0.7', 'lastmod': '2026-08-07'},
+    {'loc': f'{BASE_URL}/blog/bot-dlya-fotografa', 'changefreq': 'monthly', 'priority': '0.7', 'lastmod': '2026-08-07'},
+    {'loc': f'{BASE_URL}/blog/bot-dlya-himchistki', 'changefreq': 'monthly', 'priority': '0.7', 'lastmod': '2026-08-07'},
+    {'loc': f'{BASE_URL}/blog/bot-dlya-hr', 'changefreq': 'monthly', 'priority': '0.7', 'lastmod': '2026-08-07'},
+    {'loc': f'{BASE_URL}/blog/bot-dlya-joga-studii', 'changefreq': 'monthly', 'priority': '0.7', 'lastmod': '2026-08-07'},
+    {'loc': f'{BASE_URL}/blog/bot-dlya-kibersporta', 'changefreq': 'monthly', 'priority': '0.7', 'lastmod': '2026-08-07'},
+    {'loc': f'{BASE_URL}/blog/bot-dlya-klininga', 'changefreq': 'monthly', 'priority': '0.7', 'lastmod': '2026-08-07'},
+    {'loc': f'{BASE_URL}/blog/bot-dlya-koucha', 'changefreq': 'monthly', 'priority': '0.7', 'lastmod': '2026-08-07'},
+    {'loc': f'{BASE_URL}/blog/bot-dlya-logistiki', 'changefreq': 'monthly', 'priority': '0.7', 'lastmod': '2026-08-07'},
+    {'loc': f'{BASE_URL}/blog/bot-dlya-marketingovogo-agentstva', 'changefreq': 'monthly', 'priority': '0.7', 'lastmod': '2026-08-07'},
+    {'loc': f'{BASE_URL}/blog/bot-dlya-massazha', 'changefreq': 'monthly', 'priority': '0.7', 'lastmod': '2026-08-07'},
+    {'loc': f'{BASE_URL}/blog/bot-dlya-mebeli', 'changefreq': 'monthly', 'priority': '0.7', 'lastmod': '2026-08-07'},
+    {'loc': f'{BASE_URL}/blog/bot-dlya-medkliniki', 'changefreq': 'monthly', 'priority': '0.7', 'lastmod': '2026-08-07'},
+    {'loc': f'{BASE_URL}/blog/bot-dlya-muzyki', 'changefreq': 'monthly', 'priority': '0.7', 'lastmod': '2026-08-07'},
+    {'loc': f'{BASE_URL}/blog/bot-dlya-notariusa', 'changefreq': 'monthly', 'priority': '0.7', 'lastmod': '2026-08-07'},
+    {'loc': f'{BASE_URL}/blog/bot-dlya-obrazovatelnogo-soobshchestva', 'changefreq': 'monthly', 'priority': '0.7', 'lastmod': '2026-08-07'},
+    {'loc': f'{BASE_URL}/blog/bot-dlya-onlajn-shkoly', 'changefreq': 'monthly', 'priority': '0.7', 'lastmod': '2026-08-07'},
+    {'loc': f'{BASE_URL}/blog/bot-dlya-parikmaxerskoj', 'changefreq': 'monthly', 'priority': '0.7', 'lastmod': '2026-08-07'},
+    {'loc': f'{BASE_URL}/blog/bot-dlya-pekarni', 'changefreq': 'monthly', 'priority': '0.7', 'lastmod': '2026-08-07'},
+    {'loc': f'{BASE_URL}/blog/bot-dlya-prokata', 'changefreq': 'monthly', 'priority': '0.7', 'lastmod': '2026-08-07'},
+    {'loc': f'{BASE_URL}/blog/bot-dlya-psihologa', 'changefreq': 'monthly', 'priority': '0.7', 'lastmod': '2026-08-07'},
+    {'loc': f'{BASE_URL}/blog/bot-dlya-remonta-tekhniki', 'changefreq': 'monthly', 'priority': '0.7', 'lastmod': '2026-08-07'},
+    {'loc': f'{BASE_URL}/blog/bot-dlya-repetitora', 'changefreq': 'monthly', 'priority': '0.7', 'lastmod': '2026-08-07'},
+    {'loc': f'{BASE_URL}/blog/bot-dlya-restorana', 'changefreq': 'monthly', 'priority': '0.7', 'lastmod': '2026-08-07'},
+    {'loc': f'{BASE_URL}/blog/bot-dlya-rieltora', 'changefreq': 'monthly', 'priority': '0.7', 'lastmod': '2026-08-07'},
+    {'loc': f'{BASE_URL}/blog/bot-dlya-salona-krasoty', 'changefreq': 'monthly', 'priority': '0.7', 'lastmod': '2026-08-07'},
+    {'loc': f'{BASE_URL}/blog/bot-dlya-selera-ozon', 'changefreq': 'monthly', 'priority': '0.7', 'lastmod': '2026-08-07'},
+    {'loc': f'{BASE_URL}/blog/bot-dlya-selera-wildberries', 'changefreq': 'monthly', 'priority': '0.7', 'lastmod': '2026-08-07'},
+    {'loc': f'{BASE_URL}/blog/bot-dlya-smm-agentstva', 'changefreq': 'monthly', 'priority': '0.7', 'lastmod': '2026-08-07'},
+    {'loc': f'{BASE_URL}/blog/bot-dlya-stomatologii', 'changefreq': 'monthly', 'priority': '0.7', 'lastmod': '2026-08-07'},
+    {'loc': f'{BASE_URL}/blog/bot-dlya-strahovki', 'changefreq': 'monthly', 'priority': '0.7', 'lastmod': '2026-08-07'},
+    {'loc': f'{BASE_URL}/blog/bot-dlya-strojki', 'changefreq': 'monthly', 'priority': '0.7', 'lastmod': '2026-08-07'},
+    {'loc': f'{BASE_URL}/blog/bot-dlya-studii-zagara', 'changefreq': 'monthly', 'priority': '0.7', 'lastmod': '2026-08-07'},
+    {'loc': f'{BASE_URL}/blog/bot-dlya-svadby', 'changefreq': 'monthly', 'priority': '0.7', 'lastmod': '2026-08-07'},
+    {'loc': f'{BASE_URL}/blog/bot-dlya-tancev', 'changefreq': 'monthly', 'priority': '0.7', 'lastmod': '2026-08-07'},
+    {'loc': f'{BASE_URL}/blog/bot-dlya-trenera', 'changefreq': 'monthly', 'priority': '0.7', 'lastmod': '2026-08-07'},
+    {'loc': f'{BASE_URL}/blog/bot-dlya-tsvetochnogo', 'changefreq': 'monthly', 'priority': '0.7', 'lastmod': '2026-08-07'},
+    {'loc': f'{BASE_URL}/blog/bot-dlya-turagentstva', 'changefreq': 'monthly', 'priority': '0.7', 'lastmod': '2026-08-07'},
+    {'loc': f'{BASE_URL}/blog/bot-dlya-vetkliniki', 'changefreq': 'monthly', 'priority': '0.7', 'lastmod': '2026-08-07'},
+    {'loc': f'{BASE_URL}/blog/bot-dlya-videografa', 'changefreq': 'monthly', 'priority': '0.7', 'lastmod': '2026-08-07'},
+    {'loc': f'{BASE_URL}/blog/bot-dlya-yurista', 'changefreq': 'monthly', 'priority': '0.7', 'lastmod': '2026-08-07'},
     # Служебные
     {'loc': f'{BASE_URL}/privacy', 'changefreq': 'yearly', 'priority': '0.3'},
     {'loc': f'{BASE_URL}/llms.txt', 'changefreq': 'weekly', 'priority': '0.5'},
@@ -461,6 +574,63 @@ BLOG_CLUSTERS = [
         ("Telegram-бот для Wildberries", "/blog/telegram-bot-dlya-wildberries"),
         ("Telegram-бот рассылка", "/blog/telegram-bot-rassylka"),
         ("Telegram-бот с оплатой", "/blog/telegram-bot-s-oplatoj"),
+    ]),
+    ("Telegram-боты для бизнеса (по нишам)", [
+        ("Telegram-боты для отраслей (хаб)", "/blog/telegram-boty-dlya-otraslej"),
+        ("Бот для аптеки", "/blog/bot-dlya-apteki"),
+        ("Бот для ателье", "/blog/bot-dlya-atelye"),
+        ("Бот для продавца Avito", "/blog/bot-dlya-avito-prodavca"),
+        ("Бот для автодилера", "/blog/bot-dlya-avtodilera"),
+        ("Бот для автосервиса", "/blog/bot-dlya-avtoservisa"),
+        ("Бот для Автослон", "/blog/bot-dlya-avtoslona"),
+        ("Бот для барбершопа", "/blog/bot-dlya-barbershopa"),
+        ("Бот для бухгалтера", "/blog/bot-dlya-buhgaltera"),
+        ("Бот для детского сада", "/blog/bot-dlya-detskogo-sada"),
+        ("Бот для дизайн-студии", "/blog/bot-dlya-dizajn-studii"),
+        ("Бот для доставки еды", "/blog/bot-dlya-dostavki-edy"),
+        ("Бот для дропшиппинга", "/blog/bot-dlya-dropshippinga"),
+        ("Бот для ивент-агентства", "/blog/bot-dlya-eventa"),
+        ("Бот для фитнес-клуба", "/blog/bot-dlya-fitnes-kluba"),
+        ("Бот для фотографа", "/blog/bot-dlya-fotografa"),
+        ("Бот для химчистки", "/blog/bot-dlya-himchistki"),
+        ("Бот для HR", "/blog/bot-dlya-hr"),
+        ("Бот для йога-студии", "/blog/bot-dlya-joga-studii"),
+        ("Бот для киберспорта", "/blog/bot-dlya-kibersporta"),
+        ("Бот для клининга", "/blog/bot-dlya-klininga"),
+        ("Бот для коуча", "/blog/bot-dlya-koucha"),
+        ("Бот для логистики", "/blog/bot-dlya-logistiki"),
+        ("Бот для маркетингового агентства", "/blog/bot-dlya-marketingovogo-agentstva"),
+        ("Бот для массажа", "/blog/bot-dlya-massazha"),
+        ("Бот для мебельного магазина", "/blog/bot-dlya-mebeli"),
+        ("Бот для медицинской клиники", "/blog/bot-dlya-medkliniki"),
+        ("Бот для музыканта", "/blog/bot-dlya-muzyki"),
+        ("Бот для нотариуса", "/blog/bot-dlya-notariusa"),
+        ("Бот для образовательного сообщества", "/blog/bot-dlya-obrazovatelnogo-soobshchestva"),
+        ("Бот для онлайн-школы", "/blog/bot-dlya-onlajn-shkoly"),
+        ("Бот для парикмахерской", "/blog/bot-dlya-parikmaxerskoj"),
+        ("Бот для пекарни", "/blog/bot-dlya-pekarni"),
+        ("Бот для проката", "/blog/bot-dlya-prokata"),
+        ("Бот для психолога", "/blog/bot-dlya-psihologa"),
+        ("Бот для ремонта техники", "/blog/bot-dlya-remonta-tekhniki"),
+        ("Бот для репетитора", "/blog/bot-dlya-repetitora"),
+        ("Бот для ресторана", "/blog/bot-dlya-restorana"),
+        ("Бот для риелтора", "/blog/bot-dlya-rieltora"),
+        ("Бот для салона красоты", "/blog/bot-dlya-salona-krasoty"),
+        ("Бот для селера Ozon", "/blog/bot-dlya-selera-ozon"),
+        ("Бот для селера Wildberries", "/blog/bot-dlya-selera-wildberries"),
+        ("Бот для SMM-агентства", "/blog/bot-dlya-smm-agentstva"),
+        ("Бот для стоматологии", "/blog/bot-dlya-stomatologii"),
+        ("Бот для страхования", "/blog/bot-dlya-strahovki"),
+        ("Бот для стройки", "/blog/bot-dlya-strojki"),
+        ("Бот для студии загара", "/blog/bot-dlya-studii-zagara"),
+        ("Бот для свадьбы", "/blog/bot-dlya-svadby"),
+        ("Бот для танцев", "/blog/bot-dlya-tancev"),
+        ("Бот для тренера", "/blog/bot-dlya-trenera"),
+        ("Бот для цветочного магазина", "/blog/bot-dlya-tsvetochnogo"),
+        ("Бот для турагентства", "/blog/bot-dlya-turagentstva"),
+        ("Бот для ветклиники", "/blog/bot-dlya-vetkliniki"),
+        ("Бот для видеографа", "/blog/bot-dlya-videografa"),
+        ("Бот для юриста", "/blog/bot-dlya-yurista"),
     ]),
     ("Парсинг маркетплейсов", [
         ("Парсер Wildberries", "/blog/parser-wildberries"),
