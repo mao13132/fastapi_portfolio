@@ -222,6 +222,9 @@ LLMS_TXT_SHORT = f"""# DimaRazrab — Фриланс-разработчик
 - [Создание сайта-каталога]({BASE_URL}/blog/sozdanie-sajta-kataloga)
 - [Заказать сайт на Tilde]({BASE_URL}/blog/zakazat-sajt-na-tilde)
 - [Заказать сайт на Bitrix]({BASE_URL}/blog/zakazat-sajt-na-bitrix)
+- [Разработка веб-приложений]({BASE_URL}/blog/razrabotka-veb-prilozhenij)
+- [Разработка SaaS-платформы]({BASE_URL}/blog/razrabotka-saas-platformy)
+- [Создание лендинга с помощью ИИ]({BASE_URL}/blog/sozdanie-lendinga-s-pomoshchyu-ii)
 
 ### Мобильная разработка
 - [Мобильные приложения (хаб)]({BASE_URL}/blog/mobilnye-prilozheniya)
@@ -230,6 +233,7 @@ LLMS_TXT_SHORT = f"""# DimaRazrab — Фриланс-разработчик
 - [Кроссплатформенная разработка приложений]({BASE_URL}/blog/krossplatformennaya-razrabotka-prilozhenij)
 - [Разработка приложений для бизнеса]({BASE_URL}/blog/razrabotka-prilozhenij-dlya-biznesa)
 - [Разработка приложений Android и iOS]({BASE_URL}/blog/razrabotka-prilozhenij-android-ios)
+- [Разработка мобильных приложений с ИИ]({BASE_URL}/blog/razrabotka-mobilnyh-prilozhenij-s-ii)
 
 ### Конструкторы сайтов
 - [Создание сайта на WordPress]({BASE_URL}/blog/sozdanie-sajta-na-wordpress)
@@ -405,12 +409,16 @@ SITEMAP_STATIC_URLS = [
     {'loc': f'{BASE_URL}/blog/sozdanie-sajta-kataloga', 'changefreq': 'monthly', 'priority': '0.7', 'lastmod': '2026-08-05'},
     {'loc': f'{BASE_URL}/blog/zakazat-sajt-na-tilde', 'changefreq': 'monthly', 'priority': '0.7', 'lastmod': '2026-08-05'},
     {'loc': f'{BASE_URL}/blog/zakazat-sajt-na-bitrix', 'changefreq': 'monthly', 'priority': '0.7', 'lastmod': '2026-08-05'},
+    {'loc': f'{BASE_URL}/blog/razrabotka-veb-prilozhenij', 'changefreq': 'monthly', 'priority': '0.7', 'lastmod': '2026-08-09'},
+    {'loc': f'{BASE_URL}/blog/razrabotka-saas-platformy', 'changefreq': 'monthly', 'priority': '0.7', 'lastmod': '2026-08-09'},
+    {'loc': f'{BASE_URL}/blog/sozdanie-lendinga-s-pomoshchyu-ii', 'changefreq': 'monthly', 'priority': '0.7', 'lastmod': '2026-08-09'},
     # Блог — статьи: Мобильная разработка
     {'loc': f'{BASE_URL}/blog/razrabotka-mobilnyh-prilozhenij', 'changefreq': 'monthly', 'priority': '0.7', 'lastmod': '2026-08-05'},
     {'loc': f'{BASE_URL}/blog/skolko-stoit-mobilnoe-prilozhenie', 'changefreq': 'monthly', 'priority': '0.7', 'lastmod': '2026-08-05'},
     {'loc': f'{BASE_URL}/blog/krossplatformennaya-razrabotka-prilozhenij', 'changefreq': 'monthly', 'priority': '0.7', 'lastmod': '2026-08-05'},
     {'loc': f'{BASE_URL}/blog/razrabotka-prilozhenij-dlya-biznesa', 'changefreq': 'monthly', 'priority': '0.7', 'lastmod': '2026-08-05'},
     {'loc': f'{BASE_URL}/blog/razrabotka-prilozhenij-android-ios', 'changefreq': 'monthly', 'priority': '0.7', 'lastmod': '2026-08-05'},
+    {'loc': f'{BASE_URL}/blog/razrabotka-mobilnyh-prilozhenij-s-ii', 'changefreq': 'monthly', 'priority': '0.7', 'lastmod': '2026-08-09'},
     # Блог — статьи: Конструкторы сайтов
     {'loc': f'{BASE_URL}/blog/sozdanie-sajta-na-wordpress', 'changefreq': 'monthly', 'priority': '0.7', 'lastmod': '2026-08-05'},
     {'loc': f'{BASE_URL}/blog/sozdanie-sajta-na-1s-bitrix', 'changefreq': 'monthly', 'priority': '0.7', 'lastmod': '2026-08-05'},
@@ -722,6 +730,9 @@ BLOG_CLUSTERS = [
         ("Создание сайта-каталога", "/blog/sozdanie-sajta-kataloga"),
         ("Заказать сайт на Tilde", "/blog/zakazat-sajt-na-tilde"),
         ("Заказать сайт на Bitrix", "/blog/zakazat-sajt-na-bitrix"),
+        ("Разработка веб-приложений", "/blog/razrabotka-veb-prilozhenij"),
+        ("Разработка SaaS-платформы", "/blog/razrabotka-saas-platformy"),
+        ("Создание лендинга с помощью ИИ", "/blog/sozdanie-lendinga-s-pomoshchyu-ii"),
     ]),
     ("Мобильная разработка", [
         ("Мобильные приложения (хаб)", "/blog/mobilnye-prilozheniya"),
@@ -730,6 +741,7 @@ BLOG_CLUSTERS = [
         ("Кроссплатформенная разработка приложений", "/blog/krossplatformennaya-razrabotka-prilozhenij"),
         ("Разработка приложений для бизнеса", "/blog/razrabotka-prilozhenij-dlya-biznesa"),
         ("Разработка приложений Android и iOS", "/blog/razrabotka-prilozhenij-android-ios"),
+        ("Разработка мобильных приложений с ИИ", "/blog/razrabotka-mobilnyh-prilozhenij-s-ii"),
     ]),
     ("Конструкторы сайтов", [
         ("Создание сайта на WordPress", "/blog/sozdanie-sajta-na-wordpress"),

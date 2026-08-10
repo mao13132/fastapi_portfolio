@@ -20,6 +20,7 @@ from src.business.Category.CategoryRouter import categoryRouter
 from src.business.Category.categoryAdmin import CategoryAdmin
 from src.business.Click.clickRouter import clickRouter
 from src.business.Click.clicksAdmin import ClicksAdmin
+from src.business.Click.seoStatsAdmin import SeoStatsAdmin
 from src.business.Contact.contactAdmin import ContactAdmin
 from src.business.Contact.contactRouter import contactRouter
 from src.business.Quiz.quizAdmin import QuizAdmin, QuizResultAdmin
@@ -31,6 +32,9 @@ from src.business.visits.visitsRouter import visitsRouter
 from src.sql.bd import engine
 from src.start_data.StartRouter import startRouter
 from src.business.Seo.seoRouter import seoRouter
+from src.business.Click.eventRouter import eventRouter
+from src.business.Click.abRouter import abRouter
+from src.middleware import install_exception_catcher, AdminErrorMiddleware, RequestLoggingMiddleware
 
 app = FastAPI()
 
@@ -46,6 +50,8 @@ app.include_router(clickRouter)
 app.include_router(quizRouter)
 app.include_router(visitsRouter)
 app.include_router(seoRouter)
+app.include_router(eventRouter)
+app.include_router(abRouter)
 
 origins = [
     "http://localhost",
@@ -70,6 +76,9 @@ app.add_middleware(CORSMiddleware,
 authentication_backend = AdminAuth(secret_key=SECRET_JWT)
 admin = Admin(app, engine=engine, authentication_backend=authentication_backend)
 
+# Перехват ошибок SQLAdmin (вместо белого экрана — детальная страница с traceback)
+install_exception_catcher(admin)
+
 admin.add_view(UserAdmin)
 admin.add_view(CategoryAdmin)
 admin.add_view(WorksAdmin)
@@ -77,6 +86,12 @@ admin.add_view(QuizResultAdmin)
 admin.add_view(QuizAdmin)
 admin.add_view(ContactAdmin)
 admin.add_view(ClicksAdmin)
+admin.add_view(SeoStatsAdmin)
+
+# Логирование запросов при ошибках (422, 400, 500)
+app.add_middleware(RequestLoggingMiddleware)
+# Внешний ASGI-middleware как fallback для 'тихих' 500
+app.add_middleware(AdminErrorMiddleware)
 
 if __name__ == '__main__':
     uvicorn.run(app, host="127.0.0.1", port=8000)

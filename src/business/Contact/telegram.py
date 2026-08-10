@@ -112,11 +112,30 @@ def format_journey(attribution: Optional[dict]) -> str:
     if not attribution or not attribution.get("journey"):
         return ""
 
-    lines = ["📊 Путь клиента:"]
-    emojis = ["1️⃣", "2️⃣", "3️⃣", "4️⃣", "5️⃣", "6️⃣", "7️⃣", "8️⃣", "9️⃣"]
+    journey = attribution["journey"]
 
-    for i, visit in enumerate(attribution["journey"], 1):
-        page = visit.get("page", "?")
+    # Дедупликация: убираем подряд идущие дубли одного URL
+    deduped = []
+    for visit in journey:
+        url = visit.get("url") or visit.get("page") or ""
+        if not deduped or url != (deduped[-1].get("url") or deduped[-1].get("page") or ""):
+            deduped.append(visit)
+    journey = deduped
+
+    # Ограничиваем до 10 последних записей
+    if len(journey) > 10:
+        journey = journey[-10:]
+
+    if not journey:
+        return ""
+
+    lines = ["📊 Путь клиента:"]
+    emojis = ["1️⃣", "2️⃣", "3️⃣", "4️⃣", "5️⃣", "6️⃣", "7️⃣", "8️⃣", "9️⃣", "🔟"]
+
+    for i, visit in enumerate(journey, 1):
+        # Фронтенд отправляет: {url, timestamp, referrer}
+        # Старый формат: {page, timeOnPage, scrollDepth, ctaClicks}
+        page = visit.get("url") or visit.get("page") or "—"
         time_s = visit.get("timeOnPage", 0)
         scroll = visit.get("scrollDepth", 0)
         cta = visit.get("ctaClicks", [])
