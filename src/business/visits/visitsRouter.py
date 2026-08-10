@@ -87,9 +87,9 @@ async def track_visit(request: Request):
         msg += f"   🌐 URL: {data.get('url', 'Не указан')}\n"
         msg += f"   💻 Платформа: {data.get('platform', 'Не указана')}\n"
         msg += f"   ⏰ Время: {data.get('timestamp', 'Не указано')}\n"
-        
-        # Отправляем сообщение в Telegram
-        res_send = await send_text_telegram(msg)
+
+        # Отправка в Telegram убрана — дублировала уведомление из /click
+        # res_send = await send_text_telegram(msg)
 
         return {"status": "success", "message": "OK"}
     except Exception as e:

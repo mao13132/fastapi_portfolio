@@ -3,6 +3,7 @@ from datetime import datetime, timedelta
 from typing import List, Dict, Optional
 from sqlalchemy import select, func, and_, Integer
 from sqlalchemy.ext.asyncio import AsyncSession
+from src.business.Click.SeoStatsService import _calc_since, _date_filter, _clicks_date_cond
 from src.business.Click.click_table import Clicks
 from src.business.Click.pageEvent_table import PageEvent, MicroConversion, CtaClick
 from src.business.Contact.contact_table import Contact
@@ -45,19 +46,29 @@ class CroRecommendation:
         }
 
 
+def _event_date_cond(days: int = 30, since=None, until=None):
+    return _date_filter(PageEvent.created_at, days, since, until)
+
+
+def _cta_date_cond(days: int = 30, since=None, until=None):
+    return _date_filter(CtaClick.created_at, days, since, until)
+
+
 class CroAnalysisService:
     """AI CRO Analysis — автоматические рекомендации по страницам"""
 
     @staticmethod
-    async def analyze_page(session: AsyncSession, url: str, days: int = 30) -> List[CroRecommendation]:
+    async def analyze_page(session: AsyncSession, url: str, days: int = 30, since=None, until=None) -> List[CroRecommendation]:
         """Анализ одной страницы — генерация рекомендаций"""
         recommendations = []
-        since = datetime.utcnow() - timedelta(days=days)
+        date_cond = _clicks_date_cond(days, since, until)
+        ev_date_cond = _event_date_cond(days, since, until)
+        cta_date_cond = _cta_date_cond(days, since, until)
 
         # 1. Собираем данные по странице
         total_views = (await session.execute(
             select(func.count(Clicks.id))
-            .where(and_(Clicks.url == url, Clicks.date >= since, Clicks.is_bot == False))
+            .where(and_(Clicks.url == url, *date_cond, Clicks.is_bot == False))
         )).scalar() or 0
 
         if total_views < 5:
@@ -65,12 +76,12 @@ class CroAnalysisService:
 
         unique_visitors = (await session.execute(
             select(func.count(func.distinct(Clicks.ip)))
-            .where(and_(Clicks.url == url, Clicks.date >= since, Clicks.is_bot == False))
+            .where(and_(Clicks.url == url, *date_cond, Clicks.is_bot == False))
         )).scalar() or 0
 
         search_clicks = (await session.execute(
             select(func.count(Clicks.id))
-            .where(and_(Clicks.url == url, Clicks.date >= since, Clicks.search_engine.isnot(None)))
+            .where(and_(Clicks.url == url, *date_cond, Clicks.search_engine.isnot(None)))
         )).scalar() or 0
 
         conversions = (await session.execute(
@@ -85,7 +96,7 @@ class CroAnalysisService:
             .where(and_(
                 PageEvent.url == url,
                 PageEvent.event_type == 'scroll_depth',
-                PageEvent.created_at >= since,
+                *ev_date_cond,
             ))
             .group_by(PageEvent.value)
         )).all()
@@ -98,7 +109,7 @@ class CroAnalysisService:
             .where(and_(
                 PageEvent.url == url,
                 PageEvent.event_type == 'time_on_page',
-                PageEvent.created_at >= since,
+                *ev_date_cond,
             ))
         )).all()
         time_values = [r[0] for r in time_rows if r[0] and r[0] > 0]
@@ -110,7 +121,7 @@ class CroAnalysisService:
             .where(and_(
                 PageEvent.url == url,
                 PageEvent.event_type == 'rage_click',
-                PageEvent.created_at >= since,
+                *ev_date_cond,
             ))
         )).scalar() or 0
 
@@ -119,14 +130,14 @@ class CroAnalysisService:
             .where(and_(
                 PageEvent.url == url,
                 PageEvent.event_type == 'dead_click',
-                PageEvent.created_at >= since,
+                *ev_date_cond,
             ))
         )).scalar() or 0
 
         # CTA clicks on this page
         cta_total = (await session.execute(
             select(func.count(CtaClick.id))
-            .where(and_(CtaClick.url == url, CtaClick.created_at >= since))
+            .where(and_(CtaClick.url == url, *cta_date_cond))
         )).scalar() or 0
 
         # 2. Генерируем рекомендации на основе данных
@@ -285,14 +296,14 @@ class CroAnalysisService:
         return recommendations
 
     @staticmethod
-    async def get_all_recommendations(session: AsyncSession, days: int = 30, limit: int = 10) -> List[dict]:
+    async def get_all_recommendations(session: AsyncSession, days: int = 30, since=None, until=None, limit: int = 10) -> List[dict]:
         """Анализ всех страниц — топ рекомендации"""
-        since = datetime.utcnow() - timedelta(days=days)
+        date_cond = _clicks_date_cond(days, since, until)
 
         # Получаем топ страниц по просмотрам
         top_pages = (await session.execute(
             select(Clicks.url, func.count(Clicks.id).label('views'))
-            .where(and_(Clicks.date >= since, Clicks.is_bot == False))
+            .where(and_(*date_cond, Clicks.is_bot == False))
             .group_by(Clicks.url)
             .order_by(func.count(Clicks.id).desc())
             .limit(limit)
@@ -300,7 +311,7 @@ class CroAnalysisService:
 
         all_recommendations = []
         for page in top_pages:
-            recs = await CroAnalysisService.analyze_page(session, page.url, days)
+            recs = await CroAnalysisService.analyze_page(session, page.url, days, since=since, until=until)
             for rec in recs:
                 all_recommendations.append(rec.to_dict())
 
@@ -313,13 +324,14 @@ class CroAnalysisService:
         return all_recommendations
 
     @staticmethod
-    async def get_page_summary(session: AsyncSession, days: int = 30) -> dict:
+    async def get_page_summary(session: AsyncSession, days: int = 30, since=None, until=None) -> dict:
         """Сводка по всем страницам для CRO"""
-        since = datetime.utcnow() - timedelta(days=days)
+        date_cond = _clicks_date_cond(days, since, until)
+        ev_date_cond = _event_date_cond(days, since, until)
 
         total_pages = (await session.execute(
             select(func.count(func.distinct(Clicks.url)))
-            .where(and_(Clicks.date >= since, Clicks.is_bot == False))
+            .where(and_(*date_cond, Clicks.is_bot == False))
         )).scalar() or 0
 
         pages_with_conversions = (await session.execute(
@@ -333,17 +345,17 @@ class CroAnalysisService:
 
         total_views = (await session.execute(
             select(func.count(Clicks.id))
-            .where(and_(Clicks.date >= since, Clicks.is_bot == False))
+            .where(and_(*date_cond, Clicks.is_bot == False))
         )).scalar() or 0
 
         total_rage = (await session.execute(
             select(func.count(PageEvent.id))
-            .where(and_(PageEvent.event_type == 'rage_click', PageEvent.created_at >= since))
+            .where(and_(PageEvent.event_type == 'rage_click', *ev_date_cond))
         )).scalar() or 0
 
         total_dead = (await session.execute(
             select(func.count(PageEvent.id))
-            .where(and_(PageEvent.event_type == 'dead_click', PageEvent.created_at >= since))
+            .where(and_(PageEvent.event_type == 'dead_click', *ev_date_cond))
         )).scalar() or 0
 
         return {

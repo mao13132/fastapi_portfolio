@@ -2,9 +2,25 @@ import logging
 from datetime import datetime, timedelta
 from sqlalchemy import select, func, and_, case, Integer
 from sqlalchemy.ext.asyncio import AsyncSession
+from src.business.Click.SeoStatsService import _calc_since, _date_filter
 from src.business.Click.pageEvent_table import PageEvent, MicroConversion, CtaClick
 
 logger = logging.getLogger(__name__)
+
+
+def _event_date_cond(days: int = 30, since=None, until=None):
+    """Условия по PageEvent.created_at"""
+    return _date_filter(PageEvent.created_at, days, since, until)
+
+
+def _micro_date_cond(days: int = 30, since=None, until=None):
+    """Условия по MicroConversion.created_at"""
+    return _date_filter(MicroConversion.created_at, days, since, until)
+
+
+def _cta_date_cond(days: int = 30, since=None, until=None):
+    """Условия по CtaClick.created_at"""
+    return _date_filter(CtaClick.created_at, days, since, until)
 
 
 class EventService:
@@ -12,9 +28,9 @@ class EventService:
     # ==================== SCROLL DEPTH ====================
 
     @staticmethod
-    async def get_scroll_distribution(session: AsyncSession, days: int = 30) -> list:
+    async def get_scroll_distribution(session: AsyncSession, days: int = 30, since=None, until=None) -> list:
         """Распределение глубины скролла по страницам"""
-        since = datetime.utcnow() - timedelta(days=days)
+        date_cond = _event_date_cond(days, since, until)
         q = (
             select(
                 PageEvent.url.label('url'),
@@ -23,7 +39,7 @@ class EventService:
             )
             .where(and_(
                 PageEvent.event_type == 'scroll_depth',
-                PageEvent.created_at >= since,
+                *date_cond,
             ))
             .group_by(PageEvent.url, PageEvent.value)
             .order_by(PageEvent.url, PageEvent.value)
@@ -39,9 +55,9 @@ class EventService:
     # ==================== TIME ON PAGE ====================
 
     @staticmethod
-    async def get_time_segments(session: AsyncSession, days: int = 30) -> list:
+    async def get_time_segments(session: AsyncSession, days: int = 30, since=None, until=None) -> list:
         """Сегментация по времени на странице"""
-        since = datetime.utcnow() - timedelta(days=days)
+        date_cond = _event_date_cond(days, since, until)
         q = (
             select(
                 PageEvent.url.label('url'),
@@ -55,7 +71,7 @@ class EventService:
             )
             .where(and_(
                 PageEvent.event_type == 'time_on_page',
-                PageEvent.created_at >= since,
+                *date_cond,
             ))
             .group_by(PageEvent.url, 'segment')
             .order_by(PageEvent.url, 'segment')
@@ -70,9 +86,9 @@ class EventService:
     # ==================== RAGE / DEAD CLICKS ====================
 
     @staticmethod
-    async def get_frustration_events(session: AsyncSession, days: int = 30, limit: int = 20) -> list:
+    async def get_frustration_events(session: AsyncSession, days: int = 30, since=None, until=None, limit: int = 20) -> list:
         """Топ элементов с rage/dead кликами"""
-        since = datetime.utcnow() - timedelta(days=days)
+        date_cond = _event_date_cond(days, since, until)
         q = (
             select(
                 PageEvent.event_type.label('type'),
@@ -82,7 +98,7 @@ class EventService:
             )
             .where(and_(
                 PageEvent.event_type.in_(['rage_click', 'dead_click']),
-                PageEvent.created_at >= since,
+                *date_cond,
             ))
             .group_by(PageEvent.event_type, PageEvent.url, PageEvent.value)
             .order_by(func.count(PageEvent.id).desc())
@@ -92,32 +108,32 @@ class EventService:
         return [{'type': r.type, 'url': r.url, 'element': r.element, 'count': r.count} for r in rows]
 
     @staticmethod
-    async def get_frustration_summary(session: AsyncSession, days: int = 30) -> dict:
+    async def get_frustration_summary(session: AsyncSession, days: int = 30, since=None, until=None) -> dict:
         """Сводка: сколько rage/dead кликов"""
-        since = datetime.utcnow() - timedelta(days=days)
+        date_cond = _event_date_cond(days, since, until)
         rage = (await session.execute(
             select(func.count(PageEvent.id))
-            .where(and_(PageEvent.event_type == 'rage_click', PageEvent.created_at >= since))
+            .where(and_(PageEvent.event_type == 'rage_click', *date_cond))
         )).scalar() or 0
         dead = (await session.execute(
             select(func.count(PageEvent.id))
-            .where(and_(PageEvent.event_type == 'dead_click', PageEvent.created_at >= since))
+            .where(and_(PageEvent.event_type == 'dead_click', *date_cond))
         )).scalar() or 0
         return {'rage_clicks': rage, 'dead_clicks': dead, 'total': rage + dead}
 
     # ==================== MICRO CONVERSIONS ====================
 
     @staticmethod
-    async def get_micro_conversion_funnel(session: AsyncSession, days: int = 30) -> list:
+    async def get_micro_conversion_funnel(session: AsyncSession, days: int = 30, since=None, until=None) -> list:
         """Воронка микроконверсий"""
-        since = datetime.utcnow() - timedelta(days=days)
+        date_cond = _micro_date_cond(days, since, until)
         q = (
             select(
                 MicroConversion.conversion_type.label('type'),
                 func.count(MicroConversion.id).label('count'),
                 func.count(func.distinct(MicroConversion.session_id)).label('unique_sessions'),
             )
-            .where(MicroConversion.created_at >= since)
+            .where(and_(*date_cond))
             .group_by(MicroConversion.conversion_type)
             .order_by(func.count(MicroConversion.id).desc())
         )
@@ -125,16 +141,16 @@ class EventService:
         return [{'type': r.type, 'count': r.count, 'unique_sessions': r.unique_sessions} for r in rows]
 
     @staticmethod
-    async def get_micro_conversions_by_page(session: AsyncSession, days: int = 30) -> list:
+    async def get_micro_conversions_by_page(session: AsyncSession, days: int = 30, since=None, until=None) -> list:
         """Микроконверсии по страницам"""
-        since = datetime.utcnow() - timedelta(days=days)
+        date_cond = _micro_date_cond(days, since, until)
         q = (
             select(
                 MicroConversion.url.label('url'),
                 MicroConversion.conversion_type.label('type'),
                 func.count(MicroConversion.id).label('count'),
             )
-            .where(MicroConversion.created_at >= since)
+            .where(and_(*date_cond))
             .group_by(MicroConversion.url, MicroConversion.conversion_type)
             .order_by(MicroConversion.url, func.count(MicroConversion.id).desc())
         )
@@ -148,9 +164,9 @@ class EventService:
     # ==================== CTA EFFECTIVENESS ====================
 
     @staticmethod
-    async def get_cta_stats(session: AsyncSession, days: int = 30) -> list:
+    async def get_cta_stats(session: AsyncSession, days: int = 30, since=None, until=None) -> list:
         """Статистика по CTA-кнопкам"""
-        since = datetime.utcnow() - timedelta(days=days)
+        date_cond = _cta_date_cond(days, since, until)
         q = (
             select(
                 CtaClick.cta_id.label('cta_id'),
@@ -159,7 +175,7 @@ class EventService:
                 func.count(func.distinct(CtaClick.session_id)).label('unique_sessions'),
                 func.count(func.distinct(CtaClick.url)).label('pages_seen'),
             )
-            .where(CtaClick.created_at >= since)
+            .where(and_(*date_cond))
             .group_by(CtaClick.cta_id, CtaClick.cta_text)
             .order_by(func.count(CtaClick.id).desc())
         )
@@ -223,16 +239,16 @@ class EventService:
     # ==================== VISITOR TEMPERATURE ====================
 
     @staticmethod
-    async def get_temperature_breakdown(session: AsyncSession, days: int = 30) -> dict:
+    async def get_temperature_breakdown(session: AsyncSession, days: int = 30, since=None, until=None) -> dict:
         """Распределение температуры посетителей"""
         # Упрощённо: по количеству событий на session_id
-        since = datetime.utcnow() - timedelta(days=days)
+        date_cond = _event_date_cond(days, since, until)
         q = (
             select(
                 PageEvent.session_id.label('sid'),
                 func.count(PageEvent.id).label('events'),
             )
-            .where(and_(PageEvent.created_at >= since, PageEvent.session_id.isnot(None)))
+            .where(and_(*date_cond, PageEvent.session_id.isnot(None)))
             .group_by(PageEvent.session_id)
         )
         rows = (await session.execute(q)).all()

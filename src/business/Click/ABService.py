@@ -3,9 +3,15 @@ import random
 from datetime import datetime, timedelta
 from sqlalchemy import select, func, and_
 from sqlalchemy.ext.asyncio import AsyncSession
+from src.business.Click.SeoStatsService import _calc_since, _date_filter
 from src.business.Click.ab_table import ABTest, ABAssignment
 
 logger = logging.getLogger(__name__)
+
+
+def _ab_date_cond(days: int = 30, since=None, until=None):
+    """Условия по ABAssignment.created_at"""
+    return _date_filter(ABAssignment.created_at, days, since, until)
 
 
 class ABService:
@@ -53,8 +59,8 @@ class ABService:
             await session.commit()
 
     @staticmethod
-    async def get_test_results(session: AsyncSession, days: int = 30) -> list:
-        since = datetime.utcnow() - timedelta(days=days)
+    async def get_test_results(session: AsyncSession, days: int = 30, since=None, until=None) -> list:
+        date_cond = _ab_date_cond(days, since, until)
         tests = (await session.execute(
             select(ABTest).where(ABTest.status.in_(['active', 'completed']))
         )).scalars().all()
@@ -64,21 +70,21 @@ class ABService:
             # Вариант A
             a_total = (await session.execute(
                 select(func.count(ABAssignment.id))
-                .where(and_(ABAssignment.test_id == test.id, ABAssignment.variant == 'A', ABAssignment.created_at >= since))
+                .where(and_(ABAssignment.test_id == test.id, ABAssignment.variant == 'A', *date_cond))
             )).scalar() or 0
             a_converted = (await session.execute(
                 select(func.count(ABAssignment.id))
-                .where(and_(ABAssignment.test_id == test.id, ABAssignment.variant == 'A', ABAssignment.converted == True, ABAssignment.created_at >= since))
+                .where(and_(ABAssignment.test_id == test.id, ABAssignment.variant == 'A', ABAssignment.converted == True, *date_cond))
             )).scalar() or 0
 
             # Вариант B
             b_total = (await session.execute(
                 select(func.count(ABAssignment.id))
-                .where(and_(ABAssignment.test_id == test.id, ABAssignment.variant == 'B', ABAssignment.created_at >= since))
+                .where(and_(ABAssignment.test_id == test.id, ABAssignment.variant == 'B', *date_cond))
             )).scalar() or 0
             b_converted = (await session.execute(
                 select(func.count(ABAssignment.id))
-                .where(and_(ABAssignment.test_id == test.id, ABAssignment.variant == 'B', ABAssignment.converted == True, ABAssignment.created_at >= since))
+                .where(and_(ABAssignment.test_id == test.id, ABAssignment.variant == 'B', ABAssignment.converted == True, *date_cond))
             )).scalar() or 0
 
             a_rate = round(a_converted / a_total * 100, 2) if a_total else 0

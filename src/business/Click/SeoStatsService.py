@@ -7,25 +7,44 @@ from src.business.Click.click_table import Clicks
 logger = logging.getLogger(__name__)
 
 
+def _calc_since(days: int, since=None):
+    """Возвращает since: если передан — используем его, иначе вычисляем из days"""
+    return since if since is not None else datetime.utcnow() - timedelta(days=days)
+
+
+def _date_filter(date_col, days: int = 30, since=None, until=None):
+    """Строит список условий по дате для .where(and_(...))"""
+    s = _calc_since(days, since)
+    conditions = [date_col >= s]
+    if until is not None:
+        conditions.append(date_col < until)
+    return conditions
+
+
+def _clicks_date_cond(days: int = 30, since=None, until=None):
+    """Условия по Clicks.date"""
+    return _date_filter(Clicks.date, days, since, until)
+
+
 class SeoStatsService:
 
     @staticmethod
-    async def get_summary(session: AsyncSession, days: int = 30) -> dict:
-        since = datetime.utcnow() - timedelta(days=days)
+    async def get_summary(session: AsyncSession, days: int = 30, since=None, until=None) -> dict:
+        date_cond = _clicks_date_cond(days, since, until)
         total = (await session.execute(
-            select(func.count(Clicks.id)).where(Clicks.date >= since)
+            select(func.count(Clicks.id)).where(and_(*date_cond))
         )).scalar() or 0
         unique_ip = (await session.execute(
-            select(func.count(func.distinct(Clicks.ip))).where(Clicks.date >= since)
+            select(func.count(func.distinct(Clicks.ip))).where(and_(*date_cond))
         )).scalar() or 0
         search_clicks = (await session.execute(
             select(func.count(Clicks.id)).where(
-                and_(Clicks.date >= since, Clicks.search_engine.isnot(None))
+                and_(*date_cond, Clicks.search_engine.isnot(None))
             )
         )).scalar() or 0
         bots = (await session.execute(
             select(func.count(Clicks.id)).where(
-                and_(Clicks.date >= since, Clicks.is_bot == True)
+                and_(*date_cond, Clicks.is_bot == True)
             )
         )).scalar() or 0
         human = total - bots
@@ -39,11 +58,11 @@ class SeoStatsService:
         }
 
     @staticmethod
-    async def get_clicks_by_day(session: AsyncSession, days: int = 30) -> list:
-        since = datetime.utcnow() - timedelta(days=days)
+    async def get_clicks_by_day(session: AsyncSession, days: int = 30, since=None, until=None) -> list:
+        date_cond = _clicks_date_cond(days, since, until)
         q = (
             select(func.date(Clicks.date).label('date'), func.count(Clicks.id).label('count'))
-            .where(Clicks.date >= since)
+            .where(and_(*date_cond))
             .group_by(func.date(Clicks.date))
             .order_by(func.date(Clicks.date))
         )
@@ -51,11 +70,31 @@ class SeoStatsService:
         return [{'date': str(row.date), 'count': row.count} for row in result.all()]
 
     @staticmethod
-    async def get_search_engines_breakdown(session: AsyncSession, days: int = 30) -> list:
-        since = datetime.utcnow() - timedelta(days=days)
+    async def get_referrer_clicks_by_day(session: AsyncSession, days: int = 30, referrer_domain=None, since=None, until=None) -> list:
+        """Клики по дням, фильтрованные по домену реферера"""
+        date_cond = _clicks_date_cond(days, since, until)
+
+        if referrer_domain:
+            # Фильтр по домену: referer LIKE '%domain%'
+            date_cond.append(
+                Clicks.referer.ilike(f'%{referrer_domain}%')
+            )
+
+        q = (
+            select(func.date(Clicks.date).label('date'), func.count(Clicks.id).label('count'))
+            .where(and_(*date_cond))
+            .group_by(func.date(Clicks.date))
+            .order_by(func.date(Clicks.date))
+        )
+        result = await session.execute(q)
+        return [{'date': str(row.date), 'count': row.count} for row in result.all()]
+
+    @staticmethod
+    async def get_search_engines_breakdown(session: AsyncSession, days: int = 30, since=None, until=None) -> list:
+        date_cond = _clicks_date_cond(days, since, until)
         q = (
             select(Clicks.search_engine.label('engine'), func.count(Clicks.id).label('count'))
-            .where(and_(Clicks.date >= since, Clicks.search_engine.isnot(None)))
+            .where(and_(*date_cond, Clicks.search_engine.isnot(None)))
             .group_by(Clicks.search_engine)
             .order_by(func.count(Clicks.id).desc())
         )
@@ -67,8 +106,8 @@ class SeoStatsService:
         ]
 
     @staticmethod
-    async def get_top_search_queries(session: AsyncSession, days: int = 30, limit: int = 20) -> list:
-        since = datetime.utcnow() - timedelta(days=days)
+    async def get_top_search_queries(session: AsyncSession, days: int = 30, since=None, until=None, limit: int = 20) -> list:
+        date_cond = _clicks_date_cond(days, since, until)
         q = (
             select(
                 Clicks.search_query.label('query'),
@@ -76,7 +115,7 @@ class SeoStatsService:
                 func.count(Clicks.id).label('count'),
             )
             .where(and_(
-                Clicks.date >= since,
+                *date_cond,
                 Clicks.search_query.isnot(None),
                 Clicks.search_query != '',
             ))
@@ -90,11 +129,11 @@ class SeoStatsService:
         ]
 
     @staticmethod
-    async def get_top_pages_from_search(session: AsyncSession, days: int = 30, limit: int = 20) -> list:
-        since = datetime.utcnow() - timedelta(days=days)
+    async def get_top_pages_from_search(session: AsyncSession, days: int = 30, since=None, until=None, limit: int = 20) -> list:
+        date_cond = _clicks_date_cond(days, since, until)
         q = (
             select(Clicks.url.label('url'), func.count(Clicks.id).label('count'))
-            .where(and_(Clicks.date >= since, Clicks.search_engine.isnot(None)))
+            .where(and_(*date_cond, Clicks.search_engine.isnot(None)))
             .group_by(Clicks.url)
             .order_by(func.count(Clicks.id).desc())
             .limit(limit)
@@ -105,25 +144,25 @@ class SeoStatsService:
         ]
 
     @staticmethod
-    async def get_utm_analysis(session: AsyncSession, days: int = 30) -> dict:
-        since = datetime.utcnow() - timedelta(days=days)
+    async def get_utm_analysis(session: AsyncSession, days: int = 30, since=None, until=None) -> dict:
+        date_cond = _clicks_date_cond(days, since, until)
         sources = (await session.execute(
             select(Clicks.utm_source.label('source'), func.count(Clicks.id).label('count'))
-            .where(and_(Clicks.date >= since, Clicks.utm_source.isnot(None), Clicks.utm_source != ''))
+            .where(and_(*date_cond, Clicks.utm_source.isnot(None), Clicks.utm_source != ''))
             .group_by(Clicks.utm_source)
             .order_by(func.count(Clicks.id).desc())
             .limit(15)
         )).all()
         campaigns = (await session.execute(
             select(Clicks.utm_campaign.label('campaign'), func.count(Clicks.id).label('count'))
-            .where(and_(Clicks.date >= since, Clicks.utm_campaign.isnot(None), Clicks.utm_campaign != ''))
+            .where(and_(*date_cond, Clicks.utm_campaign.isnot(None), Clicks.utm_campaign != ''))
             .group_by(Clicks.utm_campaign)
             .order_by(func.count(Clicks.id).desc())
             .limit(15)
         )).all()
         mediums = (await session.execute(
             select(Clicks.utm_medium.label('medium'), func.count(Clicks.id).label('count'))
-            .where(and_(Clicks.date >= since, Clicks.utm_medium.isnot(None), Clicks.utm_medium != ''))
+            .where(and_(*date_cond, Clicks.utm_medium.isnot(None), Clicks.utm_medium != ''))
             .group_by(Clicks.utm_medium)
             .order_by(func.count(Clicks.id).desc())
             .limit(15)
@@ -135,11 +174,11 @@ class SeoStatsService:
         }
 
     @staticmethod
-    async def get_device_breakdown(session: AsyncSession, days: int = 30) -> list:
-        since = datetime.utcnow() - timedelta(days=days)
+    async def get_device_breakdown(session: AsyncSession, days: int = 30, since=None, until=None) -> list:
+        date_cond = _clicks_date_cond(days, since, until)
         q = (
             select(Clicks.device_type.label('device'), func.count(Clicks.id).label('count'))
-            .where(Clicks.date >= since)
+            .where(and_(*date_cond))
             .group_by(Clicks.device_type)
             .order_by(func.count(Clicks.id).desc())
         )
@@ -149,11 +188,11 @@ class SeoStatsService:
         ]
 
     @staticmethod
-    async def get_browser_breakdown(session: AsyncSession, days: int = 30) -> list:
-        since = datetime.utcnow() - timedelta(days=days)
+    async def get_browser_breakdown(session: AsyncSession, days: int = 30, since=None, until=None) -> list:
+        date_cond = _clicks_date_cond(days, since, until)
         q = (
             select(Clicks.browser.label('browser'), func.count(Clicks.id).label('count'))
-            .where(Clicks.date >= since)
+            .where(and_(*date_cond))
             .group_by(Clicks.browser)
             .order_by(func.count(Clicks.id).desc())
             .limit(10)
@@ -164,11 +203,11 @@ class SeoStatsService:
         ]
 
     @staticmethod
-    async def get_os_breakdown(session: AsyncSession, days: int = 30) -> list:
-        since = datetime.utcnow() - timedelta(days=days)
+    async def get_os_breakdown(session: AsyncSession, days: int = 30, since=None, until=None) -> list:
+        date_cond = _clicks_date_cond(days, since, until)
         q = (
             select(Clicks.os.label('os'), func.count(Clicks.id).label('count'))
-            .where(Clicks.date >= since)
+            .where(and_(*date_cond))
             .group_by(Clicks.os)
             .order_by(func.count(Clicks.id).desc())
             .limit(10)
@@ -181,10 +220,10 @@ class SeoStatsService:
     # ==================== PER-PAGE ANALYTICS ====================
 
     @staticmethod
-    async def get_page_stats(session: AsyncSession, days: int = 30, limit: int = 30) -> list:
+    async def get_page_stats(session: AsyncSession, days: int = 30, since=None, until=None, limit: int = 30) -> list:
         """Статистика по страницам: просмотры, поисковый трафик, конверсии"""
         from src.business.Contact.contact_table import Contact
-        since = datetime.utcnow() - timedelta(days=days)
+        date_cond = _clicks_date_cond(days, since, until)
 
         # Клики по страницам
         clicks_q = (
@@ -195,7 +234,7 @@ class SeoStatsService:
                 func.count(Clicks.id).filter(Clicks.search_engine.isnot(None)).label('search_clicks'),
                 func.count(Clicks.id).filter(Clicks.is_bot == True).label('bot_views'),
             )
-            .where(and_(Clicks.date >= since, Clicks.is_bot == False))
+            .where(and_(*date_cond, Clicks.is_bot == False))
             .group_by(Clicks.url)
             .order_by(func.count(Clicks.id).desc())
             .limit(limit)
@@ -231,9 +270,9 @@ class SeoStatsService:
         return result
 
     @staticmethod
-    async def get_page_source_matrix(session: AsyncSession, days: int = 30, limit: int = 20) -> list:
+    async def get_page_source_matrix(session: AsyncSession, days: int = 30, since=None, until=None, limit: int = 20) -> list:
         """Матрица: страница × источник трафика (для поиска лучших связок)"""
-        since = datetime.utcnow() - timedelta(days=days)
+        date_cond = _clicks_date_cond(days, since, until)
 
         # Определяем coalesce expression один раз для SELECT и GROUP BY
         source_expr = func.coalesce(Clicks.search_engine, Clicks.utm_source, 'direct')
@@ -245,7 +284,7 @@ class SeoStatsService:
                 func.count(Clicks.id).label('views'),
                 func.count(func.distinct(Clicks.ip)).label('unique_visitors'),
             )
-            .where(and_(Clicks.date >= since, Clicks.is_bot == False))
+            .where(and_(*date_cond, Clicks.is_bot == False))
             .group_by(Clicks.url, source_expr)
             .order_by(func.count(Clicks.id).desc())
             .limit(limit * 5)
@@ -276,9 +315,9 @@ class SeoStatsService:
         return result[:limit]
 
     @staticmethod
-    async def get_search_ctr_by_page(session: AsyncSession, days: int = 30, limit: int = 20) -> list:
+    async def get_search_ctr_by_page(session: AsyncSession, days: int = 30, since=None, until=None, limit: int = 20) -> list:
         """CTR по страницам из поиска: поисковые клики / общие просмотры"""
-        since = datetime.utcnow() - timedelta(days=days)
+        date_cond = _clicks_date_cond(days, since, until)
         q = (
             select(
                 Clicks.url.label('url'),
@@ -287,7 +326,7 @@ class SeoStatsService:
                 func.count(Clicks.id).filter(Clicks.search_engine == 'google').label('from_google'),
                 func.count(Clicks.id).filter(Clicks.search_engine == 'yandex').label('from_yandex'),
             )
-            .where(and_(Clicks.date >= since, Clicks.is_bot == False))
+            .where(and_(*date_cond, Clicks.is_bot == False))
             .group_by(Clicks.url)
             .having(func.count(Clicks.id) >= 3)
             .order_by(func.count(Clicks.id).desc())
@@ -306,14 +345,14 @@ class SeoStatsService:
         } for row in rows]
 
     @staticmethod
-    async def get_traffic_trends_by_page(session: AsyncSession, days: int = 30, top_n: int = 5) -> list:
+    async def get_traffic_trends_by_page(session: AsyncSession, days: int = 30, since=None, until=None, top_n: int = 5) -> list:
         """Тренды трафика по топ-N страницам (для графиков)"""
-        since = datetime.utcnow() - timedelta(days=days)
+        date_cond = _clicks_date_cond(days, since, until)
 
         # Топ-N страниц по просмотрам
         top_pages_q = (
             select(Clicks.url)
-            .where(and_(Clicks.date >= since, Clicks.is_bot == False))
+            .where(and_(*date_cond, Clicks.is_bot == False))
             .group_by(Clicks.url)
             .order_by(func.count(Clicks.id).desc())
             .limit(top_n)
@@ -331,7 +370,7 @@ class SeoStatsService:
                 func.count(Clicks.id).label('count'),
             )
             .where(and_(
-                Clicks.date >= since,
+                *date_cond,
                 Clicks.url.in_(top_urls),
                 Clicks.is_bot == False,
             ))
@@ -359,9 +398,9 @@ class SeoStatsService:
     # ==================== ФАЗА 2: ENGAGEMENT & ATTRIBUTION ====================
 
     @staticmethod
-    async def get_engagement_by_source(session: AsyncSession, days: int = 30) -> list:
+    async def get_engagement_by_source(session: AsyncSession, days: int = 30, since=None, until=None) -> list:
         """Engagement Score по источникам трафика"""
-        since = datetime.utcnow() - timedelta(days=days)
+        date_cond = _clicks_date_cond(days, since, until)
         source_expr = func.coalesce(Clicks.search_engine, Clicks.utm_source, 'direct')
         q = (
             select(
@@ -371,7 +410,7 @@ class SeoStatsService:
                 func.avg(Clicks.time_on_page_seconds).label('avg_time'),
                 func.avg(Clicks.scroll_depth_pct).label('avg_scroll'),
             )
-            .where(and_(Clicks.date >= since, Clicks.is_bot == False, Clicks.engagement_score.isnot(None)))
+            .where(and_(*date_cond, Clicks.is_bot == False, Clicks.engagement_score.isnot(None)))
             .group_by(source_expr)
             .order_by(func.avg(Clicks.engagement_score).desc())
         )
@@ -385,16 +424,16 @@ class SeoStatsService:
         } for r in rows]
 
     @staticmethod
-    async def get_visitor_temperature_stats(session: AsyncSession, days: int = 30) -> dict:
+    async def get_visitor_temperature_stats(session: AsyncSession, days: int = 30, since=None, until=None) -> dict:
         """Распределение температуры посетителей"""
-        since = datetime.utcnow() - timedelta(days=days)
+        date_cond = _clicks_date_cond(days, since, until)
         q = (
             select(
                 Clicks.visitor_temperature.label('temp'),
                 func.count(Clicks.id).label('count'),
                 func.count(func.distinct(Clicks.ip)).label('unique'),
             )
-            .where(and_(Clicks.date >= since, Clicks.is_bot == False))
+            .where(and_(*date_cond, Clicks.is_bot == False))
             .group_by(Clicks.visitor_temperature)
         )
         rows = (await session.execute(q)).all()
@@ -405,9 +444,9 @@ class SeoStatsService:
         return result
 
     @staticmethod
-    async def get_referral_quality(session: AsyncSession, days: int = 30) -> list:
+    async def get_referral_quality(session: AsyncSession, days: int = 30, since=None, until=None) -> list:
         """Ранжирование реферальных источников по качеству"""
-        since = datetime.utcnow() - timedelta(days=days)
+        date_cond = _clicks_date_cond(days, since, until)
         
         from urllib.parse import urlparse
         from collections import defaultdict
@@ -420,7 +459,7 @@ class SeoStatsService:
                 func.count(func.distinct(Clicks.ip)).label('unique_visitors'),
             )
             .where(and_(
-                Clicks.date >= since,
+                *date_cond,
                 Clicks.is_bot == False,
                 Clicks.referer.isnot(None),
                 Clicks.referer != '',
@@ -458,9 +497,9 @@ class SeoStatsService:
         return result[:20]
 
     @staticmethod
-    async def get_performance_correlation(session: AsyncSession, days: int = 30) -> list:
+    async def get_performance_correlation(session: AsyncSession, days: int = 30, since=None, until=None) -> list:
         """Корреляция скорости загрузки с bounce rate"""
-        since = datetime.utcnow() - timedelta(days=days)
+        date_cond = _clicks_date_cond(days, since, until)
         q = (
             select(
                 case(
@@ -474,7 +513,7 @@ class SeoStatsService:
                 func.avg(Clicks.engagement_score).label('avg_engagement'),
             )
             .where(and_(
-                Clicks.date >= since,
+                *date_cond,
                 Clicks.is_bot == False,
                 Clicks.page_load_time_ms.isnot(None),
             ))
@@ -493,15 +532,15 @@ class SeoStatsService:
     # ==================== ФАЗА 3: ПРОДВИНУТАЯ АНАЛИТИКА ====================
 
     @staticmethod
-    async def get_bounce_quality(session: AsyncSession, days: int = 30) -> dict:
+    async def get_bounce_quality(session: AsyncSession, days: int = 30, since=None, until=None) -> dict:
         """Переопределённый bounce rate: quality vs quick vs standard"""
-        since = datetime.utcnow() - timedelta(days=days)
+        date_cond = _clicks_date_cond(days, since, until)
         q = (
             select(
                 Clicks.bounce_quality.label('quality'),
                 func.count(Clicks.id).label('count'),
             )
-            .where(and_(Clicks.date >= since, Clicks.is_bot == False, Clicks.bounce_quality.isnot(None)))
+            .where(and_(*date_cond, Clicks.is_bot == False, Clicks.bounce_quality.isnot(None)))
             .group_by(Clicks.bounce_quality)
         )
         rows = (await session.execute(q)).all()
@@ -519,9 +558,9 @@ class SeoStatsService:
         }
 
     @staticmethod
-    async def get_ttfi_stats(session: AsyncSession, days: int = 30) -> list:
+    async def get_ttfi_stats(session: AsyncSession, days: int = 30, since=None, until=None) -> list:
         """Time to First Interaction по страницам"""
-        since = datetime.utcnow() - timedelta(days=days)
+        date_cond = _clicks_date_cond(days, since, until)
         q = (
             select(
                 Clicks.url.label('url'),
@@ -529,7 +568,7 @@ class SeoStatsService:
                 func.count(Clicks.id).label('count'),
             )
             .where(and_(
-                Clicks.date >= since,
+                *date_cond,
                 Clicks.is_bot == False,
                 Clicks.time_to_first_interaction_ms.isnot(None),
             ))
@@ -547,9 +586,9 @@ class SeoStatsService:
         } for r in rows]
 
     @staticmethod
-    async def get_cwv_stats(session: AsyncSession, days: int = 30) -> list:
+    async def get_cwv_stats(session: AsyncSession, days: int = 30, since=None, until=None) -> list:
         """Core Web Vitals по страницам"""
-        since = datetime.utcnow() - timedelta(days=days)
+        date_cond = _clicks_date_cond(days, since, until)
         q = (
             select(
                 Clicks.url.label('url'),
@@ -559,7 +598,7 @@ class SeoStatsService:
                 func.count(Clicks.id).label('count'),
             )
             .where(and_(
-                Clicks.date >= since,
+                *date_cond,
                 Clicks.is_bot == False,
                 Clicks.lcp_ms.isnot(None),
             ))
@@ -579,17 +618,20 @@ class SeoStatsService:
         } for r in rows]
 
     @staticmethod
-    async def get_section_visibility(session: AsyncSession, days: int = 30) -> list:
+    async def get_section_visibility(session: AsyncSession, days: int = 30, since=None, until=None) -> list:
         """Видимость секций страницы"""
         from src.business.Click.pageEvent_table import SectionView
-        since = datetime.utcnow() - timedelta(days=days)
+        s = _calc_since(days, since)
+        conds = [SectionView.created_at >= s]
+        if until is not None:
+            conds.append(SectionView.created_at < until)
         q = (
             select(
                 SectionView.section_name.label('section'),
                 func.count(SectionView.id).label('views'),
                 func.count(func.distinct(SectionView.session_id)).label('unique_sessions'),
             )
-            .where(SectionView.created_at >= since)
+            .where(and_(*conds))
             .group_by(SectionView.section_name)
             .order_by(func.count(SectionView.id).desc())
         )
@@ -601,9 +643,9 @@ class SeoStatsService:
         } for r in rows]
 
     @staticmethod
-    async def get_return_visitor_stats(session: AsyncSession, days: int = 30) -> dict:
+    async def get_return_visitor_stats(session: AsyncSession, days: int = 30, since=None, until=None) -> dict:
         """Поведение возвращающихся посетителей"""
-        since = datetime.utcnow() - timedelta(days=days)
+        date_cond = _clicks_date_cond(days, since, until)
         q = (
             select(
                 case(
@@ -615,7 +657,7 @@ class SeoStatsService:
                 func.count(func.distinct(Clicks.ip)).label('unique'),
                 func.avg(Clicks.engagement_score).label('avg_engagement'),
             )
-            .where(and_(Clicks.date >= since, Clicks.is_bot == False))
+            .where(and_(*date_cond, Clicks.is_bot == False))
             .group_by('visitor_type')
         )
         rows = (await session.execute(q)).all()
@@ -629,10 +671,10 @@ class SeoStatsService:
         return result
 
     @staticmethod
-    async def get_content_correlation(session: AsyncSession, days: int = 30) -> list:
+    async def get_content_correlation(session: AsyncSession, days: int = 30, since=None, until=None) -> list:
         """Корреляция контента с конверсиями"""
         from src.business.Contact.contact_table import Contact
-        since = datetime.utcnow() - timedelta(days=days)
+        date_cond = _clicks_date_cond(days, since, until)
 
         features = ['has_video', 'has_tech_stack', 'has_testimonial']
         results = []
@@ -641,12 +683,12 @@ class SeoStatsService:
             # С конверсией
             with_feature = (await session.execute(
                 select(func.count(Clicks.id))
-                .where(and_(Clicks.date >= since, Clicks.is_bot == False, getattr(Clicks, feature) == True))
+                .where(and_(*date_cond, Clicks.is_bot == False, getattr(Clicks, feature) == True))
             )).scalar() or 0
 
             without_feature = (await session.execute(
                 select(func.count(Clicks.id))
-                .where(and_(Clicks.date >= since, Clicks.is_bot == False, getattr(Clicks, feature) == False))
+                .where(and_(*date_cond, Clicks.is_bot == False, getattr(Clicks, feature) == False))
             )).scalar() or 0
 
             results.append({
@@ -658,10 +700,10 @@ class SeoStatsService:
         return results
 
     @staticmethod
-    async def get_conversion_prediction_features(session: AsyncSession, days: int = 30) -> dict:
+    async def get_conversion_prediction_features(session: AsyncSession, days: int = 30, since=None, until=None) -> dict:
         """Признаки для предсказания конверсии (на основе исторических данных)"""
         from src.business.Contact.contact_table import Contact
-        since = datetime.utcnow() - timedelta(days=days)
+        date_cond = _clicks_date_cond(days, since, until)
 
         # Средние метрики для конвертированных vs неконвертированных
         converted_urls = (await session.execute(
@@ -678,7 +720,7 @@ class SeoStatsService:
                 func.avg(Clicks.scroll_depth_pct).label('avg_scroll'),
                 func.avg(Clicks.visit_number).label('avg_visits'),
             )
-            .where(and_(Clicks.url.in_(converted_urls), Clicks.date >= since, Clicks.is_bot == False))
+            .where(and_(Clicks.url.in_(converted_urls), *date_cond, Clicks.is_bot == False))
         )).one()
 
         non_converted_stats = (await session.execute(
@@ -688,7 +730,7 @@ class SeoStatsService:
                 func.avg(Clicks.scroll_depth_pct).label('avg_scroll'),
                 func.avg(Clicks.visit_number).label('avg_visits'),
             )
-            .where(and_(Clicks.url.notin_(converted_urls), Clicks.date >= since, Clicks.is_bot == False))
+            .where(and_(Clicks.url.notin_(converted_urls), *date_cond, Clicks.is_bot == False))
         )).one()
 
         return {
@@ -708,9 +750,9 @@ class SeoStatsService:
         }
 
     @staticmethod
-    async def get_page_load_times(session: AsyncSession, days: int = 30, limit: int = 20) -> list:
+    async def get_page_load_times(session: AsyncSession, days: int = 30, since=None, until=None, limit: int = 20) -> list:
         """Скорость загрузки по страницам — какие страницы медленные"""
-        since = datetime.utcnow() - timedelta(days=days)
+        date_cond = _clicks_date_cond(days, since, until)
         q = (
             select(
                 Clicks.url.label('url'),
@@ -720,7 +762,7 @@ class SeoStatsService:
                 func.count(Clicks.id).label('views'),
             )
             .where(and_(
-                Clicks.date >= since,
+                *date_cond,
                 Clicks.is_bot == False,
                 Clicks.page_load_time_ms.isnot(None),
                 Clicks.page_load_time_ms > 0,
@@ -742,7 +784,7 @@ class SeoStatsService:
         } for r in rows]
 
     @staticmethod
-    async def get_recent_visitors(session: AsyncSession, limit: int = 50) -> list:
+    async def get_recent_visitors(session: AsyncSession, limit: int = 50, since=None, until=None) -> list:
         """Последние посетители с IP, страницей, устройством"""
         q = (
             select(
@@ -761,12 +803,16 @@ class SeoStatsService:
                 Clicks.referer,
             )
             .order_by(Clicks.date.desc())
-            .limit(limit)
         )
+        # Если задан фильтр дат — применяем
+        if since is not None or until is not None:
+            date_cond = _date_filter(Clicks.date, since=since, until=until)
+            q = q.where(and_(*date_cond))
+        q = q.limit(limit)
         rows = (await session.execute(q)).all()
         return [{
             'id': r.id,
-            'date': r.date.strftime('%d.%m.%Y %H:%M') if r.date else '—',
+            'date': (r.date + timedelta(hours=3)).strftime('%d.%m.%Y %H:%M') if r.date else '—',
             'ip': r.ip or '—',
             'url': r.url or '—',
             'search_engine': r.search_engine or '—',

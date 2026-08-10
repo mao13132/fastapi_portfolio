@@ -170,7 +170,8 @@ async def send_order(request: Request, data: ClickProps):
                     attribution_dict, min_visits=CLICK_HOT_MIN_VISITS, min_time=CLICK_HOT_MIN_TIME)
                 msg = format_click_message(
                     url=url, attribution=attribution_dict,
-                    utm_source=utm_source, ip_address=ip_address, is_hot=is_hot)
+                    utm_source=utm_source, ip_address=ip_address, is_hot=is_hot,
+                    referer=referer)
                 await send_formatted_message(msg)
         except Exception as e:
             logger.error(f"Telegram click notification failed: {e}")

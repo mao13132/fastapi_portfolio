@@ -169,6 +169,89 @@
             border-color: var(--seo-primary);
         }
 
+        /* ===== Панель фильтрации по дате (аналогично clicks_list.html) ===== */
+        .date-filter-bar {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            padding: 10px 16px;
+            background: #f8f9fc;
+            border: 1px solid #e3e6f0;
+            border-radius: 8px;
+            margin-bottom: 24px;
+            flex-wrap: wrap;
+        }
+        .date-filter-bar .filter-label {
+            font-weight: 600;
+            color: #5a5c69;
+            font-size: 0.85rem;
+            margin-right: 4px;
+        }
+        .date-filter-bar .btn-preset {
+            padding: 4px 14px;
+            font-size: 0.82rem;
+            border-radius: 4px;
+            border: 1px solid #d1d3e2;
+            background: #fff;
+            color: #5a5c69;
+            cursor: pointer;
+            transition: all 0.15s;
+            text-decoration: none;
+        }
+        .date-filter-bar .btn-preset:hover {
+            background: #e8eaff;
+            border-color: #7c7cf7;
+            color: #4e4eaa;
+        }
+        .date-filter-bar .btn-preset.active {
+            background: #4e73df;
+            border-color: #4e73df;
+            color: #fff;
+            font-weight: 600;
+        }
+        .date-filter-bar .date-range-group {
+            display: flex;
+            align-items: center;
+            gap: 6px;
+            margin-left: 12px;
+        }
+        .date-filter-bar .date-range-group input[type="date"] {
+            padding: 4px 8px;
+            font-size: 0.82rem;
+            border: 1px solid #d1d3e2;
+            border-radius: 4px;
+        }
+        .date-filter-bar .btn-apply {
+            padding: 4px 12px;
+            font-size: 0.82rem;
+            background: #1cc88a;
+            color: #fff;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+        }
+        .date-filter-bar .btn-apply:hover { background: #17a673; }
+        .date-filter-bar .btn-clear {
+            padding: 4px 10px;
+            font-size: 0.82rem;
+            background: transparent;
+            color: #858796;
+            border: 1px solid #d1d3e2;
+            border-radius: 4px;
+            cursor: pointer;
+            text-decoration: none;
+        }
+        .date-filter-bar .btn-clear:hover {
+            color: #e74a3b;
+            border-color: #e74a3b;
+        }
+        .date-filter-bar .active-filter-info {
+            margin-left: auto;
+            font-size: 0.8rem;
+            color: #4e73df;
+            font-weight: 500;
+        }
+
         /* ===== Таблицы ===== */
         .data-table {
             width: 100%;
@@ -381,12 +464,52 @@
         </h1>
         <div class="filter-bar">
             <span class="text-muted"><i class="fa-regular fa-calendar"></i> Период:</span>
-            <a href="?days=7" class="filter-btn {% if days == 7 %}active{% endif %}">7 дн</a>
-            <a href="?days=30" class="filter-btn {% if days == 30 %}active{% endif %}">30 дн</a>
-            <a href="?days=90" class="filter-btn {% if days == 90 %}active{% endif %}">90 дн</a>
-            <a href="?days=180" class="filter-btn {% if days == 180 %}active{% endif %}">180 дн</a>
-            <a href="?days=365" class="filter-btn {% if days == 365 %}active{% endif %}">Год</a>
+            <a href="?days=7" class="filter-btn {% if days == 7 and not has_date_filter %}active{% endif %}">7 дн</a>
+            <a href="?days=30" class="filter-btn {% if days == 30 and not has_date_filter %}active{% endif %}">30 дн</a>
+            <a href="?days=90" class="filter-btn {% if days == 90 and not has_date_filter %}active{% endif %}">90 дн</a>
+            <a href="?days=180" class="filter-btn {% if days == 180 and not has_date_filter %}active{% endif %}">180 дн</a>
+            <a href="?days=365" class="filter-btn {% if days == 365 and not has_date_filter %}active{% endif %}">Год</a>
         </div>
+    </div>
+
+    <!-- ===== Панель фильтрации по дате (Сегодня / Вчера / Неделя + ручной диапазон) ===== -->
+    <div class="date-filter-bar">
+        <span class="filter-label"><i class="fa-solid fa-calendar-days"></i> Дата:</span>
+
+        <a class="btn-preset {% if not date_preset and not date_from and not date_to %}active{% endif %}"
+           href="?days={{ days }}">Все</a>
+
+        <a class="btn-preset {% if date_preset == 'today' %}active{% endif %}"
+           href="?days={{ days }}&date_preset=today">Сегодня</a>
+
+        <a class="btn-preset {% if date_preset == 'yesterday' %}active{% endif %}"
+           href="?days={{ days }}&date_preset=yesterday">Вчера</a>
+
+        <a class="btn-preset {% if date_preset == 'week' %}active{% endif %}"
+           href="?days={{ days }}&date_preset=week">Неделя</a>
+
+        <div class="date-range-group">
+            <input type="date" id="seo-date-from" value="{{ date_from }}" placeholder="От">
+            <span>—</span>
+            <input type="date" id="seo-date-to" value="{{ date_to }}" placeholder="До">
+            <button class="btn-apply" id="btn-seo-apply-range" type="button">Применить</button>
+        </div>
+
+        {% if date_from or date_to %}
+        <a class="btn-clear" href="?days={{ days }}">
+            <i class="fa-solid fa-times"></i> Сбросить
+        </a>
+        {% endif %}
+
+        {% if date_preset == 'today' %}
+        <span class="active-filter-info">📍 Сегодня (МСК)</span>
+        {% elif date_preset == 'yesterday' %}
+        <span class="active-filter-info">📍 Вчера (МСК)</span>
+        {% elif date_preset == 'week' %}
+        <span class="active-filter-info">📍 Текущая неделя (МСК)</span>
+        {% elif date_from or date_to %}
+        <span class="active-filter-info">📍 {{ date_from or '…' }} — {{ date_to or '…' }}</span>
+        {% endif %}
     </div>
 
     {% if stats.error %}
@@ -470,6 +593,43 @@
             </div>
         </div>
 
+        <!-- Бейджики рефереров -->
+        <div class="row mb-3">
+            <div class="col-12">
+                <div class="card">
+                    <div class="card-header d-flex align-items-center">
+                        <i class="fa-solid fa-link me-2"></i>
+                        <strong>Источники трафика</strong>
+                        {% if referrer_filter %}
+                        <a href="{{ request.url.remove_query_params('referrer') }}"
+                           class="btn btn-sm btn-outline-secondary ms-auto">
+                            <i class="fa-solid fa-xmark"></i> Сбросить фильтр
+                        </a>
+                        {% endif %}
+                    </div>
+                    <div class="card-body">
+                        {% if stats.referral_quality %}
+                        <div class="d-flex flex-wrap gap-2">
+                            {% for ref in stats.referral_quality[:15] %}
+                            <a href="{{ request.url.include_query_params(referrer=ref.domain) }}"
+                               class="btn btn-sm {% if referrer_filter == ref.domain %}btn-primary{% else %}btn-outline-primary{% endif %} referrer-badge"
+                               title="Кликов: {{ ref.clicks }} | Уникальных: {{ ref.unique_visitors }} | Score: {{ ref.quality_score|round(1) }}">
+                                <i class="fa-solid fa-globe me-1"></i>
+                                {{ ref.domain }}
+                                <span class="badge bg-{% if referrer_filter == ref.domain %}light text-primary{% else %}primary{% endif %} ms-1">
+                                    {{ ref.clicks }}
+                                </span>
+                            </a>
+                            {% endfor %}
+                        </div>
+                        {% else %}
+                        <p class="text-muted mb-0">Нет данных о реферерах</p>
+                        {% endif %}
+                    </div>
+                </div>
+            </div>
+        </div>
+
         <!-- AI-подсказка: общая картина -->
         <div class="ai-hint">
             <span class="ai-icon">🤖</span>
@@ -484,7 +644,14 @@
         <div class="section-card">
             <div class="section-title">
                 <i class="fa-solid fa-chart-area"></i> Клики по дням
+                {% if referrer_filter %}<small class="text-muted">— {{ referrer_filter }}</small>{% endif %}
             </div>
+            {% if referrer_filter %}
+            <div class="alert alert-info py-1 px-2 mb-2">
+                <i class="fa-solid fa-filter"></i> Фильтр: <strong>{{ referrer_filter }}</strong>
+                — показаны только клики из этого источника
+            </div>
+            {% endif %}
             <div class="chart-wrap">
                 <canvas id="clicksByDayChart"></canvas>
             </div>
@@ -513,6 +680,7 @@
                             <th>IP</th>
                             <th>Страница</th>
                             <th>Поисковик</th>
+                            <th>Источник</th>
                             <th>Запрос</th>
                             <th>Устройство</th>
                             <th>Браузер</th>
@@ -527,6 +695,19 @@
                             <td><code>{{ v.ip }}</code></td>
                             <td style="max-width:200px; overflow:hidden; text-overflow:ellipsis; white-space:nowrap;" title="{{ v.url }}">{{ v.url }}</td>
                             <td>{% if v.search_engine != '—' %}<span class="badge-engine badge-{{ v.search_engine if v.search_engine in ['google','yandex','bing','duckduckgo'] else 'other' }}">{{ v.search_engine }}</span>{% else %}—{% endif %}</td>
+                            <td>
+                                {% if v.referer and v.referer != '—' %}
+                                    {% set domain = v.referer.split('/')[2] if '/' in v.referer else v.referer %}
+                                    <a href="{{ request.url.include_query_params(referrer=domain) }}"
+                                       class="badge bg-outline-secondary text-decoration-none"
+                                       title="{{ v.referer }}"
+                                       style="font-size: 0.75em;">
+                                        {{ domain[:30] }}
+                                    </a>
+                                {% else %}
+                                    <span class="text-muted">—</span>
+                                {% endif %}
+                            </td>
                             <td style="max-width:150px; overflow:hidden; text-overflow:ellipsis; white-space:nowrap;" title="{{ v.search_query }}">{{ v.search_query }}</td>
                             <td>{{ v.device_type }}</td>
                             <td>{{ v.browser }}</td>
@@ -1673,7 +1854,11 @@
         Chart.defaults.color = '#858796';
 
         /* ===== Клики по дням (линейный график) ===== */
+        {% if referrer_filter %}
+        var dailyData = {{ stats.referrer_clicks_by_day | default([]) | tojson }};
+        {% else %}
         var dailyData = {{ stats.clicks_by_day | default([]) | tojson }};
+        {% endif %}
         if (dailyData && dailyData.length > 0) {
             var ctx = document.getElementById('clicksByDayChart');
             if (ctx) {
@@ -1851,6 +2036,26 @@
             }
         }
         {% endif %}
+
+        /* ===== Фильтр по дате: кнопка "Применить" ===== */
+        var btnApply = document.getElementById('btn-seo-apply-range');
+        if (btnApply) {
+            btnApply.addEventListener('click', function() {
+                var fromVal = document.getElementById('seo-date-from').value;
+                var toVal = document.getElementById('seo-date-to').value;
+                if (!fromVal && !toVal) return;
+
+                var url = new URL(window.location.href);
+                url.searchParams.delete('date_preset');
+                url.searchParams.delete('date_from');
+                url.searchParams.delete('date_to');
+
+                if (fromVal) url.searchParams.set('date_from', fromVal);
+                if (toVal) url.searchParams.set('date_to', toVal);
+
+                window.location.href = url.toString();
+            });
+        }
     })();
     </script>
 {% endblock %}

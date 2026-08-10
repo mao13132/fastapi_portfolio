@@ -21,10 +21,10 @@ class AnomalyService:
         week_ago = today_start - timedelta(days=7)
 
         # Среднее за 7 дней
-        avg_clicks = (await session.execute(
-            select(func.count(Clicks.id) / 7)
+        avg_clicks = float((await session.execute(
+            select(func.count(Clicks.id) / 7.0)
             .where(and_(Clicks.date >= week_ago, Clicks.date < today_start))
-        )).scalar() or 0
+        )).scalar() or 0)
 
         # Сегодня
         today_clicks = (await session.execute(
@@ -53,10 +53,10 @@ class AnomalyService:
                 })
 
         # Конверсии
-        avg_conversions = (await session.execute(
-            select(func.count(Contact.id) / 7)
-            .where(and_(Contact.id > 0))  # упрощённо
-        )).scalar() or 0
+        avg_conversions = float((await session.execute(
+            select(func.count(Contact.id) / 7.0)
+            .where(and_(Contact.id > 0))
+        )).scalar() or 0)
 
         today_conversions = (await session.execute(
             select(func.count(Contact.id))

@@ -646,7 +646,8 @@ def is_hot_visit(attribution: Optional[dict],
 def format_click_message(url: str, attribution: Optional[dict] = None,
                          utm_source: Optional[str] = None,
                          ip_address: str = "-",
-                         is_hot: bool = False) -> str:
+                         is_hot: bool = False,
+                         referer: str = "") -> str:
     """
     Форматирует сообщение для /click.
     Если is_hot=True — заголовок «🔥 Горячий визит», иначе «📊 Новый клик».
@@ -697,6 +698,9 @@ def format_click_message(url: str, attribution: Optional[dict] = None,
         # Без attribution — базовая информация
         if utm_source:
             lines.append(f"🏷 UTM source: {utm_source}")
+
+    if referer:
+        lines.append(f"🔀 Реферер: {referer}")
 
     if ip_address and ip_address != "-":
         lines.append(f"💻 IP: {ip_address}")
