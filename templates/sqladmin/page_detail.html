@@ -1,0 +1,1328 @@
+{% extends "sqladmin/layout.html" %}
+
+{% block head %}
+    {{ super() }}
+    <style>
+        :root {
+            --pd-primary: #4e73df;
+            --pd-success: #1cc88a;
+            --pd-info: #36b9cc;
+            --pd-warning: #f6c23e;
+            --pd-danger: #e74a3b;
+            --pd-gray: #858796;
+            --pd-dark: #5a5c69;
+            --pd-light: #f8f9fc;
+        }
+
+        .pd-container { padding: 20px; max-width: 1400px; margin: 0 auto; }
+
+        /* ===== Хедер страницы ===== */
+        .pd-header {
+            background: linear-gradient(135deg, #4e73df, #224abe);
+            color: #fff;
+            border-radius: 16px;
+            padding: 28px 32px;
+            margin-bottom: 24px;
+            position: relative;
+            overflow: hidden;
+        }
+        .pd-header::after {
+            content: '';
+            position: absolute;
+            top: -50%; right: -10%;
+            width: 300px; height: 300px;
+            background: rgba(255,255,255,0.05);
+            border-radius: 50%;
+        }
+        .pd-header h1 {
+            font-size: 1.5rem;
+            font-weight: 700;
+            margin: 0 0 8px;
+            word-break: break-all;
+        }
+        .pd-header .pd-subtitle {
+            font-size: 0.9rem;
+            opacity: 0.85;
+        }
+        .pd-back-link {
+            color: rgba(255,255,255,0.8);
+            text-decoration: none;
+            font-size: 0.85rem;
+            display: inline-flex;
+            align-items: center;
+            gap: 6px;
+            margin-bottom: 12px;
+            transition: color 0.2s;
+        }
+        .pd-back-link:hover { color: #fff; }
+
+        /* ===== CPS Score Card ===== */
+        .cps-card {
+            background: #fff;
+            border-radius: 16px;
+            padding: 32px;
+            box-shadow: 0 4px 20px rgba(0,0,0,0.08);
+            text-align: center;
+            margin-bottom: 24px;
+        }
+        .cps-circle {
+            width: 160px; height: 160px;
+            border-radius: 50%;
+            display: flex; align-items: center; justify-content: center;
+            flex-direction: column;
+            margin: 0 auto 20px;
+            position: relative;
+        }
+        .cps-circle::before {
+            content: '';
+            position: absolute;
+            inset: 0;
+            border-radius: 50%;
+            border: 8px solid #e3e6f0;
+        }
+        .cps-circle .cps-grade {
+            font-size: 3rem;
+            font-weight: 800;
+            line-height: 1;
+        }
+        .cps-circle .cps-score {
+            font-size: 1.1rem;
+            font-weight: 600;
+            opacity: 0.8;
+        }
+        .cps-factors {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+            gap: 12px;
+            margin-top: 20px;
+        }
+        .cps-factor {
+            background: var(--pd-light);
+            border-radius: 10px;
+            padding: 14px;
+            text-align: left;
+        }
+        .cps-factor-label {
+            font-size: 0.78rem;
+            color: var(--pd-gray);
+            text-transform: uppercase;
+            letter-spacing: 0.04em;
+            font-weight: 600;
+            margin-bottom: 6px;
+        }
+        .cps-factor-bar {
+            height: 6px;
+            background: #e3e6f0;
+            border-radius: 3px;
+            overflow: hidden;
+            margin-bottom: 4px;
+        }
+        .cps-factor-fill {
+            height: 100%;
+            border-radius: 3px;
+            transition: width 0.6s;
+        }
+        .cps-factor-value {
+            font-size: 0.85rem;
+            font-weight: 700;
+            color: var(--pd-dark);
+        }
+
+        /* ===== Карточки метрик ===== */
+        .metric-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 16px;
+            margin-bottom: 24px;
+        }
+        .metric-card {
+            background: #fff;
+            border-radius: 12px;
+            padding: 20px;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.06);
+            position: relative;
+            overflow: hidden;
+        }
+        .metric-card::before {
+            content: '';
+            position: absolute;
+            top: 0; left: 0;
+            width: 4px; height: 100%;
+        }
+        .metric-card.mc-primary::before { background: var(--pd-primary); }
+        .metric-card.mc-success::before { background: var(--pd-success); }
+        .metric-card.mc-info::before { background: var(--pd-info); }
+        .metric-card.mc-warning::before { background: var(--pd-warning); }
+        .metric-card.mc-danger::before { background: var(--pd-danger); }
+        .mc-label {
+            font-size: 0.78rem;
+            color: var(--pd-gray);
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+            font-weight: 600;
+        }
+        .mc-value {
+            font-size: 1.8rem;
+            font-weight: 700;
+            color: var(--pd-dark);
+            margin-top: 4px;
+        }
+        .mc-value small { font-size: 0.85rem; font-weight: 500; }
+        .mc-sub {
+            font-size: 0.78rem;
+            color: var(--pd-gray);
+            margin-top: 2px;
+        }
+
+        /* ===== Секции ===== */
+        .section-card {
+            background: #fff;
+            border-radius: 12px;
+            padding: 24px;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.06);
+            margin-bottom: 24px;
+        }
+        .section-title {
+            font-size: 1.1rem;
+            font-weight: 600;
+            color: var(--pd-dark);
+            margin-bottom: 16px;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+        .section-title i { color: var(--pd-primary); }
+
+        /* ===== AIDA ===== */
+        .aida-grid {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 16px;
+            margin-bottom: 16px;
+        }
+        .aida-card {
+            background: var(--pd-light);
+            border-radius: 12px;
+            padding: 20px;
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+        }
+        .aida-card::after {
+            content: '';
+            position: absolute;
+            bottom: 0; left: 0; right: 0;
+            height: 4px;
+        }
+        .aida-icon { font-size: 2rem; margin-bottom: 8px; }
+        .aida-label { font-size: 0.85rem; font-weight: 600; color: var(--pd-dark); }
+        .aida-score { font-size: 2rem; font-weight: 800; margin: 4px 0; }
+        .aida-desc { font-size: 0.75rem; color: var(--pd-gray); }
+        .aida-arrow {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.5rem;
+            color: var(--pd-gray);
+        }
+
+        /* ===== Bottleneck ===== */
+        .bottleneck-card {
+            background: linear-gradient(135deg, #fff5f5, #fff);
+            border: 2px solid var(--pd-danger);
+            border-radius: 12px;
+            padding: 20px;
+            display: flex;
+            align-items: flex-start;
+            gap: 16px;
+        }
+        .bottleneck-icon { font-size: 2.5rem; }
+        .bottleneck-title { font-weight: 700; color: var(--pd-danger); margin-bottom: 4px; }
+        .bottleneck-fix { font-size: 0.9rem; color: var(--pd-dark); line-height: 1.5; }
+
+        /* ===== Таблицы ===== */
+        .data-table {
+            width: 100%;
+            border-collapse: collapse;
+            font-size: 0.9rem;
+        }
+        .data-table th, .data-table td {
+            padding: 10px 14px;
+            text-align: left;
+            border-bottom: 1px solid #e3e6f0;
+        }
+        .data-table th {
+            background: var(--pd-light);
+            color: var(--pd-gray);
+            font-size: 0.78rem;
+            text-transform: uppercase;
+            letter-spacing: 0.04em;
+            font-weight: 600;
+        }
+        .data-table tbody tr:hover { background: #f0f4ff; }
+
+        /* ===== Бейджи ===== */
+        .badge-engine {
+            padding: 3px 10px;
+            border-radius: 12px;
+            font-size: 0.75rem;
+            color: #fff;
+            font-weight: 500;
+        }
+        .badge-google { background: #4285f4; }
+        .badge-yandex { background: #fc3f1d; }
+        .badge-bing { background: #00809d; }
+        .badge-direct { background: #6c757d; }
+        .badge-other { background: #858796; }
+
+        .badge-priority {
+            padding: 3px 10px;
+            border-radius: 8px;
+            font-size: 0.72rem;
+            font-weight: 700;
+            text-transform: uppercase;
+        }
+        .badge-critical { background: #fce4e4; color: #e74a3b; }
+        .badge-high { background: #fef3cd; color: #856404; }
+        .badge-medium { background: #d1ecf1; color: #0c5460; }
+        .badge-low { background: #e2e3e5; color: #383d41; }
+
+        /* ===== Рекомендации ===== */
+        .rec-card {
+            background: #fff;
+            border-radius: 12px;
+            margin-bottom: 12px;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.06);
+            overflow: hidden;
+            border-left: 5px solid #ccc;
+        }
+        .rec-critical { border-left-color: #e74a3b; }
+        .rec-high { border-left-color: #f6c23e; }
+        .rec-medium { border-left-color: #36b9cc; }
+        .rec-low { border-left-color: #858796; }
+        .rec-header {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            padding: 14px 20px;
+            background: var(--pd-light);
+            border-bottom: 1px solid #e3e6f0;
+        }
+        .rec-category {
+            font-size: 0.82rem;
+            font-weight: 600;
+            color: var(--pd-dark);
+        }
+        .rec-body { padding: 14px 20px; }
+        .rec-row {
+            display: flex;
+            gap: 10px;
+            margin-bottom: 8px;
+            font-size: 0.9rem;
+            line-height: 1.5;
+        }
+        .rec-icon { font-size: 1.1rem; min-width: 24px; }
+        .rec-gain {
+            display: inline-block;
+            background: #d4edda;
+            color: #155724;
+            padding: 3px 10px;
+            border-radius: 8px;
+            font-size: 0.78rem;
+            font-weight: 600;
+        }
+
+        /* ===== Скролл heatmap ===== */
+        .scroll-bar-row {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            margin-bottom: 6px;
+        }
+        .scroll-label {
+            min-width: 60px;
+            font-size: 0.82rem;
+            font-weight: 600;
+            color: var(--pd-dark);
+            text-align: right;
+        }
+        .scroll-bar-bg {
+            flex: 1;
+            height: 28px;
+            background: #e3e6f0;
+            border-radius: 6px;
+            overflow: hidden;
+            position: relative;
+        }
+        .scroll-bar-fill {
+            height: 100%;
+            border-radius: 6px;
+            transition: width 0.5s;
+            display: flex;
+            align-items: center;
+            padding-left: 8px;
+            font-size: 0.75rem;
+            font-weight: 600;
+            color: #fff;
+        }
+        .scroll-count {
+            min-width: 40px;
+            font-size: 0.82rem;
+            font-weight: 600;
+            color: var(--pd-gray);
+        }
+
+        /* ===== Conversion Path ===== */
+        .cp-comparison {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 20px;
+        }
+        .cp-side {
+            border-radius: 12px;
+            padding: 20px;
+        }
+        .cp-converted { background: linear-gradient(135deg, #d4edda, #f0fff4); border: 1px solid #c3e6cb; }
+        .cp-not-converted { background: linear-gradient(135deg, #fce4e4, #fff5f5); border: 1px solid #f5c6cb; }
+        .cp-side-title {
+            font-size: 1rem;
+            font-weight: 700;
+            margin-bottom: 12px;
+        }
+        .cp-metric {
+            display: flex;
+            justify-content: space-between;
+            padding: 6px 0;
+            border-bottom: 1px solid rgba(0,0,0,0.05);
+            font-size: 0.9rem;
+        }
+        .cp-metric-label { color: var(--pd-gray); }
+        .cp-metric-value { font-weight: 700; color: var(--pd-dark); }
+
+        /* ===== AI-подсказки ===== */
+        .ai-hint {
+            background: #f0f4ff;
+            border: 1px solid var(--pd-primary);
+            border-left: 4px solid var(--pd-primary);
+            border-radius: 8px;
+            padding: 16px;
+            margin: 16px 0;
+            font-size: 0.92rem;
+            line-height: 1.6;
+            color: #3a3f5c;
+        }
+        .ai-hint strong { color: var(--pd-primary); }
+
+        /* ===== Фильтр периодов ===== */
+        .filter-bar {
+            display: flex;
+            gap: 8px;
+            align-items: center;
+            flex-wrap: wrap;
+        }
+        .filter-btn {
+            padding: 8px 18px;
+            border: 2px solid #d1d3e2;
+            border-radius: 8px;
+            background: #fff;
+            color: var(--pd-dark);
+            cursor: pointer;
+            font-size: 0.9rem;
+            font-weight: 500;
+            text-decoration: none;
+            transition: all 0.2s;
+        }
+        .filter-btn:hover { border-color: var(--pd-primary); color: var(--pd-primary); }
+        .filter-btn.active {
+            background: linear-gradient(135deg, #4e73df, #224abe);
+            color: #fff;
+            border-color: var(--pd-primary);
+        }
+
+        /* ===== Chart ===== */
+        .chart-wrap { position: relative; min-height: 250px; }
+        .chart-wrap canvas { max-height: 350px; }
+
+        /* ===== Tab навигация ===== */
+        .tab-nav {
+            display: flex;
+            gap: 8px;
+            margin-bottom: 24px;
+            flex-wrap: wrap;
+            border-bottom: 2px solid #e3e6f0;
+            padding-bottom: 0;
+        }
+        .tab-btn {
+            padding: 10px 18px;
+            border: 2px solid #d1d3e2;
+            border-bottom: none;
+            border-radius: 8px 8px 0 0;
+            background: #fff;
+            color: var(--pd-gray);
+            cursor: pointer;
+            font-size: 0.9rem;
+            font-weight: 500;
+            transition: all 0.2s;
+            text-decoration: none;
+            display: flex;
+            align-items: center;
+            gap: 6px;
+            position: relative;
+            top: 2px;
+        }
+        .tab-btn:hover { background: var(--pd-light); color: var(--pd-primary); border-color: var(--pd-primary); }
+        .tab-btn.active { background: var(--pd-primary); color: #fff; border-color: var(--pd-primary); font-weight: 600; }
+        .tab-content { display: none; }
+        .tab-content.active { display: block; }
+
+        /* ===== Цветовая индикация ===== */
+        .val-good { color: var(--pd-success); font-weight: 700; }
+        .val-warn { color: var(--pd-warning); font-weight: 700; }
+        .val-bad { color: var(--pd-danger); font-weight: 700; }
+
+        /* ===== Temperature ===== */
+        .temp-bar {
+            display: flex;
+            height: 32px;
+            border-radius: 8px;
+            overflow: hidden;
+            margin-bottom: 8px;
+        }
+        .temp-segment {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 0.75rem;
+            font-weight: 600;
+            color: #fff;
+            transition: width 0.5s;
+        }
+
+        @media (max-width: 768px) {
+            .pd-container { padding: 12px; }
+            .aida-grid { grid-template-columns: 1fr 1fr; }
+            .cp-comparison { grid-template-columns: 1fr; }
+            .cps-circle { width: 120px; height: 120px; }
+            .cps-circle .cps-grade { font-size: 2rem; }
+        }
+    </style>
+{% endblock %}
+
+{% block content %}
+<div class="pd-container">
+
+    {% if error %}
+    <div class="alert alert-danger">
+        <i class="fa-solid fa-triangle-exclamation"></i> {{ error }}
+    </div>
+    {% if not page_url %}
+    <div class="section-card" style="text-align: center; padding: 60px;">
+        <div style="font-size: 4rem; margin-bottom: 16px;">🔍</div>
+        <h2>Детальная аналитика страницы</h2>
+        <p class="text-muted">Перейдите сюда из SEO Статистики, кликнув на URL страницы,<br>или добавьте <code>?url=/works/slug</code> к адресу.</p>
+        <a href="/admin/seo-stats" class="btn btn-primary mt-3">
+            <i class="fa-solid fa-chart-line"></i> Перейти к SEO Статистике
+        </a>
+    </div>
+    </div>
+    {% endif %}
+    {% else %}
+
+    <!-- ===== Заголовок ===== -->
+    <div class="pd-header">
+        <a href="/admin/seo-stats?days={{ days }}" class="pd-back-link">
+            <i class="fa-solid fa-arrow-left"></i> Назад к SEO Статистике
+        </a>
+        <h1><i class="fa-solid fa-file-lines"></i> {{ page_url }}</h1>
+        <div class="pd-subtitle">
+            Детальная аналитика страницы за {{ days }} дней
+            {% if data.overview %} · {{ data.overview.total_views }} просмотров · {{ data.overview.unique_visitors }} уникальных{% endif %}
+        </div>
+    </div>
+
+    <!-- ===== Фильтр периодов ===== -->
+    <div class="d-flex justify-content-between align-items-center mb-4 flex-wrap" style="gap: 12px;">
+        <div class="filter-bar">
+            <span class="text-muted"><i class="fa-regular fa-calendar"></i> Период:</span>
+            <a href="?url={{ page_url }}&days=7" class="filter-btn {% if days == 7 and not has_date_filter %}active{% endif %}">7 дн</a>
+            <a href="?url={{ page_url }}&days=30" class="filter-btn {% if days == 30 and not has_date_filter %}active{% endif %}">30 дн</a>
+            <a href="?url={{ page_url }}&days=90" class="filter-btn {% if days == 90 and not has_date_filter %}active{% endif %}">90 дн</a>
+            <a href="?url={{ page_url }}&days=180" class="filter-btn {% if days == 180 and not has_date_filter %}active{% endif %}">180 дн</a>
+            <a href="?url={{ page_url }}&days=365" class="filter-btn {% if days == 365 and not has_date_filter %}active{% endif %}">Год</a>
+        </div>
+        <a href="{{ page_url }}" target="_blank" class="btn btn-outline-primary btn-sm">
+            <i class="fa-solid fa-external-link-alt"></i> Открыть страницу
+        </a>
+    </div>
+
+    {% if data.error %}
+    <div class="alert alert-danger">
+        <i class="fa-solid fa-triangle-exclamation"></i> Ошибка: {{ data.error }}
+    </div>
+    {% else %}
+
+    <!-- ===== CPS Content Performance Score ===== -->
+    {% if data.cps %}
+    <div class="cps-card">
+        <div style="font-size: 0.85rem; color: var(--pd-gray); text-transform: uppercase; letter-spacing: 0.08em; font-weight: 600; margin-bottom: 16px;">
+            Content Performance Score
+        </div>
+        <div class="cps-circle" style="border: 8px solid {{ data.cps.grade_color }}20;">
+            <div class="cps-grade" style="color: {{ data.cps.grade_color }};">{{ data.cps.grade }}</div>
+            <div class="cps-score" style="color: {{ data.cps.grade_color }};">{{ data.cps.total_score }}/100</div>
+        </div>
+        <div style="font-size: 1.2rem; font-weight: 700; color: {{ data.cps.grade_color }}; margin-bottom: 4px;">
+            {{ data.cps.grade_label }}
+        </div>
+        <div class="cps-factors">
+            {% for f in data.cps.factors %}
+            <div class="cps-factor">
+                <div class="cps-factor-label">{{ f.icon }} {{ f.name_ru }}</div>
+                <div class="cps-factor-bar">
+                    <div class="cps-factor-fill" style="width: {{ f.score }}%; background: {% if f.score >= 60 %}#1cc88a{% elif f.score >= 30 %}#f6c23e{% else %}#e74a3b{% endif %};"></div>
+                </div>
+                <div class="cps-factor-value">{{ f.score }}/100 <small style="font-weight:400; color: var(--pd-gray);">(×{{ f.weight }}%)</small></div>
+            </div>
+            {% endfor %}
+        </div>
+        <div class="ai-hint" style="text-align: left; margin-top: 20px;">
+            🤖 <strong>Content Performance Score (CPS)</strong> — это комплексная оценка эффективности страницы по 6 факторам.
+            Грейд <strong>A (80+)</strong> = страница работает отлично. <strong>C (40-59)</strong> = средний результат, есть куда расти.
+            <strong>F (<20)</strong> = критично, страница требует серьёзной доработки.
+            Смотрите на самое слабое звено — над ним нужно работать в первую очередь.
+        </div>
+    </div>
+    {% endif %}
+
+    <!-- ===== Tab навигация ===== -->
+    <div class="tab-nav">
+        <button class="tab-btn active" data-tab="tab-overview">
+            <i class="fa-solid fa-gauge-high"></i> Обзор
+        </button>
+        <button class="tab-btn" data-tab="tab-search">
+            <i class="fa-solid fa-magnifying-glass"></i> Поиск & CTR
+        </button>
+        <button class="tab-btn" data-tab="tab-sources">
+            <i class="fa-solid fa-globe"></i> Источники
+        </button>
+        <button class="tab-btn" data-tab="tab-engagement">
+            <i class="fa-solid fa-bullseye"></i> Вовлечение
+        </button>
+        <button class="tab-btn" data-tab="tab-triggers">
+            <i class="fa-solid fa-bolt"></i> Триггеры
+        </button>
+        <button class="tab-btn" data-tab="tab-marketing">
+            <i class="fa-solid fa-rocket"></i> Маркетинг
+        </button>
+        <button class="tab-btn" data-tab="tab-growth">
+            <i class="fa-solid fa-seedling"></i> Рост
+        </button>
+    </div>
+
+    <!-- ============================================================ -->
+    <!-- TAB 1: ОБЗОР                                                  -->
+    <!-- ============================================================ -->
+    <div id="tab-overview" class="tab-content active">
+
+        {% if data.overview %}
+        <div class="metric-grid">
+            <div class="metric-card mc-primary">
+                <div class="mc-label">Просмотры</div>
+                <div class="mc-value">{{ data.overview.total_views }}</div>
+                <div class="mc-sub">{{ data.overview.unique_visitors }} уникальных</div>
+            </div>
+            <div class="metric-card mc-success">
+                <div class="mc-label">Конверсии</div>
+                <div class="mc-value">{{ data.overview.conversions }}</div>
+                <div class="mc-sub">{{ data.overview.conversion_rate }}% конверсия</div>
+            </div>
+            <div class="metric-card mc-info">
+                <div class="mc-label">Из поиска</div>
+                <div class="mc-value">{{ data.overview.from_search }} <small>({{ data.overview.search_share }}%)</small></div>
+                <div class="mc-sub">Google + Yandex</div>
+            </div>
+            <div class="metric-card mc-warning">
+                <div class="mc-label">Среднее время</div>
+                <div class="mc-value">{{ data.overview.avg_time_display }}</div>
+                <div class="mc-sub">На странице</div>
+            </div>
+            <div class="metric-card mc-info">
+                <div class="mc-label">Скролл</div>
+                <div class="mc-value">{{ data.overview.avg_scroll_pct }}%</div>
+                <div class="mc-sub">Средняя глубина</div>
+            </div>
+            <div class="metric-card mc-primary">
+                <div class="mc-label">Engagement</div>
+                <div class="mc-value">{{ data.overview.avg_engagement }}</div>
+                <div class="mc-sub">Из 100</div>
+            </div>
+            <div class="metric-card mc-{% if data.overview.avg_load_sec < 2 %}success{% elif data.overview.avg_load_sec < 4 %}warning{% else %}danger{% endif %}">
+                <div class="mc-label">Загрузка</div>
+                <div class="mc-value">{{ data.overview.avg_load_sec }} сек</div>
+                <div class="mc-sub">{% if data.overview.avg_load_sec < 2 %}✅ Быстро{% elif data.overview.avg_load_sec < 4 %}⚠️ Нормально{% else %}❌ Медленно{% endif %}</div>
+            </div>
+            <div class="metric-card mc-info">
+                <div class="mc-label">Возвраты</div>
+                <div class="mc-value">{{ data.overview.avg_visit_number }}</div>
+                <div class="mc-sub">Средний визит</div>
+            </div>
+        </div>
+        {% endif %}
+
+        <!-- График трендов -->
+        {% if data.trends %}
+        <div class="section-card">
+            <div class="section-title">
+                <i class="fa-solid fa-chart-area"></i> Тренды по дням
+            </div>
+            <div class="chart-wrap">
+                <canvas id="trendsChart"></canvas>
+            </div>
+        </div>
+        {% endif %}
+
+        <!-- Устройства -->
+        {% if data.devices %}
+        <div class="section-card">
+            <div class="section-title">
+                <i class="fa-solid fa-display"></i> Устройства и браузеры
+            </div>
+            <div style="overflow-x: auto;">
+                <table class="data-table">
+                    <thead>
+                        <tr><th>Устройство</th><th>Браузер</th><th>Просмотры</th><th>Engagement</th></tr>
+                    </thead>
+                    <tbody>
+                        {% for d in data.devices %}
+                        <tr>
+                            <td>{{ d.device }}</td>
+                            <td>{{ d.browser }}</td>
+                            <td><strong>{{ d.count }}</strong></td>
+                            <td>{{ d.avg_engagement }}</td>
+                        </tr>
+                        {% endfor %}
+                    </tbody>
+                </table>
+            </div>
+        </div>
+        {% endif %}
+    </div>
+
+    <!-- ============================================================ -->
+    <!-- TAB 2: ПОИСК & CTR                                            -->
+    <!-- ============================================================ -->
+    <div id="tab-search" class="tab-content">
+
+        {% if data.search %}
+        <div class="metric-grid">
+            <div class="metric-card mc-primary">
+                <div class="mc-label">Поисковый CTR</div>
+                <div class="mc-value {% if data.search.search_ctr >= 30 %}val-good{% elif data.search.search_ctr >= 10 %}val-warn{% else %}val-bad{% endif %}">
+                    {{ data.search.search_ctr }}%
+                </div>
+                <div class="mc-sub">{{ data.search.total_search_clicks }} кликов из поиска</div>
+            </div>
+            <div class="metric-card mc-info">
+                <div class="mc-label">Google CTR</div>
+                <div class="mc-value">{{ data.search.google_ctr }}%</div>
+                <div class="mc-sub">{{ data.search.google_clicks }} кликов</div>
+            </div>
+            <div class="metric-card mc-danger">
+                <div class="mc-label">Yandex CTR</div>
+                <div class="mc-value">{{ data.search.yandex_ctr }}%</div>
+                <div class="mc-sub">{{ data.search.yandex_clicks }} кликов</div>
+            </div>
+        </div>
+
+        {% if data.search.queries %}
+        <div class="section-card">
+            <div class="section-title">
+                <i class="fa-solid fa-ranking-star"></i> Поисковые запросы
+            </div>
+            <div style="overflow-x: auto;">
+                <table class="data-table">
+                    <thead>
+                        <tr><th>#</th><th>Запрос</th><th>Поисковик</th><th>Клики</th><th>Первый показ</th><th>Последний</th></tr>
+                    </thead>
+                    <tbody>
+                        {% for q in data.search.queries %}
+                        <tr>
+                            <td>{{ loop.index }}</td>
+                            <td><strong>{{ q.query }}</strong></td>
+                            <td><span class="badge-engine badge-{{ q.engine or 'other' }}">{{ q.engine or '?' }}</span></td>
+                            <td><strong>{{ q.count }}</strong></td>
+                            <td>{{ q.first_seen }}</td>
+                            <td>{{ q.last_seen }}</td>
+                        </tr>
+                        {% endfor %}
+                    </tbody>
+                </table>
+            </div>
+            <div class="ai-hint">
+                🤖 <strong>Как читать:</strong> Запросы с большим количеством кликов — ваши "золотые жилы".
+                Создавайте больше контента по этим темам. Если запрос один — это "длинный хвост", он тоже ценен.
+                Если видите запрос, по которому мало кликов но он релевантен — оптимизируйте title и description под него.
+            </div>
+        </div>
+        {% else %}
+        <div class="section-card" style="text-align: center; padding: 40px;">
+            <div style="font-size: 3rem; margin-bottom: 12px;">🔍</div>
+            <h3>Нет поисковых запросов</h3>
+            <p class="text-muted">Страница пока не получает поисковый трафик по конкретным запросам.</p>
+        </div>
+        {% endif %}
+        {% endif %}
+    </div>
+
+    <!-- ============================================================ -->
+    <!-- TAB 3: ИСТОЧНИКИ                                              -->
+    <!-- ============================================================ -->
+    <div id="tab-sources" class="tab-content">
+
+        {% if data.sources %}
+        <div class="section-card">
+            <div class="section-title">
+                <i class="fa-solid fa-globe"></i> Источники трафика для этой страницы
+            </div>
+            <div style="overflow-x: auto;">
+                <table class="data-table">
+                    <thead>
+                        <tr>
+                            <th>#</th>
+                            <th>Источник</th>
+                            <th>Клики</th>
+                            <th>Доля</th>
+                            <th>Уникальные</th>
+                            <th>Вовлечённость</th>
+                            <th>Время</th>
+                            <th>Скролл</th>
+                            <th>Вовлечённые</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {% for s in data.sources %}
+                        <tr>
+                            <td>{{ loop.index }}</td>
+                            <td>
+                                <span class="badge-engine badge-{{ s.source if s.source in ['google','yandex','bing','duckduckgo'] else 'other' }}">
+                                    {{ s.source }}
+                                </span>
+                            </td>
+                            <td><strong>{{ s.clicks }}</strong></td>
+                            <td>{{ s.share }}%</td>
+                            <td>{{ s.unique_visitors }}</td>
+                            <td>
+                                <strong {% if s.avg_engagement >= 60 %}class="val-good"{% elif s.avg_engagement >= 30 %}class="val-warn"{% else %}class="val-bad"{% endif %}>
+                                    {{ s.avg_engagement }}
+                                </strong>
+                            </td>
+                            <td>{{ s.avg_time }} сек</td>
+                            <td>{{ s.avg_scroll }}%</td>
+                            <td>{{ s.engaged_rate }}%</td>
+                        </tr>
+                        {% endfor %}
+                    </tbody>
+                </table>
+            </div>
+            <div class="ai-hint">
+                🤖 <strong>Матрица качества:</strong> Ищите источник с высокой вовлечённостью и высокой долей "вовлечённых" визитов (30+ сек).
+                Если один источник даёт мало кликов, но высокий engagement — это качественный канал, масштабируйте его.
+                Источник с 1000 кликов и engagement 10 хуже, чем источник с 100 кликов и engagement 70.
+            </div>
+        </div>
+        {% endif %}
+    </div>
+
+    <!-- ============================================================ -->
+    <!-- TAB 4: ВОВЛЕЧЕНИЕ                                             -->
+    <!-- ============================================================ -->
+    <div id="tab-engagement" class="tab-content">
+
+        <!-- Scroll Heatmap -->
+        {% if data.scroll_heatmap %}
+        <div class="section-card">
+            <div class="section-title">
+                <i class="fa-solid fa-fire"></i> Тепловая карта скролла
+            </div>
+            {% for s in data.scroll_heatmap %}
+            <div class="scroll-bar-row">
+                <div class="scroll-label">{{ s.depth }}%</div>
+                <div class="scroll-bar-bg">
+                    <div class="scroll-bar-fill" style="width: {{ s.bar_width }}%; background: {% if s.pct >= 30 %}#1cc88a{% elif s.pct >= 15 %}#36b9cc{% elif s.pct >= 5 %}#f6c23e{% else %}#e74a3b{% endif %};">
+                        {{ s.pct }}%
+                    </div>
+                </div>
+                <div class="scroll-count">{{ s.count }}</div>
+            </div>
+            {% endfor %}
+            <div class="ai-hint">
+                🤖 <strong>Тепловая карта скролла</strong> показывает до куда доскроливают посетители.
+                Если на 25% видно резкое падение — значит там что-то отпугивает (длинный текст, скучная секция).
+                Переместите самый важный контент (CTA, кейсы) выше точки отсечения.
+                Если до 100% доходит > 30% — отлично, контент цепляет!
+            </div>
+        </div>
+        {% endif %}
+
+        <!-- Conversion Path -->
+        {% if data.conversion_path and data.conversion_path.has_data %}
+        <div class="section-card">
+            <div class="section-title">
+                <i class="fa-solid fa-route"></i> Профиль конверсии
+            </div>
+            <div class="cp-comparison">
+                <div class="cp-side cp-converted">
+                    <div class="cp-side-title">🟢 Эталон: страницы с конверсиями ({{ data.conversion_path.converted_count }} заявок на этой)</div>
+                    <div class="cp-metric"><span class="cp-metric-label">Engagement</span><span class="cp-metric-value">{{ data.conversion_path.converted.avg_engagement }}</span></div>
+                    <div class="cp-metric"><span class="cp-metric-label">Время на стр.</span><span class="cp-metric-value">{{ data.conversion_path.converted.avg_time }} сек</span></div>
+                    <div class="cp-metric"><span class="cp-metric-label">Скролл</span><span class="cp-metric-value">{{ data.conversion_path.converted.avg_scroll }}%</span></div>
+                    <div class="cp-metric"><span class="cp-metric-label">Номер визита</span><span class="cp-metric-value">{{ data.conversion_path.converted.avg_visits }}</span></div>
+                    <div class="cp-metric"><span class="cp-metric-label">Всего кликов</span><span class="cp-metric-value">{{ data.conversion_path.converted.total_clicks }}</span></div>
+                </div>
+                <div class="cp-side cp-not-converted">
+                    <div class="cp-side-title">🔵 Эта страница</div>
+                    <div class="cp-metric"><span class="cp-metric-label">Engagement</span><span class="cp-metric-value">{{ data.conversion_path.non_converted.avg_engagement }}</span></div>
+                    <div class="cp-metric"><span class="cp-metric-label">Время на стр.</span><span class="cp-metric-value">{{ data.conversion_path.non_converted.avg_time }} сек</span></div>
+                    <div class="cp-metric"><span class="cp-metric-label">Скролл</span><span class="cp-metric-value">{{ data.conversion_path.non_converted.avg_scroll }}%</span></div>
+                    <div class="cp-metric"><span class="cp-metric-label">Номер визита</span><span class="cp-metric-value">{{ data.conversion_path.non_converted.avg_visits }}</span></div>
+                    <div class="cp-metric"><span class="cp-metric-label">Всего кликов</span><span class="cp-metric-value">{{ data.conversion_path.non_converted.total_clicks }}</span></div>
+                </div>
+            </div>
+            <div class="ai-hint">
+                🤖 <strong>Профиль идеального клиента:</strong> Сравните показатели. Если конвертированные имеют engagement 70, а неконвертированные 30 —
+                значит нужно повышать engagement. Если конвертированные возвращаются 2+ раза — добавьте remarketing/email-цепочки.
+            </div>
+        </div>
+        {% endif %}
+    </div>
+
+    <!-- ============================================================ -->
+    <!-- TAB 5: ТРИГГЕРЫ                                               -->
+    <!-- ============================================================ -->
+    <div id="tab-triggers" class="tab-content">
+
+        {% if data.triggers %}
+        <!-- Сводка -->
+        <div class="metric-grid">
+            <div class="metric-card mc-danger">
+                <div class="mc-label">😤 Rage Clicks</div>
+                <div class="mc-value">{{ data.triggers.rage_clicks }}</div>
+                <div class="mc-sub">Злые клики</div>
+            </div>
+            <div class="metric-card mc-warning">
+                <div class="mc-label">👻 Dead Clicks</div>
+                <div class="mc-value">{{ data.triggers.dead_clicks }}</div>
+                <div class="mc-sub">Мёртвые клики</div>
+            </div>
+            <div class="metric-card mc-info">
+                <div class="mc-label">👆 CTA клики</div>
+                <div class="mc-value">{{ data.triggers.cta_clicks | sum(attribute='clicks') if data.triggers.cta_clicks else 0 }}</div>
+                <div class="mc-sub">По кнопкам</div>
+            </div>
+            <div class="metric-card mc-success">
+                <div class="mc-label">🎯 Микроконверсии</div>
+                <div class="mc-value">{{ data.triggers.micro_conversions | sum(attribute='count') if data.triggers.micro_conversions else 0 }}</div>
+                <div class="mc-sub">Промежуточные цели</div>
+            </div>
+        </div>
+
+        <!-- Frustration Events -->
+        {% if data.triggers.frustration_events %}
+        <div class="section-card">
+            <div class="section-title">
+                <i class="fa-solid fa-face-angry"></i> Проблемные элементы
+            </div>
+            <div style="overflow-x: auto;">
+                <table class="data-table">
+                    <thead><tr><th>Тип</th><th>Элемент</th><th>Клики</th><th>Сессий</th></tr></thead>
+                    <tbody>
+                        {% for e in data.triggers.frustration_events %}
+                        <tr>
+                            <td>{% if e.type == 'rage_click' %}<span class="badge badge-critical">😤 Rage</span>{% else %}<span class="badge badge-warning">👻 Dead</span>{% endif %}</td>
+                            <td><code>{{ e.element }}</code></td>
+                            <td><strong>{{ e.count }}</strong></td>
+                            <td>{{ e.sessions }}</td>
+                        </tr>
+                        {% endfor %}
+                    </tbody>
+                </table>
+            </div>
+        </div>
+        {% else %}
+        <div class="section-card" style="text-align: center; padding: 30px;">
+            <div style="font-size: 2.5rem; margin-bottom: 8px;">🎉</div>
+            <h3>Нет проблемных кликов!</h3>
+            <p class="text-muted">Пользователи не испытывают frustration на этой странице.</p>
+        </div>
+        {% endif %}
+
+        <!-- CTA Clicks -->
+        {% if data.triggers.cta_clicks %}
+        <div class="section-card">
+            <div class="section-title">
+                <i class="fa-solid fa-hand-pointer"></i> CTA-кнопки
+            </div>
+            <div style="overflow-x: auto;">
+                <table class="data-table">
+                    <thead><tr><th>CTA ID</th><th>Текст</th><th>Клики</th><th>Сессий</th></tr></thead>
+                    <tbody>
+                        {% for c in data.triggers.cta_clicks %}
+                        <tr>
+                            <td><span class="badge badge-medium">{{ c.cta_id }}</span></td>
+                            <td>{{ c.cta_text or '—' }}</td>
+                            <td><strong>{{ c.clicks }}</strong></td>
+                            <td>{{ c.sessions }}</td>
+                        </tr>
+                        {% endfor %}
+                    </tbody>
+                </table>
+            </div>
+        </div>
+        {% endif %}
+
+        <!-- Micro Conversions -->
+        {% if data.triggers.micro_conversions %}
+        <div class="section-card">
+            <div class="section-title">
+                <i class="fa-solid fa-filter"></i> Микроконверсии
+            </div>
+            <div style="overflow-x: auto;">
+                <table class="data-table">
+                    <thead><tr><th>Тип</th><th>Количество</th><th>Сессий</th></tr></thead>
+                    <tbody>
+                        {% for m in data.triggers.micro_conversions %}
+                        <tr>
+                            <td>
+                                {% if m.type == 'portfolio_open' %}📂 Открытие портфолио
+                                {% elif m.type == 'work_click' %}👆 Клик по работе
+                                {% elif m.type == 'form_scroll' %}📜 Скролл к форме
+                                {% elif m.type == 'cta_visible' %}👁️ Видимость CTA
+                                {% else %}{{ m.type }}{% endif %}
+                            </td>
+                            <td><strong>{{ m.count }}</strong></td>
+                            <td>{{ m.sessions }}</td>
+                        </tr>
+                        {% endfor %}
+                    </tbody>
+                </table>
+            </div>
+        </div>
+        {% endif %}
+
+        {% endif %}
+    </div>
+
+    <!-- ============================================================ -->
+    <!-- TAB 6: МАРКЕТИНГ (AIDA + Insights)                            -->
+    <!-- ============================================================ -->
+    <div id="tab-marketing" class="tab-content">
+
+        {% if data.marketing %}
+
+        <!-- AIDA Analysis -->
+        <div class="section-card">
+            <div class="section-title">
+                <i class="fa-solid fa-filter"></i> AIDA-воронка
+                <span style="margin-left: auto; font-size: 0.85rem; color: var(--pd-gray);">
+                    Средний балл: <strong style="color: {% if data.marketing.aida_avg >= 60 %}#1cc88a{% elif data.marketing.aida_avg >= 30 %}#f6c23e{% else %}#e74a3b{% endif %};">{{ data.marketing.aida_avg }}/100</strong>
+                </span>
+            </div>
+
+            <div class="aida-grid">
+                {% for key in ['attention', 'interest', 'desire', 'action'] %}
+                {% set stage = data.marketing.aida[key] %}
+                <div class="aida-card" style="border-bottom: 4px solid {{ stage.color }};">
+                    <div class="aida-icon">{{ stage.icon }}</div>
+                    <div class="aida-label">{{ stage.label }}</div>
+                    <div class="aida-score" style="color: {{ stage.color }};">{{ stage.score }}</div>
+                    <div class="aida-desc">{{ stage.description }}</div>
+                </div>
+                {% if not loop.last %}
+                <div class="aida-arrow" style="align-self: center;"><i class="fa-solid fa-chevron-right"></i></div>
+                {% endif %}
+                {% endfor %}
+            </div>
+
+            {% if data.marketing.bottleneck %}
+            <div class="bottleneck-card" style="margin-top: 16px;">
+                <div class="bottleneck-icon">🔗</div>
+                <div>
+                    <div class="bottleneck-title">
+                        Узкое место: {{ data.marketing.bottleneck.label }} ({{ data.marketing.bottleneck.score }}/100)
+                    </div>
+                    <div class="bottleneck-fix">{{ data.marketing.bottleneck.fix }}</div>
+                </div>
+            </div>
+            {% endif %}
+
+            <div class="ai-hint">
+                🤖 <strong>AIDA</strong> — классическая маркетинговая модель:
+                <strong>Attention</strong> (Внимание) → <strong>Interest</strong> (Интерес) → <strong>Desire</strong> (Желание) → <strong>Action</strong> (Действие).
+                Узкое место — это самое слабое звено, которое тормозит всю воронку. Исправьте его в первую очередь!
+            </div>
+        </div>
+
+        <!-- Temperature Mix -->
+        {% if data.marketing.temperature_mix %}
+        <div class="section-card">
+            <div class="section-title">
+                <i class="fa-solid fa-temperature-half"></i> Микс температуры трафика
+            </div>
+            <div class="temp-bar">
+                {% for t in data.marketing.temperature_mix %}
+                <div class="temp-segment" style="width: {{ t.pct }}%; background: {% if t.temp == 'hot' %}#e74a3b{% elif t.temp == 'warm' %}#f6c23e{% else %}#36b9cc{% endif %};">
+                    {% if t.pct > 10 %}{{ t.temp }} {{ t.pct }}%{% endif %}
+                </div>
+                {% endfor %}
+            </div>
+            <div style="display: flex; gap: 20px; margin-top: 12px;">
+                {% for t in data.marketing.temperature_mix %}
+                <div>
+                    <span style="font-size: 1.2rem;">{% if t.temp == 'hot' %}🔥{% elif t.temp == 'warm' %}🌡️{% else %}🧊{% endif %}</span>
+                    <strong>{{ t.temp }}</strong>: {{ t.count }} ({{ t.pct }}%)
+                </div>
+                {% endfor %}
+            </div>
+            <div class="ai-hint">
+                🤖 <strong>Температура трафика:</strong> 🧊 <strong>Cold</strong> — новые посетители, не знакомы с вами.
+                🌡️ <strong>Warm</strong> — заинтересованы, но не готовы купить. 🔥 <strong>Hot</strong> — готовы к действию.
+                Если холодных > 80% — проблема с первым экраном. Если горячих > 15% — страница работает хорошо.
+            </div>
+        </div>
+        {% endif %}
+
+        <!-- Marketing Metrics -->
+        <div class="metric-grid">
+            <div class="metric-card mc-info">
+                <div class="mc-label">Content-Commerce Ratio</div>
+                <div class="mc-value">{{ data.marketing.content_commerce_ratio }}%</div>
+                <div class="mc-sub">Действия / Просмотры</div>
+            </div>
+            <div class="metric-card mc-success">
+                <div class="mc-label">Viral Coefficient</div>
+                <div class="mc-value">{{ data.marketing.viral_coefficient }}</div>
+                <div class="mc-sub">Доля прямого/реферального</div>
+            </div>
+            <div class="metric-card mc-warning">
+                <div class="mc-label">Return Rate</div>
+                <div class="mc-value">{{ data.marketing.return_visitor_ratio }}%</div>
+                <div class="mc-sub">Возвращающиеся</div>
+            </div>
+        </div>
+
+        <div class="ai-hint">
+            🤖 <strong>Маркетинговые метрики:</strong>
+            <strong>Content-Commerce Ratio</strong> = какой % посетителей совершает целевые действия. Хороший показатель: 3-8%.
+            <strong>Viral Coefficient</strong> = доля "сарафанного" трафика. Если > 0.3 — люди делятся вашим контентом.
+            <strong>Return Rate</strong> = % возвращающихся. Высокий = контент ценен, люди возвращаются.
+        </div>
+
+        {% endif %}
+    </div>
+
+    <!-- ============================================================ -->
+    <!-- TAB 7: РОСТ (Рекомендации)                                    -->
+    <!-- ============================================================ -->
+    <div id="tab-growth" class="tab-content">
+
+        {% if data.growth %}
+        <div class="section-card">
+            <div class="section-title">
+                <i class="fa-solid fa-seedling"></i> Потенциал роста
+                <span style="margin-left: auto;">
+                    <span style="font-size: 1.5rem; font-weight: 800; color: {% if data.growth.potential_score >= 60 %}#e74a3b{% elif data.growth.potential_score >= 30 %}#f6c23e{% else %}#1cc88a{% endif %};">
+                        {{ data.growth.potential_score }}/100
+                    </span>
+                    <small style="color: var(--pd-gray);">потенциал</small>
+                </span>
+            </div>
+
+            <div style="height: 8px; background: #e3e6f0; border-radius: 4px; overflow: hidden; margin-bottom: 16px;">
+                <div style="height: 100%; width: {{ data.growth.potential_score }}%; background: linear-gradient(90deg, #1cc88a, #f6c23e, #e74a3b); border-radius: 4px;"></div>
+            </div>
+
+            <div class="ai-hint">
+                🤖 <strong>Потенциал роста</strong> показывает сколько можно улучшить эту страницу.
+                Высокий балл = много возможностей для роста. Низкий = страница уже хорошо оптимизирована.
+                Сосредоточьтесь на рекомендациях с высоким приоритетом (Critical/High).
+            </div>
+        </div>
+
+        <!-- Quick Wins -->
+        {% if data.growth.quick_wins %}
+        <div class="section-card" style="border: 2px solid #f6c23e;">
+            <div class="section-title">
+                <i class="fa-solid fa-bolt" style="color: #f6c23e;"></i> Quick Wins — быстрые победы
+            </div>
+            <div style="display: grid; gap: 12px;">
+                {% for r in data.growth.quick_wins %}
+                <div style="display: flex; align-items: flex-start; gap: 12px; padding: 12px; background: #fffbeb; border-radius: 8px;">
+                    <span style="font-size: 1.5rem;">{{ r.icon }}</span>
+                    <div>
+                        <div style="font-weight: 700; color: var(--pd-dark);">{{ r.title }}</div>
+                        <div style="font-size: 0.9rem; color: var(--pd-gray); margin: 4px 0;">{{ r.description }}</div>
+                        <div style="font-size: 0.85rem;"><strong>Действие:</strong> {{ r.action }}</div>
+                        <span class="rec-gain">{{ r.potential_gain }}</span>
+                    </div>
+                </div>
+                {% endfor %}
+            </div>
+        </div>
+        {% endif %}
+
+        <!-- Все рекомендации -->
+        {% if data.growth.recommendations %}
+        <div class="section-card">
+            <div class="section-title">
+                <i class="fa-solid fa-list-check"></i> Все рекомендации ({{ data.growth.recommendations | length }})
+            </div>
+
+            {% for r in data.growth.recommendations %}
+            <div class="rec-card rec-{{ r.priority }}">
+                <div class="rec-header">
+                    <span style="font-size: 1.3rem;">{{ r.icon }}</span>
+                    <span class="rec-category">{{ r.category }}</span>
+                    <span class="badge-priority badge-{{ r.priority }}">{{ r.priority }}</span>
+                    <span style="margin-left: auto;">{{ r.title }}</span>
+                </div>
+                <div class="rec-body">
+                    <div class="rec-row">
+                        <span class="rec-icon">📝</span>
+                        <div>{{ r.description }}</div>
+                    </div>
+                    <div class="rec-row">
+                        <span class="rec-icon">✅</span>
+                        <div><strong>{{ r.action }}</strong></div>
+                    </div>
+                    <div class="rec-row">
+                        <span class="rec-icon">📈</span>
+                        <div><span class="rec-gain">{{ r.potential_gain }}</span></div>
+                    </div>
+                </div>
+            </div>
+            {% endfor %}
+        </div>
+        {% else %}
+        <div class="section-card" style="text-align: center; padding: 40px;">
+            <div style="font-size: 3rem; margin-bottom: 12px;">🎉</div>
+            <h3>Страница хорошо оптимизирована!</h3>
+            <p class="text-muted">Система не нашла критических рекомендаций. Продолжайте собирать данные.</p>
+        </div>
+        {% endif %}
+
+        {% endif %}
+    </div>
+
+    {% endif %} {# end if not error #}
+    {% endif %} {# end if page_url #}
+</div>
+{% endblock %}
+
+{% block tail %}
+    {{ super() }}
+    <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.0/dist/chart.umd.min.js"></script>
+    <script>
+    (function() {
+        /* ===== Tab переключение ===== */
+        var tabBtns = document.querySelectorAll('.tab-btn');
+        var tabContents = document.querySelectorAll('.tab-content');
+
+        tabBtns.forEach(function(btn) {
+            btn.addEventListener('click', function() {
+                var targetId = this.getAttribute('data-tab');
+                tabBtns.forEach(function(b) { b.classList.remove('active'); });
+                tabContents.forEach(function(c) { c.classList.remove('active'); });
+                this.classList.add('active');
+                document.getElementById(targetId).classList.add('active');
+                window.dispatchEvent(new Event('resize'));
+            });
+        });
+
+        /* ===== Chart.js defaults ===== */
+        Chart.defaults.font.family = 'inherit';
+        Chart.defaults.font.size = 13;
+        Chart.defaults.color = '#858796';
+
+        /* ===== Тренды по дням ===== */
+        {% if data.trends %}
+        var trendsData = {{ data.trends | tojson }};
+        if (trendsData && trendsData.length > 0) {
+            var ctx = document.getElementById('trendsChart');
+            if (ctx) {
+                var gradient = ctx.getContext('2d').createLinearGradient(0, 0, 0, 300);
+                gradient.addColorStop(0, 'rgba(78, 115, 223, 0.25)');
+                gradient.addColorStop(1, 'rgba(78, 115, 223, 0.02)');
+
+                var gradient2 = ctx.getContext('2d').createLinearGradient(0, 0, 0, 300);
+                gradient2.addColorStop(0, 'rgba(28, 200, 138, 0.25)');
+                gradient2.addColorStop(1, 'rgba(28, 200, 138, 0.02)');
+
+                new Chart(ctx, {
+                    type: 'line',
+                    data: {
+                        labels: trendsData.map(function(d) { return d.date; }),
+                        datasets: [
+                            {
+                                label: 'Всего',
+                                data: trendsData.map(function(d) { return d.total; }),
+                                borderColor: '#4e73df',
+                                backgroundColor: gradient,
+                                fill: true,
+                                tension: 0.4,
+                                pointRadius: 3,
+                                pointHoverRadius: 6,
+                                borderWidth: 2.5,
+                            },
+                            {
+                                label: 'Из поиска',
+                                data: trendsData.map(function(d) { return d.search; }),
+                                borderColor: '#1cc88a',
+                                backgroundColor: gradient2,
+                                fill: true,
+                                tension: 0.4,
+                                pointRadius: 3,
+                                pointHoverRadius: 6,
+                                borderWidth: 2,
+                            },
+                            {
+                                label: 'Уникальные',
+                                data: trendsData.map(function(d) { return d.unique; }),
+                                borderColor: '#36b9cc',
+                                backgroundColor: 'transparent',
+                                borderDash: [5, 5],
+                                tension: 0.4,
+                                pointRadius: 2,
+                                borderWidth: 2,
+                            }
+                        ]
+                    },
+                    options: {
+                        responsive: true,
+                        maintainAspectRatio: true,
+                        plugins: {
+                            legend: {
+                                position: 'bottom',
+                                labels: { boxWidth: 12, padding: 16, usePointStyle: true }
+                            },
+                            tooltip: {
+                                backgroundColor: '#fff',
+                                titleColor: '#5a5c69',
+                                bodyColor: '#5a5c69',
+                                borderColor: '#e3e6f0',
+                                borderWidth: 1,
+                                cornerRadius: 8,
+                                padding: 12,
+                            }
+                        },
+                        scales: {
+                            x: { grid: { display: false }, ticks: { maxTicksLimit: 15 } },
+                            y: { beginAtZero: true, ticks: { precision: 0 }, grid: { color: '#e3e6f0' } }
+                        }
+                    }
+                });
+            }
+        }
+        {% endif %}
+    })();
+    </script>
+{% endblock %}

@@ -776,7 +776,7 @@
                                 {% for item in stats.search_ctr %}
                                 <tr>
                                     <td>{{ loop.index }}</td>
-                                    <td class="cell-truncate" title="{{ item.url }}">{{ item.url }}</td>
+                                    <td class="cell-truncate" title="{{ item.url }}"><a href="/admin/page-detail?url={{ item.url }}" style="color: var(--seo-primary); text-decoration: none; font-weight: 500;">{{ item.url }} <i class="fa-solid fa-arrow-up-right-from-square" style="font-size: 0.7em;"></i></a></td>
                                     <td>{{ item.total_views }}</td>
                                     <td>{{ item.from_search }}</td>
                                     <td>
@@ -882,7 +882,7 @@
                         {% for item in stats.page_stats %}
                         <tr>
                             <td>{{ loop.index }}</td>
-                            <td class="cell-truncate" title="{{ item.url }}">{{ item.url }}</td>
+                            <td class="cell-truncate" title="{{ item.url }}"><a href="/admin/page-detail?url={{ item.url }}" style="color: var(--seo-primary); text-decoration: none; font-weight: 500;">{{ item.url }} <i class="fa-solid fa-arrow-up-right-from-square" style="font-size: 0.7em;"></i></a></td>
                             <td>{{ item.total_views }}</td>
                             <td>{{ item.unique_visitors }}</td>
                             <td>{{ item.search_clicks }} <small class="text-muted">({{ item.search_share }}%)</small></td>
@@ -934,7 +934,7 @@
                         {% for item in stats.page_source_matrix %}
                         <tr>
                             <td>{{ loop.index }}</td>
-                            <td class="cell-truncate" title="{{ item.url }}">{{ item.url }}</td>
+                            <td class="cell-truncate" title="{{ item.url }}"><a href="/admin/page-detail?url={{ item.url }}" style="color: var(--seo-primary); text-decoration: none; font-weight: 500;">{{ item.url }} <i class="fa-solid fa-arrow-up-right-from-square" style="font-size: 0.7em;"></i></a></td>
                             <td>
                                 <span class="badge-engine badge-{{ item.source if item.source in ['google','yandex','bing','duckduckgo'] else 'other' }}">
                                     {{ item.source }}
@@ -1365,7 +1365,7 @@
                     {% for item in stats.page_load_times %}
                     <tr>
                         <td>{{ loop.index }}</td>
-                        <td style="max-width:250px; overflow:hidden; text-overflow:ellipsis; white-space:nowrap;" title="{{ item.url }}">{{ item.url }}</td>
+                        <td style="max-width:250px; overflow:hidden; text-overflow:ellipsis; white-space:nowrap;" title="{{ item.url }}"><a href="/admin/page-detail?url={{ item.url }}" style="color: var(--seo-primary); text-decoration: none; font-weight: 500;">{{ item.url }} <i class="fa-solid fa-arrow-up-right-from-square" style="font-size: 0.7em;"></i></a></td>
                         <td><strong {% if item.avg_load_sec < 2 %}class="text-success"{% elif item.avg_load_sec < 4 %}class="text-warning"{% else %}class="text-danger"{% endif %}>{{ item.avg_load_sec }} сек</strong></td>
                         <td>{{ item.min_load_ms }} мс</td>
                         <td>{{ item.max_load_ms }} мс</td>
@@ -1475,7 +1475,7 @@
                         {% for item in stats.micro_conversions.by_page %}
                         <tr>
                             <td>{{ loop.index }}</td>
-                            <td style="max-width:300px; overflow:hidden; text-overflow:ellipsis; white-space:nowrap;" title="{{ item.url }}">{{ item.url }}</td>
+                            <td style="max-width:300px; overflow:hidden; text-overflow:ellipsis; white-space:nowrap;" title="{{ item.url }}"><a href="/admin/page-detail?url={{ item.url }}" style="color: var(--seo-primary); text-decoration: none; font-weight: 500;">{{ item.url }} <i class="fa-solid fa-arrow-up-right-from-square" style="font-size: 0.7em;"></i></a></td>
                             <td>
                                 {% for c in item.conversions %}
                                     <span class="badge" style="background:#d1ecf1;color:#0c5460;margin-right:4px;">
@@ -1658,7 +1658,7 @@
                 <tbody>
                     {% for item in stats.cwv %}
                     <tr>
-                        <td style="max-width:250px; overflow:hidden; text-overflow:ellipsis;">{{ item.url }}</td>
+                        <td style="max-width:250px; overflow:hidden; text-overflow:ellipsis;"><a href="/admin/page-detail?url={{ item.url }}" style="color: var(--seo-primary); text-decoration: none; font-weight: 500;">{{ item.url }}</a></td>
                         <td>{{ item.avg_lcp }}</td>
                         <td>{{ item.avg_inp }}</td>
                         <td>{{ item.avg_cls }}</td>
@@ -1684,7 +1684,7 @@
                 <tbody>
                     {% for item in stats.ttfi %}
                     <tr>
-                        <td style="max-width:250px; overflow:hidden; text-overflow:ellipsis;">{{ item.url }}</td>
+                        <td style="max-width:250px; overflow:hidden; text-overflow:ellipsis;"><a href="/admin/page-detail?url={{ item.url }}" style="color: var(--seo-primary); text-decoration: none; font-weight: 500;">{{ item.url }}</a></td>
                         <td><strong {% if item.avg_ttfi_sec < 2 %}class="text-success"{% elif item.avg_ttfi_sec < 5 %}class="text-warning"{% else %}class="text-danger"{% endif %}>{{ item.avg_ttfi_sec }} сек</strong></td>
                         <td>{{ item.count }}</td>
                     </tr>

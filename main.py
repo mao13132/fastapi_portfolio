@@ -21,6 +21,7 @@ from src.business.Category.categoryAdmin import CategoryAdmin
 from src.business.Click.clickRouter import clickRouter
 from src.business.Click.clicksAdmin import ClicksAdmin
 from src.business.Click.seoStatsAdmin import SeoStatsAdmin
+from src.business.Click.pageDetailAdmin import PageDetailAdmin
 from src.business.Contact.contactAdmin import ContactAdmin
 from src.business.Contact.contactRouter import contactRouter
 from src.business.Quiz.quizAdmin import QuizAdmin, QuizResultAdmin
@@ -87,6 +88,7 @@ admin.add_view(QuizAdmin)
 admin.add_view(ContactAdmin)
 admin.add_view(ClicksAdmin)
 admin.add_view(SeoStatsAdmin)
+admin.add_view(PageDetailAdmin)
 
 # Логирование запросов при ошибках (422, 400, 500)
 app.add_middleware(RequestLoggingMiddleware)
