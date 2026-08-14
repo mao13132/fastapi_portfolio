@@ -67,6 +67,26 @@ LLMS_TXT_SHORT = f"""# DimaRazrab — Фриланс-разработчик
 - [Telegram-бот для Wildberries]({BASE_URL}/blog/telegram-bot-dlya-wildberries)
 - [Telegram-бот рассылка]({BASE_URL}/blog/telegram-bot-rassylka)
 - [Telegram-бот с оплатой]({BASE_URL}/blog/telegram-bot-s-oplatoj)
+- [7 факторов стоимости Telegram-бота]({BASE_URL}/blog/cena-telegram-bota-7-faktorov)
+- [ROI Telegram-бота: как рассчитать]({BASE_URL}/blog/roi-telegram-bota-kak-rasschitat)
+- [Telegram-бот с оплатой через ЮKassa]({BASE_URL}/blog/telegram-bot-yukassa)
+- [Telegram-бот с amoCRM]({BASE_URL}/blog/telegram-bot-amocrm)
+- [Telegram-бот с Google Sheets]({BASE_URL}/blog/telegram-bot-google-sheets)
+- [ТЗ на Telegram-бота]({BASE_URL}/blog/tz-na-telegram-bota)
+- [Как выбрать разработчика Telegram-бота]({BASE_URL}/blog/kak-vybrat-razrabotchika-telegram-bota)
+- [Telegram-бот vs WhatsApp-бот]({BASE_URL}/blog/telegram-bot-vs-whatsapp-bot)
+- [Telegram-бот vs Viber-бот]({BASE_URL}/blog/telegram-bot-vs-viber-bot)
+- [Telegram-бот vs чат-бот на сайте]({BASE_URL}/blog/telegram-bot-vs-sajt-chatbot)
+- [Telegram Mini App vs обычный бот]({BASE_URL}/blog/telegram-mini-app-vs-obychnyj-bot)
+- [Конструктор vs заказная разработка]({BASE_URL}/blog/konstruktor-vs-zakaznaya-razrabotka)
+- [Python vs JavaScript для Telegram-бота]({BASE_URL}/blog/python-vs-javascript-dlya-telegram-bota)
+- [Aiogram vs Telebot vs PTB]({BASE_URL}/blog/aiogram-vs-telebot-vs-ptb)
+- [Telegram-бот vs Telegram-канал]({BASE_URL}/blog/telegram-bot-vs-telegram-kanal)
+- [Telegram-бот vs email-рассылка]({BASE_URL}/blog/telegram-bot-vs-email-rassylka)
+- [Telegram Stars vs ЮKassa vs Robokassa]({BASE_URL}/blog/telegram-stars-vs-yukassa-vs-robokassa)
+- [Webhook vs Long Polling]({BASE_URL}/blog/webhook-vs-long-polling)
+- [Telegram Business vs бот]({BASE_URL}/blog/telegram-business-vs-bot)
+- [Telegram-бот vs мобильное приложение]({BASE_URL}/blog/telegram-bot-vs-mobilnoe-prilozhenie)
 
 ### Telegram-боты для бизнеса (по нишам)
 - [Telegram-боты для отраслей (хаб)]({BASE_URL}/blog/telegram-boty-dlya-otraslej)
@@ -432,6 +452,27 @@ SITEMAP_STATIC_URLS = [
     {'loc': f'{BASE_URL}/blog/stoimost-telegram-bota', 'changefreq': 'monthly', 'priority': '0.7', 'lastmod': '2026-08-05'},
     {'loc': f'{BASE_URL}/blog/telegram-bot-dlya-zapisi-klientov', 'changefreq': 'monthly', 'priority': '0.7', 'lastmod': '2026-08-05'},
     {'loc': f'{BASE_URL}/blog/telegram-bot-ili-mobilnoe-prilozhenie', 'changefreq': 'monthly', 'priority': '0.7', 'lastmod': '2026-08-05'},
+    # Блог — статьи: Сравнения и гайды (новые)
+    {'loc': f'{BASE_URL}/blog/cena-telegram-bota-7-faktorov', 'changefreq': 'monthly', 'priority': '0.7', 'lastmod': '2026-08-12'},
+    {'loc': f'{BASE_URL}/blog/roi-telegram-bota-kak-rasschitat', 'changefreq': 'monthly', 'priority': '0.7', 'lastmod': '2026-08-12'},
+    {'loc': f'{BASE_URL}/blog/telegram-bot-yukassa', 'changefreq': 'monthly', 'priority': '0.7', 'lastmod': '2026-08-12'},
+    {'loc': f'{BASE_URL}/blog/telegram-bot-amocrm', 'changefreq': 'monthly', 'priority': '0.7', 'lastmod': '2026-08-12'},
+    {'loc': f'{BASE_URL}/blog/telegram-bot-google-sheets', 'changefreq': 'monthly', 'priority': '0.7', 'lastmod': '2026-08-12'},
+    {'loc': f'{BASE_URL}/blog/tz-na-telegram-bota', 'changefreq': 'monthly', 'priority': '0.7', 'lastmod': '2026-08-12'},
+    {'loc': f'{BASE_URL}/blog/kak-vybrat-razrabotchika-telegram-bota', 'changefreq': 'monthly', 'priority': '0.7', 'lastmod': '2026-08-12'},
+    {'loc': f'{BASE_URL}/blog/telegram-bot-vs-whatsapp-bot', 'changefreq': 'monthly', 'priority': '0.7', 'lastmod': '2026-08-12'},
+    {'loc': f'{BASE_URL}/blog/telegram-bot-vs-viber-bot', 'changefreq': 'monthly', 'priority': '0.7', 'lastmod': '2026-08-12'},
+    {'loc': f'{BASE_URL}/blog/telegram-bot-vs-sajt-chatbot', 'changefreq': 'monthly', 'priority': '0.7', 'lastmod': '2026-08-12'},
+    {'loc': f'{BASE_URL}/blog/telegram-mini-app-vs-obychnyj-bot', 'changefreq': 'monthly', 'priority': '0.7', 'lastmod': '2026-08-12'},
+    {'loc': f'{BASE_URL}/blog/konstruktor-vs-zakaznaya-razrabotka', 'changefreq': 'monthly', 'priority': '0.7', 'lastmod': '2026-08-12'},
+    {'loc': f'{BASE_URL}/blog/python-vs-javascript-dlya-telegram-bota', 'changefreq': 'monthly', 'priority': '0.7', 'lastmod': '2026-08-12'},
+    {'loc': f'{BASE_URL}/blog/aiogram-vs-telebot-vs-ptb', 'changefreq': 'monthly', 'priority': '0.7', 'lastmod': '2026-08-12'},
+    {'loc': f'{BASE_URL}/blog/telegram-bot-vs-telegram-kanal', 'changefreq': 'monthly', 'priority': '0.7', 'lastmod': '2026-08-12'},
+    {'loc': f'{BASE_URL}/blog/telegram-bot-vs-email-rassylka', 'changefreq': 'monthly', 'priority': '0.7', 'lastmod': '2026-08-12'},
+    {'loc': f'{BASE_URL}/blog/telegram-stars-vs-yukassa-vs-robokassa', 'changefreq': 'monthly', 'priority': '0.7', 'lastmod': '2026-08-12'},
+    {'loc': f'{BASE_URL}/blog/webhook-vs-long-polling', 'changefreq': 'monthly', 'priority': '0.7', 'lastmod': '2026-08-12'},
+    {'loc': f'{BASE_URL}/blog/telegram-business-vs-bot', 'changefreq': 'monthly', 'priority': '0.7', 'lastmod': '2026-08-12'},
+    {'loc': f'{BASE_URL}/blog/telegram-bot-vs-mobilnoe-prilozhenie', 'changefreq': 'monthly', 'priority': '0.7', 'lastmod': '2026-08-12'},
     # Блог — статьи: Telegram-боты для бизнеса (по нишам)
     {'loc': f'{BASE_URL}/blog/telegram-boty-dlya-otraslej', 'changefreq': 'weekly', 'priority': '0.8', 'lastmod': '2026-08-07'},
     {'loc': f'{BASE_URL}/blog/bot-dlya-apteki', 'changefreq': 'monthly', 'priority': '0.7', 'lastmod': '2026-08-07'},
@@ -758,6 +799,28 @@ BLOG_CLUSTERS = [
         ("Стоимость Telegram-бота", "/blog/stoimost-telegram-bota"),
         ("Telegram-бот для записи клиентов", "/blog/telegram-bot-dlya-zapisi-klientov"),
         ("Telegram-бот или мобильное приложение", "/blog/telegram-bot-ili-mobilnoe-prilozhenie"),
+    ]),
+    ("Сравнения и гайды по Telegram-ботам", [
+        ("7 факторов стоимости Telegram-бота", "/blog/cena-telegram-bota-7-faktorov"),
+        ("ROI Telegram-бота: как рассчитать", "/blog/roi-telegram-bota-kak-rasschitat"),
+        ("Telegram-бот с оплатой через ЮKassa", "/blog/telegram-bot-yukassa"),
+        ("Telegram-бот с amoCRM", "/blog/telegram-bot-amocrm"),
+        ("Telegram-бот с Google Sheets", "/blog/telegram-bot-google-sheets"),
+        ("ТЗ на Telegram-бота", "/blog/tz-na-telegram-bota"),
+        ("Как выбрать разработчика Telegram-бота", "/blog/kak-vybrat-razrabotchika-telegram-bota"),
+        ("Telegram-бот vs WhatsApp-бот", "/blog/telegram-bot-vs-whatsapp-bot"),
+        ("Telegram-бот vs Viber-бот", "/blog/telegram-bot-vs-viber-bot"),
+        ("Telegram-бот vs чат-бот на сайте", "/blog/telegram-bot-vs-sajt-chatbot"),
+        ("Telegram Mini App vs обычный бот", "/blog/telegram-mini-app-vs-obychnyj-bot"),
+        ("Конструктор vs заказная разработка", "/blog/konstruktor-vs-zakaznaya-razrabotka"),
+        ("Python vs JavaScript для Telegram-бота", "/blog/python-vs-javascript-dlya-telegram-bota"),
+        ("Aiogram vs Telebot vs PTB", "/blog/aiogram-vs-telebot-vs-ptb"),
+        ("Telegram-бот vs Telegram-канал", "/blog/telegram-bot-vs-telegram-kanal"),
+        ("Telegram-бот vs email-рассылка", "/blog/telegram-bot-vs-email-rassylka"),
+        ("Telegram Stars vs ЮKassa vs Robokassa", "/blog/telegram-stars-vs-yukassa-vs-robokassa"),
+        ("Webhook vs Long Polling", "/blog/webhook-vs-long-polling"),
+        ("Telegram Business vs бот", "/blog/telegram-business-vs-bot"),
+        ("Telegram-бот vs мобильное приложение", "/blog/telegram-bot-vs-mobilnoe-prilozhenie"),
     ]),
 ]
 
