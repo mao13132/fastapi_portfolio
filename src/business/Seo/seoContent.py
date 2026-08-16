@@ -46,6 +46,9 @@ LLMS_TXT_SHORT = f"""# DimaRazrab — Фриланс-разработчик
 - [Бот или приложение для бизнеса]({BASE_URL}/blog/telegram-bot-ili-mobilnoe-prilozhenie-dlya-biznesa)
 - [Как бот увеличивает продажи]({BASE_URL}/blog/kak-telegram-bot-uvelichivaet-prodazhi)
 - [Telegram Mini App]({BASE_URL}/blog/telegram-mini-app-chto-eto)
+- [Заказать Telegram Mini App]({BASE_URL}/blog/zakazat-telegram-mini-app)
+- [Стоимость Telegram Mini App]({BASE_URL}/blog/telegram-mini-app-stoimost)
+- [Telegram Mini App под ключ]({BASE_URL}/blog/telegram-mini-app-pod-klyuch)
 - [Aiogram vs Pyrogram]({BASE_URL}/blog/aiogram-vs-pyrogram)
 - [AI Telegram-бот для бизнеса]({BASE_URL}/blog/ai-telegram-bot-dlya-biznesa)
 - [AI-бот для ведения Telegram-канала]({BASE_URL}/blog/ai-bot-dlya-vedeniya-telegram-kanala)
@@ -164,6 +167,7 @@ LLMS_TXT_SHORT = f"""# DimaRazrab — Фриланс-разработчик
 - [Лидогенерация (хаб)]({BASE_URL}/blog/lidogeneraciya-telegram)
 - [Как найти клиентов в Telegram]({BASE_URL}/blog/kak-najti-klientov-v-telegram)
 - [Парсер каналов Telegram]({BASE_URL}/blog/parser-telegram-kanalov)
+- [Парсер Telegram]({BASE_URL}/blog/parser-telegram)
 - [Лидогенерация — как это работает]({BASE_URL}/blog/lidogeneraciya-telegram-kak-eto-rabotaet)
 - [Сбор базы клиентов в Telegram]({BASE_URL}/blog/sbor-bazy-klientov-telegram)
 - [Массовая рассылка в Telegram]({BASE_URL}/blog/massovaya-rassylka-telegram)
@@ -197,6 +201,10 @@ LLMS_TXT_SHORT = f"""# DimaRazrab — Фриланс-разработчик
 - [AI-бот в Telegram с ChatGPT]({BASE_URL}/blog/ai-bot-telegram-chatgpt)
 - [Нейросети для автоматизации]({BASE_URL}/blog/nejroseti-dlya-avtomatizacii)
 - [AI для обработки документов]({BASE_URL}/blog/ai-dlya-obrabotki-dokumentov)
+- [AI-агенты для бизнеса на заказ]({BASE_URL}/blog/ii-agenty-dlya-biznesa-na-zakaz)
+- [Заказать AI-агента]({BASE_URL}/blog/zakazat-ii-agenta)
+- [Разработка AI-агентов]({BASE_URL}/blog/razrabotka-ii-agentov)
+- [AI-агент для продаж]({BASE_URL}/blog/ii-agent-dlya-prodazh)
 
 ### API и интеграции
 - [API и интеграции (хаб)]({BASE_URL}/blog/razrabotka-api)
@@ -366,6 +374,9 @@ SITEMAP_STATIC_URLS = [
     {'loc': f'{BASE_URL}/blog/telegram-bot-ili-mobilnoe-prilozhenie-dlya-biznesa', 'changefreq': 'monthly', 'priority': '0.7', 'lastmod': '2026-08-02'},
     {'loc': f'{BASE_URL}/blog/kak-telegram-bot-uvelichivaet-prodazhi', 'changefreq': 'monthly', 'priority': '0.7', 'lastmod': '2026-08-02'},
     {'loc': f'{BASE_URL}/blog/telegram-mini-app-chto-eto', 'changefreq': 'monthly', 'priority': '0.7', 'lastmod': '2026-08-02'},
+    {'loc': f'{BASE_URL}/blog/zakazat-telegram-mini-app', 'changefreq': 'monthly', 'priority': '0.7', 'lastmod': '2026-08-16'},
+    {'loc': f'{BASE_URL}/blog/telegram-mini-app-stoimost', 'changefreq': 'monthly', 'priority': '0.7', 'lastmod': '2026-08-16'},
+    {'loc': f'{BASE_URL}/blog/telegram-mini-app-pod-klyuch', 'changefreq': 'monthly', 'priority': '0.7', 'lastmod': '2026-08-16'},
     {'loc': f'{BASE_URL}/blog/aiogram-vs-pyrogram', 'changefreq': 'monthly', 'priority': '0.7', 'lastmod': '2026-08-02'},
     {'loc': f'{BASE_URL}/blog/ai-telegram-bot-dlya-biznesa', 'changefreq': 'monthly', 'priority': '0.7', 'lastmod': '2026-08-04'},
     {'loc': f'{BASE_URL}/blog/ai-bot-dlya-vedeniya-telegram-kanala', 'changefreq': 'monthly', 'priority': '0.7', 'lastmod': '2026-08-04'},
@@ -398,6 +409,7 @@ SITEMAP_STATIC_URLS = [
     # Блог — статьи: Лидогенерация
     {'loc': f'{BASE_URL}/blog/kak-najti-klientov-v-telegram', 'changefreq': 'monthly', 'priority': '0.7', 'lastmod': '2026-08-03'},
     {'loc': f'{BASE_URL}/blog/parser-telegram-kanalov', 'changefreq': 'monthly', 'priority': '0.7', 'lastmod': '2026-08-03'},
+    {'loc': f'{BASE_URL}/blog/parser-telegram', 'changefreq': 'monthly', 'priority': '0.7', 'lastmod': '2026-08-16'},
     {'loc': f'{BASE_URL}/blog/lidogeneraciya-telegram-kak-eto-rabotaet', 'changefreq': 'monthly', 'priority': '0.7', 'lastmod': '2026-08-03'},
     {'loc': f'{BASE_URL}/blog/sbor-bazy-klientov-telegram', 'changefreq': 'monthly', 'priority': '0.7', 'lastmod': '2026-08-03'},
     {'loc': f'{BASE_URL}/blog/massovaya-rassylka-telegram', 'changefreq': 'monthly', 'priority': '0.7', 'lastmod': '2026-08-03'},
@@ -428,6 +440,10 @@ SITEMAP_STATIC_URLS = [
     {'loc': f'{BASE_URL}/blog/ai-bot-telegram-chatgpt', 'changefreq': 'monthly', 'priority': '0.7', 'lastmod': '2026-08-03'},
     {'loc': f'{BASE_URL}/blog/nejroseti-dlya-avtomatizacii', 'changefreq': 'monthly', 'priority': '0.7', 'lastmod': '2026-08-03'},
     {'loc': f'{BASE_URL}/blog/ai-dlya-obrabotki-dokumentov', 'changefreq': 'monthly', 'priority': '0.7', 'lastmod': '2026-08-03'},
+    {'loc': f'{BASE_URL}/blog/ii-agenty-dlya-biznesa-na-zakaz', 'changefreq': 'monthly', 'priority': '0.7', 'lastmod': '2026-08-16'},
+    {'loc': f'{BASE_URL}/blog/zakazat-ii-agenta', 'changefreq': 'monthly', 'priority': '0.7', 'lastmod': '2026-08-16'},
+    {'loc': f'{BASE_URL}/blog/razrabotka-ii-agentov', 'changefreq': 'monthly', 'priority': '0.7', 'lastmod': '2026-08-16'},
+    {'loc': f'{BASE_URL}/blog/ii-agent-dlya-prodazh', 'changefreq': 'monthly', 'priority': '0.7', 'lastmod': '2026-08-16'},
     # Блог — статьи: API и интеграции
     {'loc': f'{BASE_URL}/blog/razrabotka-rest-api', 'changefreq': 'monthly', 'priority': '0.7', 'lastmod': '2026-08-03'},
     {'loc': f'{BASE_URL}/blog/integraciya-api-s-sajtom', 'changefreq': 'monthly', 'priority': '0.7', 'lastmod': '2026-08-03'},
@@ -677,6 +693,9 @@ BLOG_CLUSTERS = [
         ("Бот или приложение для бизнеса", "/blog/telegram-bot-ili-mobilnoe-prilozhenie-dlya-biznesa"),
         ("Как бот увеличивает продажи", "/blog/kak-telegram-bot-uvelichivaet-prodazhi"),
         ("Telegram Mini App", "/blog/telegram-mini-app-chto-eto"),
+        ("Заказать Telegram Mini App", "/blog/zakazat-telegram-mini-app"),
+        ("Стоимость Telegram Mini App", "/blog/telegram-mini-app-stoimost"),
+        ("Telegram Mini App под ключ", "/blog/telegram-mini-app-pod-klyuch"),
         ("Aiogram vs Pyrogram", "/blog/aiogram-vs-pyrogram"),
         ("AI Telegram-бот для бизнеса", "/blog/ai-telegram-bot-dlya-biznesa"),
         ("AI-бот для ведения Telegram-канала", "/blog/ai-bot-dlya-vedeniya-telegram-kanala"),
@@ -768,6 +787,7 @@ BLOG_CLUSTERS = [
     ("Лидогенерация", [
         ("Как найти клиентов в Telegram", "/blog/kak-najti-klientov-v-telegram"),
         ("Парсер каналов Telegram", "/blog/parser-telegram-kanalov"),
+        ("Парсер Telegram", "/blog/parser-telegram"),
         ("Лидогенерация — как это работает", "/blog/lidogeneraciya-telegram-kak-eto-rabotaet"),
         ("Сбор базы клиентов в Telegram", "/blog/sbor-bazy-klientov-telegram"),
         ("Массовая рассылка в Telegram", "/blog/massovaya-rassylka-telegram"),
@@ -799,6 +819,10 @@ BLOG_CLUSTERS = [
         ("AI-бот в Telegram с ChatGPT", "/blog/ai-bot-telegram-chatgpt"),
         ("Нейросети для автоматизации", "/blog/nejroseti-dlya-avtomatizacii"),
         ("AI для обработки документов", "/blog/ai-dlya-obrabotki-dokumentov"),
+        ("AI-агенты для бизнеса на заказ", "/blog/ii-agenty-dlya-biznesa-na-zakaz"),
+        ("Заказать AI-агента", "/blog/zakazat-ii-agenta"),
+        ("Разработка AI-агентов", "/blog/razrabotka-ii-agentov"),
+        ("AI-агент для продаж", "/blog/ii-agent-dlya-prodazh"),
     ]),
     ("API и интеграции", [
         ("Разработка REST API", "/blog/razrabotka-rest-api"),
