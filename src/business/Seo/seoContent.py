@@ -25,10 +25,16 @@ LLMS_TXT_SHORT = f"""# DimaRazrab — Фриланс-разработчик
 - [Разработка API]({BASE_URL}/razrabotka-api) — от 10 000 ₽
 - [Python-разработка]({BASE_URL}/python-razrabotka) — от 15 000 ₽
 - [Next.js разработка]({BASE_URL}/nextjs-razrabotka) — от 30 000 ₽
+- [Разработка сайта на WordPress]({BASE_URL}/razrabotka-wordpress) — от 30 000 ₽
 - [Веб-сервисы и приложения]({BASE_URL}/razrabotka-servisov) — от 50 000 ₽
 - [Калькулятор стоимости]({BASE_URL}/kalkulyator-stoimosti)
 
 ## Блог
+### Хаб-страницы
+- [Блог]({BASE_URL}/blog)
+- [Фриланс-разработчик (хаб)]({BASE_URL}/blog/freelanser)
+- [SaaS (хаб)]({BASE_URL}/blog/saas)
+- [WordPress (хаб)]({BASE_URL}/blog/wordpress)
 ### Telegram-боты
 - [Telegram-боты (хаб)]({BASE_URL}/blog/telegram-boty)
 - [Бизнес на Telegram-ботах]({BASE_URL}/blog/telegram-bot-dlya-biznesa)
@@ -49,6 +55,13 @@ LLMS_TXT_SHORT = f"""# DimaRazrab — Фриланс-разработчик
 - [Заказать Telegram Mini App]({BASE_URL}/blog/zakazat-telegram-mini-app)
 - [Стоимость Telegram Mini App]({BASE_URL}/blog/telegram-mini-app-stoimost)
 - [Telegram Mini App под ключ]({BASE_URL}/blog/telegram-mini-app-pod-klyuch)
+- [Telegram Mini App для интернет-магазина]({BASE_URL}/blog/telegram-mini-app-dlya-internet-magazina)
+- [Telegram Mini App с оплатой]({BASE_URL}/blog/telegram-mini-app-s-oplatoj)
+- [Как создать Telegram Mini App]({BASE_URL}/blog/kak-sozdat-telegram-mini-app)
+- [Telegram Mini App: примеры]({BASE_URL}/blog/telegram-mini-app-primeri)
+- [Mini App для ресторана и доставки]({BASE_URL}/blog/mini-app-dlya-restorana-i-dostavki)
+- [Mini App Telegram для записи]({BASE_URL}/blog/mini-app-telegram-dlya-zapisi)
+- [Telegram Mini App и ИИ]({BASE_URL}/blog/telegram-mini-app-i-ii)
 - [Aiogram vs Pyrogram]({BASE_URL}/blog/aiogram-vs-pyrogram)
 - [AI Telegram-бот для бизнеса]({BASE_URL}/blog/ai-telegram-bot-dlya-biznesa)
 - [AI-бот для ведения Telegram-канала]({BASE_URL}/blog/ai-bot-dlya-vedeniya-telegram-kanala)
@@ -193,6 +206,11 @@ LLMS_TXT_SHORT = f"""# DimaRazrab — Фриланс-разработчик
 - [Автоматизация заявок]({BASE_URL}/blog/avtomatizaciya-zayavok)
 - [Цифровизация малого бизнеса]({BASE_URL}/blog/cifrovizaciya-malogo-biznesa)
 - [Система автоматизации бизнес-процессов]({BASE_URL}/blog/sistema-avtomatizacii-biznes-processov)
+- [Голосовой робот для обзвона клиентов]({BASE_URL}/blog/golosovoj-robot-dlya-obzvona-klientov)
+- [Дешёвый VPS для Telegram-бота]({BASE_URL}/blog/deshevyj-vps-dlya-telegram-bota)
+- [Программа для учёта производства]({BASE_URL}/blog/programma-dlya-ucheta-proizvodstva)
+- [Как ускорить загрузку сайта]({BASE_URL}/blog/kak-uskorit-zagruzku-sajta)
+- [AI-бот для обработки заявок]({BASE_URL}/blog/ai-bot-dlya-obrabotki-zayavok)
 
 ### AI и нейросети
 - [AI и нейросети (хаб)]({BASE_URL}/blog/ai-integracii)
@@ -205,6 +223,11 @@ LLMS_TXT_SHORT = f"""# DimaRazrab — Фриланс-разработчик
 - [Заказать AI-агента]({BASE_URL}/blog/zakazat-ii-agenta)
 - [Разработка AI-агентов]({BASE_URL}/blog/razrabotka-ii-agentov)
 - [AI-агент для продаж]({BASE_URL}/blog/ii-agent-dlya-prodazh)
+- [AI-агент для HR]({BASE_URL}/blog/ii-agent-dlya-hr)
+- [AI-агент для Avito]({BASE_URL}/blog/ii-agent-dlya-avito)
+- [Платформа для AI-агентов]({BASE_URL}/blog/platforma-dlya-ii-agentov)
+- [AI-агенты для малого бизнеса]({BASE_URL}/blog/ii-agenty-dlya-malogo-biznesa)
+- [n8n AI-агент]({BASE_URL}/blog/n8n-ii-agent)
 
 ### API и интеграции
 - [API и интеграции (хаб)]({BASE_URL}/blog/razrabotka-api)
@@ -293,6 +316,15 @@ LLMS_TXT_SHORT = f"""# DimaRazrab — Фриланс-разработчик
 - [Создание сайта на 1С-Битрикс]({BASE_URL}/blog/sozdanie-sajta-na-1s-bitrix)
 - [Создание сайта на Tilda]({BASE_URL}/blog/sozdanie-sajta-na-tilda-konstruktor)
 
+### WordPress
+- [Заказать сайт на WordPress]({BASE_URL}/blog/zakazat-sajt-na-wordpress)
+- [WordPress для интернет-магазина]({BASE_URL}/blog/wordpress-dlya-internet-magazina)
+- [WordPress для бизнеса]({BASE_URL}/blog/wordpress-dlya-biznesa)
+- [WordPress-разработчик]({BASE_URL}/blog/wordpress-razrabotchik)
+- [WordPress vs Tilda: что лучше]({BASE_URL}/blog/wordpress-vs-tilda-chto-luchshe)
+- [WordPress корпоративный сайт]({BASE_URL}/blog/wordpress-korporativnyj-sajt)
+- [WordPress плагины для сайта]({BASE_URL}/blog/wordpress-plaginy-dlya-sajta)
+
 ### Автоматизация склада
 - [Автоматизация склада]({BASE_URL}/blog/avtomatizaciya-sklada)
 - [Автоматизация склада 1С]({BASE_URL}/blog/avtomatizaciya-sklada-1s)
@@ -346,8 +378,12 @@ SITEMAP_STATIC_URLS = [
     {'loc': f'{BASE_URL}/parsery-marketplejsov', 'changefreq': 'monthly', 'priority': '0.8', 'lastmod': '2026-08-02'},
     {'loc': f'{BASE_URL}/lidogeneraciya-telegram', 'changefreq': 'monthly', 'priority': '0.8', 'lastmod': '2026-08-02'},
     {'loc': f'{BASE_URL}/kalkulyator-stoimosti', 'changefreq': 'monthly', 'priority': '0.7', 'lastmod': '2026-08-05'},
+    {'loc': f'{BASE_URL}/razrabotka-wordpress', 'changefreq': 'monthly', 'priority': '0.9', 'lastmod': '2026-08-18'},
     # Блог — главная и хабы
-    {'loc': f'{BASE_URL}/blog', 'changefreq': 'weekly', 'priority': '0.8'},
+    {'loc': f'{BASE_URL}/blog', 'changefreq': 'weekly', 'priority': '0.8', 'lastmod': '2026-08-18'},
+    {'loc': f'{BASE_URL}/blog/freelanser', 'changefreq': 'weekly', 'priority': '0.8', 'lastmod': '2026-08-18'},
+    {'loc': f'{BASE_URL}/blog/saas', 'changefreq': 'weekly', 'priority': '0.8', 'lastmod': '2026-08-18'},
+    {'loc': f'{BASE_URL}/blog/wordpress', 'changefreq': 'weekly', 'priority': '0.8', 'lastmod': '2026-08-18'},
     {'loc': f'{BASE_URL}/blog/telegram-boty', 'changefreq': 'weekly', 'priority': '0.9'},
     {'loc': f'{BASE_URL}/blog/parsery-marketplejsov', 'changefreq': 'weekly', 'priority': '0.8'},
     {'loc': f'{BASE_URL}/blog/lidogeneraciya-telegram', 'changefreq': 'weekly', 'priority': '0.8'},
@@ -377,11 +413,18 @@ SITEMAP_STATIC_URLS = [
     {'loc': f'{BASE_URL}/blog/zakazat-telegram-mini-app', 'changefreq': 'monthly', 'priority': '0.7', 'lastmod': '2026-08-16'},
     {'loc': f'{BASE_URL}/blog/telegram-mini-app-stoimost', 'changefreq': 'monthly', 'priority': '0.7', 'lastmod': '2026-08-16'},
     {'loc': f'{BASE_URL}/blog/telegram-mini-app-pod-klyuch', 'changefreq': 'monthly', 'priority': '0.7', 'lastmod': '2026-08-16'},
+    {'loc': f'{BASE_URL}/blog/telegram-mini-app-dlya-internet-magazina', 'changefreq': 'monthly', 'priority': '0.7', 'lastmod': '2026-08-18'},
+    {'loc': f'{BASE_URL}/blog/telegram-mini-app-s-oplatoj', 'changefreq': 'monthly', 'priority': '0.7', 'lastmod': '2026-08-18'},
+    {'loc': f'{BASE_URL}/blog/kak-sozdat-telegram-mini-app', 'changefreq': 'monthly', 'priority': '0.7', 'lastmod': '2026-08-18'},
+    {'loc': f'{BASE_URL}/blog/telegram-mini-app-primeri', 'changefreq': 'monthly', 'priority': '0.7', 'lastmod': '2026-08-18'},
+    {'loc': f'{BASE_URL}/blog/mini-app-dlya-restorana-i-dostavki', 'changefreq': 'monthly', 'priority': '0.7', 'lastmod': '2026-08-18'},
+    {'loc': f'{BASE_URL}/blog/mini-app-telegram-dlya-zapisi', 'changefreq': 'monthly', 'priority': '0.7', 'lastmod': '2026-08-18'},
+    {'loc': f'{BASE_URL}/blog/telegram-mini-app-i-ii', 'changefreq': 'monthly', 'priority': '0.7', 'lastmod': '2026-08-18'},
     {'loc': f'{BASE_URL}/blog/aiogram-vs-pyrogram', 'changefreq': 'monthly', 'priority': '0.7', 'lastmod': '2026-08-02'},
     {'loc': f'{BASE_URL}/blog/ai-telegram-bot-dlya-biznesa', 'changefreq': 'monthly', 'priority': '0.7', 'lastmod': '2026-08-04'},
     {'loc': f'{BASE_URL}/blog/ai-bot-dlya-vedeniya-telegram-kanala', 'changefreq': 'monthly', 'priority': '0.7', 'lastmod': '2026-08-04'},
-    {'loc': f'{BASE_URL}/blog/bot-dlya-avtomatizacii-prodazh', 'changefreq': 'monthly', 'priority': '0.7', 'lastmod': '2026-08-04'},
-    {'loc': f'{BASE_URL}/blog/bot-menedzher-po-prodazham', 'changefreq': 'monthly', 'priority': '0.7', 'lastmod': '2026-08-04'},
+    {'loc': f'{BASE_URL}/blog/bot-dlya-avtomatizacii-prodazh', 'changefreq': 'monthly', 'priority': '0.7', 'lastmod': '2026-08-18'},
+    {'loc': f'{BASE_URL}/blog/bot-menedzher-po-prodazham', 'changefreq': 'monthly', 'priority': '0.7', 'lastmod': '2026-08-18'},
     {'loc': f'{BASE_URL}/blog/bot-obratnoj-svyazi-telegram', 'changefreq': 'monthly', 'priority': '0.7', 'lastmod': '2026-08-04'},
     {'loc': f'{BASE_URL}/blog/bot-telegram-dlya-kurerov', 'changefreq': 'monthly', 'priority': '0.7', 'lastmod': '2026-08-04'},
     {'loc': f'{BASE_URL}/blog/kak-bystro-otvechat-klientam', 'changefreq': 'monthly', 'priority': '0.7', 'lastmod': '2026-08-04'},
@@ -389,8 +432,8 @@ SITEMAP_STATIC_URLS = [
     {'loc': f'{BASE_URL}/blog/korporativnyj-telegram-bot', 'changefreq': 'monthly', 'priority': '0.7', 'lastmod': '2026-08-04'},
     {'loc': f'{BASE_URL}/blog/lichnyj-kabinet-v-telegram-bote', 'changefreq': 'monthly', 'priority': '0.7', 'lastmod': '2026-08-04'},
     {'loc': f'{BASE_URL}/blog/lichnyj-telegram-bot', 'changefreq': 'monthly', 'priority': '0.7', 'lastmod': '2026-08-04'},
-    {'loc': f'{BASE_URL}/blog/nastrojka-telegram-bota', 'changefreq': 'monthly', 'priority': '0.7', 'lastmod': '2026-08-04'},
-    {'loc': f'{BASE_URL}/blog/razrabotka-bota-dlya-telegram', 'changefreq': 'monthly', 'priority': '0.7', 'lastmod': '2026-08-04'},
+    {'loc': f'{BASE_URL}/blog/nastrojka-telegram-bota', 'changefreq': 'monthly', 'priority': '0.7', 'lastmod': '2026-08-18'},
+    {'loc': f'{BASE_URL}/blog/razrabotka-bota-dlya-telegram', 'changefreq': 'monthly', 'priority': '0.7', 'lastmod': '2026-08-18'},
     {'loc': f'{BASE_URL}/blog/sozdanie-i-nastrojka-telegram-kanalov-i-botov', 'changefreq': 'monthly', 'priority': '0.7', 'lastmod': '2026-08-04'},
     {'loc': f'{BASE_URL}/blog/telegram-bot-dlya-avito', 'changefreq': 'monthly', 'priority': '0.7', 'lastmod': '2026-08-04'},
     {'loc': f'{BASE_URL}/blog/telegram-bot-dlya-priyoma-zakazov', 'changefreq': 'monthly', 'priority': '0.7', 'lastmod': '2026-08-04'},
@@ -427,23 +470,33 @@ SITEMAP_STATIC_URLS = [
     {'loc': f'{BASE_URL}/blog/ai-agenty-dlya-biznesa', 'changefreq': 'monthly', 'priority': '0.7', 'lastmod': '2026-08-02'},
     {'loc': f'{BASE_URL}/blog/nejroseti-dlya-biznesa', 'changefreq': 'monthly', 'priority': '0.7', 'lastmod': '2026-08-02'},
     {'loc': f'{BASE_URL}/blog/razrabotka-crm-pod-klyuch', 'changefreq': 'monthly', 'priority': '0.7', 'lastmod': '2026-08-02'},
-    {'loc': f'{BASE_URL}/blog/crm-dlya-malogo-biznesa', 'changefreq': 'monthly', 'priority': '0.7', 'lastmod': '2026-08-02'},
+    {'loc': f'{BASE_URL}/blog/crm-dlya-malogo-biznesa', 'changefreq': 'monthly', 'priority': '0.7', 'lastmod': '2026-08-18'},
     {'loc': f'{BASE_URL}/blog/analiz-avtomatizacii-biznes-processov', 'changefreq': 'monthly', 'priority': '0.7', 'lastmod': '2026-08-04'},
     {'loc': f'{BASE_URL}/blog/avtomatizaciya-klientov', 'changefreq': 'monthly', 'priority': '0.7', 'lastmod': '2026-08-04'},
     {'loc': f'{BASE_URL}/blog/avtomatizaciya-voronki-prodazh', 'changefreq': 'monthly', 'priority': '0.7', 'lastmod': '2026-08-04'},
     {'loc': f'{BASE_URL}/blog/avtomatizaciya-zayavok', 'changefreq': 'monthly', 'priority': '0.7', 'lastmod': '2026-08-04'},
     {'loc': f'{BASE_URL}/blog/cifrovizaciya-malogo-biznesa', 'changefreq': 'monthly', 'priority': '0.7', 'lastmod': '2026-08-04'},
     {'loc': f'{BASE_URL}/blog/sistema-avtomatizacii-biznes-processov', 'changefreq': 'monthly', 'priority': '0.7', 'lastmod': '2026-08-04'},
+    {'loc': f'{BASE_URL}/blog/golosovoj-robot-dlya-obzvona-klientov', 'changefreq': 'monthly', 'priority': '0.7', 'lastmod': '2026-08-18'},
+    {'loc': f'{BASE_URL}/blog/deshevyj-vps-dlya-telegram-bota', 'changefreq': 'monthly', 'priority': '0.7', 'lastmod': '2026-08-18'},
+    {'loc': f'{BASE_URL}/blog/programma-dlya-ucheta-proizvodstva', 'changefreq': 'monthly', 'priority': '0.7', 'lastmod': '2026-08-18'},
+    {'loc': f'{BASE_URL}/blog/kak-uskorit-zagruzku-sajta', 'changefreq': 'monthly', 'priority': '0.7', 'lastmod': '2026-08-18'},
+    {'loc': f'{BASE_URL}/blog/ai-bot-dlya-obrabotki-zayavok', 'changefreq': 'monthly', 'priority': '0.7', 'lastmod': '2026-08-18'},
     # Блог — статьи: AI и нейросети
-    {'loc': f'{BASE_URL}/blog/chatgpt-dlya-biznesa', 'changefreq': 'monthly', 'priority': '0.7', 'lastmod': '2026-08-03'},
-    {'loc': f'{BASE_URL}/blog/integraciya-openai-api', 'changefreq': 'monthly', 'priority': '0.7', 'lastmod': '2026-08-03'},
-    {'loc': f'{BASE_URL}/blog/ai-bot-telegram-chatgpt', 'changefreq': 'monthly', 'priority': '0.7', 'lastmod': '2026-08-03'},
+    {'loc': f'{BASE_URL}/blog/chatgpt-dlya-biznesa', 'changefreq': 'monthly', 'priority': '0.7', 'lastmod': '2026-08-18'},
+    {'loc': f'{BASE_URL}/blog/integraciya-openai-api', 'changefreq': 'monthly', 'priority': '0.7', 'lastmod': '2026-08-18'},
+    {'loc': f'{BASE_URL}/blog/ai-bot-telegram-chatgpt', 'changefreq': 'monthly', 'priority': '0.7', 'lastmod': '2026-08-18'},
     {'loc': f'{BASE_URL}/blog/nejroseti-dlya-avtomatizacii', 'changefreq': 'monthly', 'priority': '0.7', 'lastmod': '2026-08-03'},
     {'loc': f'{BASE_URL}/blog/ai-dlya-obrabotki-dokumentov', 'changefreq': 'monthly', 'priority': '0.7', 'lastmod': '2026-08-03'},
     {'loc': f'{BASE_URL}/blog/ii-agenty-dlya-biznesa-na-zakaz', 'changefreq': 'monthly', 'priority': '0.7', 'lastmod': '2026-08-16'},
     {'loc': f'{BASE_URL}/blog/zakazat-ii-agenta', 'changefreq': 'monthly', 'priority': '0.7', 'lastmod': '2026-08-16'},
-    {'loc': f'{BASE_URL}/blog/razrabotka-ii-agentov', 'changefreq': 'monthly', 'priority': '0.7', 'lastmod': '2026-08-16'},
-    {'loc': f'{BASE_URL}/blog/ii-agent-dlya-prodazh', 'changefreq': 'monthly', 'priority': '0.7', 'lastmod': '2026-08-16'},
+    {'loc': f'{BASE_URL}/blog/razrabotka-ii-agentov', 'changefreq': 'monthly', 'priority': '0.7', 'lastmod': '2026-08-18'},
+    {'loc': f'{BASE_URL}/blog/ii-agent-dlya-prodazh', 'changefreq': 'monthly', 'priority': '0.7', 'lastmod': '2026-08-18'},
+    {'loc': f'{BASE_URL}/blog/ii-agent-dlya-hr', 'changefreq': 'monthly', 'priority': '0.7', 'lastmod': '2026-08-18'},
+    {'loc': f'{BASE_URL}/blog/ii-agent-dlya-avito', 'changefreq': 'monthly', 'priority': '0.7', 'lastmod': '2026-08-18'},
+    {'loc': f'{BASE_URL}/blog/platforma-dlya-ii-agentov', 'changefreq': 'monthly', 'priority': '0.7', 'lastmod': '2026-08-18'},
+    {'loc': f'{BASE_URL}/blog/ii-agenty-dlya-malogo-biznesa', 'changefreq': 'monthly', 'priority': '0.7', 'lastmod': '2026-08-18'},
+    {'loc': f'{BASE_URL}/blog/n8n-ii-agent', 'changefreq': 'monthly', 'priority': '0.7', 'lastmod': '2026-08-18'},
     # Блог — статьи: API и интеграции
     {'loc': f'{BASE_URL}/blog/razrabotka-rest-api', 'changefreq': 'monthly', 'priority': '0.7', 'lastmod': '2026-08-03'},
     {'loc': f'{BASE_URL}/blog/integraciya-api-s-sajtom', 'changefreq': 'monthly', 'priority': '0.7', 'lastmod': '2026-08-03'},
@@ -454,7 +507,7 @@ SITEMAP_STATIC_URLS = [
     # Блог — статьи: Python
     {'loc': f'{BASE_URL}/blog/python-razrabotka-pod-klyuch', 'changefreq': 'monthly', 'priority': '0.7', 'lastmod': '2026-08-03'},
     {'loc': f'{BASE_URL}/blog/fastapi-razrabotka', 'changefreq': 'monthly', 'priority': '0.7', 'lastmod': '2026-08-03'},
-    {'loc': f'{BASE_URL}/blog/python-avtomatizaciya-biznesa', 'changefreq': 'monthly', 'priority': '0.7', 'lastmod': '2026-08-03'},
+    {'loc': f'{BASE_URL}/blog/python-avtomatizaciya-biznesa', 'changefreq': 'monthly', 'priority': '0.7', 'lastmod': '2026-08-18'},
     {'loc': f'{BASE_URL}/blog/python-parsing-na-zakaz', 'changefreq': 'monthly', 'priority': '0.7', 'lastmod': '2026-08-03'},
     {'loc': f'{BASE_URL}/blog/django-vs-fastapi-vs-flask', 'changefreq': 'monthly', 'priority': '0.7', 'lastmod': '2026-08-03'},
     {'loc': f'{BASE_URL}/blog/python-backend-razrabotka', 'changefreq': 'monthly', 'priority': '0.7', 'lastmod': '2026-08-03'},
@@ -462,12 +515,12 @@ SITEMAP_STATIC_URLS = [
     {'loc': f'{BASE_URL}/blog/python-telegram-bot-razrabotka', 'changefreq': 'monthly', 'priority': '0.7', 'lastmod': '2026-08-03'},
     # Блог — статьи: Next.js
     {'loc': f'{BASE_URL}/blog/razrabotka-na-nextjs', 'changefreq': 'monthly', 'priority': '0.7', 'lastmod': '2026-08-03'},
-    {'loc': f'{BASE_URL}/blog/nextjs-seo-optimizaciya', 'changefreq': 'monthly', 'priority': '0.7', 'lastmod': '2026-08-03'},
+    {'loc': f'{BASE_URL}/blog/nextjs-seo-optimizaciya', 'changefreq': 'monthly', 'priority': '0.7', 'lastmod': '2026-08-18'},
     {'loc': f'{BASE_URL}/blog/saas-razrabotka-nextjs', 'changefreq': 'monthly', 'priority': '0.7', 'lastmod': '2026-08-03'},
     {'loc': f'{BASE_URL}/blog/nextjs-vs-react', 'changefreq': 'monthly', 'priority': '0.7', 'lastmod': '2026-08-03'},
-    {'loc': f'{BASE_URL}/blog/sozdanie-sajta-nextjs', 'changefreq': 'monthly', 'priority': '0.7', 'lastmod': '2026-08-03'},
+    {'loc': f'{BASE_URL}/blog/sozdanie-sajta-nextjs', 'changefreq': 'monthly', 'priority': '0.7', 'lastmod': '2026-08-18'},
     # Блог — статьи: Парсинг данных
-    {'loc': f'{BASE_URL}/blog/parser-dannyh', 'changefreq': 'monthly', 'priority': '0.7', 'lastmod': '2026-08-05'},
+    {'loc': f'{BASE_URL}/blog/parser-dannyh', 'changefreq': 'monthly', 'priority': '0.7', 'lastmod': '2026-08-18'},
     {'loc': f'{BASE_URL}/blog/parser-otzyvov', 'changefreq': 'monthly', 'priority': '0.7', 'lastmod': '2026-08-05'},
     {'loc': f'{BASE_URL}/blog/monitoring-reklamy-konkurentov', 'changefreq': 'monthly', 'priority': '0.7', 'lastmod': '2026-08-15'},
     # Блог — статьи: API-интеграции (новые)
@@ -491,11 +544,11 @@ SITEMAP_STATIC_URLS = [
     {'loc': f'{BASE_URL}/blog/sozdanie-lendinga-s-pomoshchyu-ii', 'changefreq': 'monthly', 'priority': '0.7', 'lastmod': '2026-08-09'},
     {'loc': f'{BASE_URL}/blog/razrabotka-korporativnogo-sajta', 'changefreq': 'monthly', 'priority': '0.7', 'lastmod': '2026-08-15'},
     {'loc': f'{BASE_URL}/blog/stoimost-sozdaniya-lendinga', 'changefreq': 'monthly', 'priority': '0.7', 'lastmod': '2026-08-15'},
-    {'loc': f'{BASE_URL}/blog/redizajn-sajta', 'changefreq': 'monthly', 'priority': '0.7', 'lastmod': '2026-08-16'},
-    {'loc': f'{BASE_URL}/blog/stoimost-razrabotki-sajta', 'changefreq': 'monthly', 'priority': '0.7', 'lastmod': '2026-08-16'},
+    {'loc': f'{BASE_URL}/blog/redizajn-sajta', 'changefreq': 'monthly', 'priority': '0.7', 'lastmod': '2026-08-18'},
+    {'loc': f'{BASE_URL}/blog/stoimost-razrabotki-sajta', 'changefreq': 'monthly', 'priority': '0.7', 'lastmod': '2026-08-18'},
     {'loc': f'{BASE_URL}/blog/zakazat-sajt-nedorogo', 'changefreq': 'monthly', 'priority': '0.7', 'lastmod': '2026-08-16'},
     {'loc': f'{BASE_URL}/blog/razrabotka-sajta-na-wordpress', 'changefreq': 'monthly', 'priority': '0.7', 'lastmod': '2026-08-16'},
-    {'loc': f'{BASE_URL}/blog/razrabotka-prodayushhego-sajta', 'changefreq': 'monthly', 'priority': '0.7', 'lastmod': '2026-08-16'},
+    {'loc': f'{BASE_URL}/blog/razrabotka-prodayushhego-sajta', 'changefreq': 'monthly', 'priority': '0.7', 'lastmod': '2026-08-18'},
     {'loc': f'{BASE_URL}/blog/razrabotka-medicinskih-sajtov', 'changefreq': 'monthly', 'priority': '0.7', 'lastmod': '2026-08-16'},
     {'loc': f'{BASE_URL}/blog/zakazat-sajt-nizhnij-novgorod', 'changefreq': 'monthly', 'priority': '0.7', 'lastmod': '2026-08-16'},
     {'loc': f'{BASE_URL}/blog/razrabotka-sajta-na-python', 'changefreq': 'monthly', 'priority': '0.7', 'lastmod': '2026-08-16'},
@@ -517,14 +570,22 @@ SITEMAP_STATIC_URLS = [
     {'loc': f'{BASE_URL}/blog/sozdanie-sajta-na-wordpress', 'changefreq': 'monthly', 'priority': '0.7', 'lastmod': '2026-08-05'},
     {'loc': f'{BASE_URL}/blog/sozdanie-sajta-na-1s-bitrix', 'changefreq': 'monthly', 'priority': '0.7', 'lastmod': '2026-08-05'},
     {'loc': f'{BASE_URL}/blog/sozdanie-sajta-na-tilda-konstruktor', 'changefreq': 'monthly', 'priority': '0.7', 'lastmod': '2026-08-05'},
+    # Блог — статьи: WordPress
+    {'loc': f'{BASE_URL}/blog/zakazat-sajt-na-wordpress', 'changefreq': 'monthly', 'priority': '0.7', 'lastmod': '2026-08-18'},
+    {'loc': f'{BASE_URL}/blog/wordpress-dlya-internet-magazina', 'changefreq': 'monthly', 'priority': '0.7', 'lastmod': '2026-08-18'},
+    {'loc': f'{BASE_URL}/blog/wordpress-dlya-biznesa', 'changefreq': 'monthly', 'priority': '0.7', 'lastmod': '2026-08-18'},
+    {'loc': f'{BASE_URL}/blog/wordpress-razrabotchik', 'changefreq': 'monthly', 'priority': '0.7', 'lastmod': '2026-08-18'},
+    {'loc': f'{BASE_URL}/blog/wordpress-vs-tilda-chto-luchshe', 'changefreq': 'monthly', 'priority': '0.7', 'lastmod': '2026-08-18'},
+    {'loc': f'{BASE_URL}/blog/wordpress-korporativnyj-sajt', 'changefreq': 'monthly', 'priority': '0.7', 'lastmod': '2026-08-18'},
+    {'loc': f'{BASE_URL}/blog/wordpress-plaginy-dlya-sajta', 'changefreq': 'monthly', 'priority': '0.7', 'lastmod': '2026-08-18'},
     # Блог — статьи: Автоматизация склада
-    {'loc': f'{BASE_URL}/blog/avtomatizaciya-sklada', 'changefreq': 'monthly', 'priority': '0.7', 'lastmod': '2026-08-05'},
-    {'loc': f'{BASE_URL}/blog/avtomatizaciya-sklada-1s', 'changefreq': 'monthly', 'priority': '0.7', 'lastmod': '2026-08-05'},
-    {'loc': f'{BASE_URL}/blog/wms-sistemy-avtomatizacii', 'changefreq': 'monthly', 'priority': '0.7', 'lastmod': '2026-08-05'},
+    {'loc': f'{BASE_URL}/blog/avtomatizaciya-sklada', 'changefreq': 'monthly', 'priority': '0.7', 'lastmod': '2026-08-18'},
+    {'loc': f'{BASE_URL}/blog/avtomatizaciya-sklada-1s', 'changefreq': 'monthly', 'priority': '0.7', 'lastmod': '2026-08-18'},
+    {'loc': f'{BASE_URL}/blog/wms-sistemy-avtomatizacii', 'changefreq': 'monthly', 'priority': '0.7', 'lastmod': '2026-08-18'},
     {'loc': f'{BASE_URL}/blog/avtomatizaciya-sklada-marketplejsy', 'changefreq': 'monthly', 'priority': '0.7', 'lastmod': '2026-08-05'},
     {'loc': f'{BASE_URL}/blog/avtomatizaciya-sklada-robotizaciya', 'changefreq': 'monthly', 'priority': '0.7', 'lastmod': '2026-08-15'},
     # Блог — статьи: Telegram-боты (доп.)
-    {'loc': f'{BASE_URL}/blog/stoimost-telegram-bota', 'changefreq': 'monthly', 'priority': '0.7', 'lastmod': '2026-08-05'},
+    {'loc': f'{BASE_URL}/blog/stoimost-telegram-bota', 'changefreq': 'monthly', 'priority': '0.7', 'lastmod': '2026-08-18'},
     {'loc': f'{BASE_URL}/blog/telegram-bot-dlya-zapisi-klientov', 'changefreq': 'monthly', 'priority': '0.7', 'lastmod': '2026-08-05'},
     {'loc': f'{BASE_URL}/blog/telegram-bot-ili-mobilnoe-prilozhenie', 'changefreq': 'monthly', 'priority': '0.7', 'lastmod': '2026-08-05'},
     # Блог — статьи: Фриланс-разработчик
@@ -696,6 +757,13 @@ BLOG_CLUSTERS = [
         ("Заказать Telegram Mini App", "/blog/zakazat-telegram-mini-app"),
         ("Стоимость Telegram Mini App", "/blog/telegram-mini-app-stoimost"),
         ("Telegram Mini App под ключ", "/blog/telegram-mini-app-pod-klyuch"),
+        ("Telegram Mini App для интернет-магазина", "/blog/telegram-mini-app-dlya-internet-magazina"),
+        ("Telegram Mini App с оплатой", "/blog/telegram-mini-app-s-oplatoj"),
+        ("Как создать Telegram Mini App", "/blog/kak-sozdat-telegram-mini-app"),
+        ("Telegram Mini App: примеры", "/blog/telegram-mini-app-primeri"),
+        ("Mini App для ресторана и доставки", "/blog/mini-app-dlya-restorana-i-dostavki"),
+        ("Mini App Telegram для записи", "/blog/mini-app-telegram-dlya-zapisi"),
+        ("Telegram Mini App и ИИ", "/blog/telegram-mini-app-i-ii"),
         ("Aiogram vs Pyrogram", "/blog/aiogram-vs-pyrogram"),
         ("AI Telegram-бот для бизнеса", "/blog/ai-telegram-bot-dlya-biznesa"),
         ("AI-бот для ведения Telegram-канала", "/blog/ai-bot-dlya-vedeniya-telegram-kanala"),
@@ -812,6 +880,11 @@ BLOG_CLUSTERS = [
         ("Автоматизация заявок", "/blog/avtomatizaciya-zayavok"),
         ("Цифровизация малого бизнеса", "/blog/cifrovizaciya-malogo-biznesa"),
         ("Система автоматизации бизнес-процессов", "/blog/sistema-avtomatizacii-biznes-processov"),
+        ("Голосовой робот для обзвона клиентов", "/blog/golosovoj-robot-dlya-obzvona-klientov"),
+        ("Дешёвый VPS для Telegram-бота", "/blog/deshevyj-vps-dlya-telegram-bota"),
+        ("Программа для учёта производства", "/blog/programma-dlya-ucheta-proizvodstva"),
+        ("Как ускорить загрузку сайта", "/blog/kak-uskorit-zagruzku-sajta"),
+        ("AI-бот для обработки заявок", "/blog/ai-bot-dlya-obrabotki-zayavok"),
     ]),
     ("AI и нейросети", [
         ("ChatGPT для бизнеса", "/blog/chatgpt-dlya-biznesa"),
@@ -823,6 +896,11 @@ BLOG_CLUSTERS = [
         ("Заказать AI-агента", "/blog/zakazat-ii-agenta"),
         ("Разработка AI-агентов", "/blog/razrabotka-ii-agentov"),
         ("AI-агент для продаж", "/blog/ii-agent-dlya-prodazh"),
+        ("AI-агент для HR", "/blog/ii-agent-dlya-hr"),
+        ("AI-агент для Avito", "/blog/ii-agent-dlya-avito"),
+        ("Платформа для AI-агентов", "/blog/platforma-dlya-ii-agentov"),
+        ("AI-агенты для малого бизнеса", "/blog/ii-agenty-dlya-malogo-biznesa"),
+        ("n8n AI-агент", "/blog/n8n-ii-agent"),
     ]),
     ("API и интеграции", [
         ("Разработка REST API", "/blog/razrabotka-rest-api"),
@@ -907,6 +985,15 @@ BLOG_CLUSTERS = [
         ("Создание сайта на WordPress", "/blog/sozdanie-sajta-na-wordpress"),
         ("Создание сайта на 1С-Битрикс", "/blog/sozdanie-sajta-na-1s-bitrix"),
         ("Создание сайта на Tilda", "/blog/sozdanie-sajta-na-tilda-konstruktor"),
+    ]),
+    ("WordPress", [
+        ("Заказать сайт на WordPress", "/blog/zakazat-sajt-na-wordpress"),
+        ("WordPress для интернет-магазина", "/blog/wordpress-dlya-internet-magazina"),
+        ("WordPress для бизнеса", "/blog/wordpress-dlya-biznesa"),
+        ("WordPress-разработчик", "/blog/wordpress-razrabotchik"),
+        ("WordPress vs Tilda: что лучше", "/blog/wordpress-vs-tilda-chto-luchshe"),
+        ("WordPress корпоративный сайт", "/blog/wordpress-korporativnyj-sajt"),
+        ("WordPress плагины для сайта", "/blog/wordpress-plaginy-dlya-sajta"),
     ]),
     ("Автоматизация склада", [
         ("Автоматизация склада", "/blog/avtomatizaciya-sklada"),
