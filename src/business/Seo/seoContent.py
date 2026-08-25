@@ -108,6 +108,8 @@ LLMS_TXT_SHORT = f"""# DimaRazrab — Фриланс-разработчик
 - [Telegram-бот за 5 000 ₽]({BASE_URL}/blog/telegram-bot-za-5000)
 - [Telegram-бот за 100 000 ₽]({BASE_URL}/blog/telegram-bot-za-100000)
 - [Сколько стоит бот для салона красоты]({BASE_URL}/blog/skolko-stoit-bot-dlya-salona-krasoty)
+- [Telegram-бот с CRM]({BASE_URL}/blog/telegram-bot-s-crm)
+- [Telegram-бот с базой данных]({BASE_URL}/blog/telegram-bot-s-bazoj-dannyh)
 
 ### Telegram-боты для бизнеса (по нишам)
 - [Telegram-боты для отраслей (хаб)]({BASE_URL}/blog/telegram-boty-dlya-otraslej)
@@ -175,6 +177,11 @@ LLMS_TXT_SHORT = f"""# DimaRazrab — Фриланс-разработчик
 - [Репрайсер Wildberries]({BASE_URL}/blog/repricer-wildberries)
 - [API Wildberries — руководство]({BASE_URL}/blog/api-wildberries-rukovodstvo)
 - [Аналитика маркетплейсов]({BASE_URL}/blog/analitika-marketplejsov)
+- [Мониторинг остатков товаров]({BASE_URL}/blog/monitoring-ostatkov-tovarov)
+- [Мониторинг наличия товара]({BASE_URL}/blog/monitoring-nalichiya-tovara)
+- [Сбор карточек товаров]({BASE_URL}/blog/sbor-kartochek-tovarov)
+- [Сбор данных с маркетплейсов]({BASE_URL}/blog/sbor-dannyh-s-marketplejsov)
+- [Мониторинг цен Wildberries и Ozon]({BASE_URL}/blog/monitoring-cen-wildberries-ozon)
 
 ### Лидогенерация
 - [Лидогенерация (хаб)]({BASE_URL}/blog/lidogeneraciya-telegram)
@@ -211,6 +218,20 @@ LLMS_TXT_SHORT = f"""# DimaRazrab — Фриланс-разработчик
 - [Программа для учёта производства]({BASE_URL}/blog/programma-dlya-ucheta-proizvodstva)
 - [Как ускорить загрузку сайта]({BASE_URL}/blog/kak-uskorit-zagruzku-sajta)
 - [AI-бот для обработки заявок]({BASE_URL}/blog/ai-bot-dlya-obrabotki-zayavok)
+- [Автоматизация продаж]({BASE_URL}/blog/avtomatizaciya-prodazh)
+- [Автоматизация Google Sheets]({BASE_URL}/blog/avtomatizaciya-google-sheets)
+- [Автоматизация amoCRM]({BASE_URL}/blog/avtomatizaciya-amocrm)
+- [Как автоматизировать приём заказов]({BASE_URL}/blog/kak-avtomatizirovat-priem-zakazov)
+- [Автоматизация Bitrix24]({BASE_URL}/blog/avtomatizaciya-bitrix24)
+- [Автоматизация продаж с помощью ИИ]({BASE_URL}/blog/avtomatizaciya-prodazh-s-pomoshchyu-ii)
+- [Автоматизация сбора данных]({BASE_URL}/blog/avtomatizaciya-sbora-dannyh)
+- [Автоматизация CRM системы]({BASE_URL}/blog/avtomatizaciya-crm-sistemy)
+- [Автоматизация маркетплейсов]({BASE_URL}/blog/avtomatizaciya-marketplejsov)
+- [Автоматизация Telegram]({BASE_URL}/blog/avtomatizaciya-telegram)
+- [Автоматизация отчётности]({BASE_URL}/blog/avtomatizaciya-otchjotnosti)
+- [Автоматизация Excel]({BASE_URL}/blog/avtomatizaciya-excel)
+- [Автоматизация Google Sheets API]({BASE_URL}/blog/avtomatizaciya-google-sheets-api)
+- [Как автоматизировать продажи в Telegram]({BASE_URL}/blog/kak-avtomatizirovat-prodazhi-v-telegram)
 
 ### AI и нейросети
 - [AI и нейросети (хаб)]({BASE_URL}/blog/ai-integracii)
@@ -228,6 +249,18 @@ LLMS_TXT_SHORT = f"""# DimaRazrab — Фриланс-разработчик
 - [Платформа для AI-агентов]({BASE_URL}/blog/platforma-dlya-ii-agentov)
 - [AI-агенты для малого бизнеса]({BASE_URL}/blog/ii-agenty-dlya-malogo-biznesa)
 - [n8n AI-агент]({BASE_URL}/blog/n8n-ii-agent)
+- [ИИ-менеджер по продажам]({BASE_URL}/blog/ii-menedzher-po-prodazham)
+- [ИИ-бот для продаж]({BASE_URL}/blog/ii-bot-dlya-prodazh)
+- [AI-агент для продаж]({BASE_URL}/blog/ai-agent-dlya-prodazh)
+- [ИИ-менеджер для бизнеса]({BASE_URL}/blog/ii-menedzher-dlya-biznesa)
+- [Голосовой ИИ-менеджер]({BASE_URL}/blog/golosovoj-ii-menedzher)
+- [ИИ-оператор]({BASE_URL}/blog/ii-operator)
+- [ИИ-консультант на сайт]({BASE_URL}/blog/ii-konsultant-na-sajt)
+- [ИИ-бот для поддержки клиентов]({BASE_URL}/blog/ii-bot-dlya-podderzhki-klientov)
+- [AI чат-бот для сайта]({BASE_URL}/blog/ai-chat-bot-dlya-sajta)
+- [ИИ обработка заявок]({BASE_URL}/blog/ii-obrabotka-zayavok)
+- [ИИ анализ звонков]({BASE_URL}/blog/ii-analiz-zvonkov)
+- [ИИ обработка сообщений клиентов]({BASE_URL}/blog/ii-obrabotka-soobschenij-klientov)
 
 ### API и интеграции
 - [API и интеграции (хаб)]({BASE_URL}/blog/razrabotka-api)
@@ -237,6 +270,12 @@ LLMS_TXT_SHORT = f"""# DimaRazrab — Фриланс-разработчик
 - [API-интеграция с 1С]({BASE_URL}/blog/api-integraciya-1s)
 - [FastAPI для разработки API]({BASE_URL}/blog/fastapi-dlya-api)
 - [Интеграция API с Яндекс]({BASE_URL}/blog/integraciya-api-s-yandex)
+- [Интеграция Telegram с Bitrix24]({BASE_URL}/blog/integraciya-telegram-s-bitrix24)
+- [Интеграция ChatGPT с сайтом]({BASE_URL}/blog/integraciya-chatgpt-s-sajtom)
+- [Интеграция Telegram с amoCRM]({BASE_URL}/blog/integraciya-telegram-s-amocrm)
+- [Интеграция сайта с CRM]({BASE_URL}/blog/integraciya-sajta-s-crm)
+- [Интеграция CRM с API]({BASE_URL}/blog/integraciya-crm-s-api)
+- [Интеграция CRM с Google Sheets]({BASE_URL}/blog/integraciya-crm-s-google-sheets)
 
 ### Python-разработка
 - [Python-разработка (хаб)]({BASE_URL}/blog/python-razrabotka)
@@ -261,6 +300,13 @@ LLMS_TXT_SHORT = f"""# DimaRazrab — Фриланс-разработчик
 - [Парсинг данных]({BASE_URL}/blog/parser-dannyh)
 - [Парсинг отзывов]({BASE_URL}/blog/parser-otzyvov)
 - [Мониторинг рекламы конкурентов]({BASE_URL}/blog/monitoring-reklamy-konkurentov)
+- [Мониторинг цен конкурентов]({BASE_URL}/blog/monitoring-cen-konkurentov)
+- [Выгрузка товаров с сайта в Excel]({BASE_URL}/blog/vygruzka-tovarov-s-sajta-v-excel)
+- [Перенос товаров с сайта]({BASE_URL}/blog/perenos-tovarov-s-sajta)
+- [Отслеживание изменений на сайте]({BASE_URL}/blog/otslezhivanie-izmenenij-na-sajte)
+- [Уведомление об изменении цены]({BASE_URL}/blog/uvedomlenie-ob-izmenenii-ceny)
+- [Автоматический сбор товаров с сайта]({BASE_URL}/blog/avtomaticheskij-sbor-tovarov-s-sajta)
+- [Сбор цен конкурентов]({BASE_URL}/blog/sbor-cen-konkurentov)
 
 ### API-интеграции
 - [Интеграция API маркетплейсов]({BASE_URL}/blog/integraciya-api-marketplejsov)
@@ -681,6 +727,58 @@ SITEMAP_STATIC_URLS = [
     {'loc': f'{BASE_URL}/blog/bot-dlya-vetkliniki', 'changefreq': 'monthly', 'priority': '0.7', 'lastmod': '2026-08-21'},
     {'loc': f'{BASE_URL}/blog/bot-dlya-videografa', 'changefreq': 'monthly', 'priority': '0.7', 'lastmod': '2026-08-21'},
     {'loc': f'{BASE_URL}/blog/bot-dlya-yurista', 'changefreq': 'monthly', 'priority': '0.7', 'lastmod': '2026-08-21'},
+    # Блог — статьи: Автоматизация продаж и CRM (новые)
+    {'loc': f'{BASE_URL}/blog/avtomatizaciya-prodazh', 'changefreq': 'monthly', 'priority': '0.7', 'lastmod': '2026-08-25'},
+    {'loc': f'{BASE_URL}/blog/avtomatizaciya-google-sheets', 'changefreq': 'monthly', 'priority': '0.7', 'lastmod': '2026-08-25'},
+    {'loc': f'{BASE_URL}/blog/avtomatizaciya-amocrm', 'changefreq': 'monthly', 'priority': '0.7', 'lastmod': '2026-08-25'},
+    {'loc': f'{BASE_URL}/blog/kak-avtomatizirovat-priem-zakazov', 'changefreq': 'monthly', 'priority': '0.7', 'lastmod': '2026-08-25'},
+    {'loc': f'{BASE_URL}/blog/avtomatizaciya-bitrix24', 'changefreq': 'monthly', 'priority': '0.7', 'lastmod': '2026-08-25'},
+    {'loc': f'{BASE_URL}/blog/avtomatizaciya-prodazh-s-pomoshchyu-ii', 'changefreq': 'monthly', 'priority': '0.7', 'lastmod': '2026-08-25'},
+    {'loc': f'{BASE_URL}/blog/avtomatizaciya-sbora-dannyh', 'changefreq': 'monthly', 'priority': '0.7', 'lastmod': '2026-08-25'},
+    {'loc': f'{BASE_URL}/blog/avtomatizaciya-crm-sistemy', 'changefreq': 'monthly', 'priority': '0.7', 'lastmod': '2026-08-25'},
+    {'loc': f'{BASE_URL}/blog/avtomatizaciya-marketplejsov', 'changefreq': 'monthly', 'priority': '0.7', 'lastmod': '2026-08-25'},
+    {'loc': f'{BASE_URL}/blog/avtomatizaciya-telegram', 'changefreq': 'monthly', 'priority': '0.7', 'lastmod': '2026-08-25'},
+    {'loc': f'{BASE_URL}/blog/avtomatizaciya-otchjotnosti', 'changefreq': 'monthly', 'priority': '0.7', 'lastmod': '2026-08-25'},
+    {'loc': f'{BASE_URL}/blog/avtomatizaciya-excel', 'changefreq': 'monthly', 'priority': '0.7', 'lastmod': '2026-08-25'},
+    {'loc': f'{BASE_URL}/blog/avtomatizaciya-google-sheets-api', 'changefreq': 'monthly', 'priority': '0.7', 'lastmod': '2026-08-25'},
+    {'loc': f'{BASE_URL}/blog/kak-avtomatizirovat-prodazhi-v-telegram', 'changefreq': 'monthly', 'priority': '0.7', 'lastmod': '2026-08-25'},
+    # Блог — статьи: AI-менеджеры и ИИ-боты (новые)
+    {'loc': f'{BASE_URL}/blog/ii-menedzher-po-prodazham', 'changefreq': 'monthly', 'priority': '0.7', 'lastmod': '2026-08-25'},
+    {'loc': f'{BASE_URL}/blog/ii-bot-dlya-prodazh', 'changefreq': 'monthly', 'priority': '0.7', 'lastmod': '2026-08-25'},
+    {'loc': f'{BASE_URL}/blog/ai-agent-dlya-prodazh', 'changefreq': 'monthly', 'priority': '0.7', 'lastmod': '2026-08-25'},
+    {'loc': f'{BASE_URL}/blog/ii-menedzher-dlya-biznesa', 'changefreq': 'monthly', 'priority': '0.7', 'lastmod': '2026-08-25'},
+    {'loc': f'{BASE_URL}/blog/golosovoj-ii-menedzher', 'changefreq': 'monthly', 'priority': '0.7', 'lastmod': '2026-08-25'},
+    {'loc': f'{BASE_URL}/blog/ii-operator', 'changefreq': 'monthly', 'priority': '0.7', 'lastmod': '2026-08-25'},
+    {'loc': f'{BASE_URL}/blog/ii-konsultant-na-sajt', 'changefreq': 'monthly', 'priority': '0.7', 'lastmod': '2026-08-25'},
+    {'loc': f'{BASE_URL}/blog/ii-bot-dlya-podderzhki-klientov', 'changefreq': 'monthly', 'priority': '0.7', 'lastmod': '2026-08-25'},
+    {'loc': f'{BASE_URL}/blog/ai-chat-bot-dlya-sajta', 'changefreq': 'monthly', 'priority': '0.7', 'lastmod': '2026-08-25'},
+    {'loc': f'{BASE_URL}/blog/ii-obrabotka-zayavok', 'changefreq': 'monthly', 'priority': '0.7', 'lastmod': '2026-08-25'},
+    {'loc': f'{BASE_URL}/blog/ii-analiz-zvonkov', 'changefreq': 'monthly', 'priority': '0.7', 'lastmod': '2026-08-25'},
+    {'loc': f'{BASE_URL}/blog/ii-obrabotka-soobschenij-klientov', 'changefreq': 'monthly', 'priority': '0.7', 'lastmod': '2026-08-25'},
+    # Блог — статьи: Интеграции (новые)
+    {'loc': f'{BASE_URL}/blog/integraciya-telegram-s-bitrix24', 'changefreq': 'monthly', 'priority': '0.7', 'lastmod': '2026-08-25'},
+    {'loc': f'{BASE_URL}/blog/integraciya-chatgpt-s-sajtom', 'changefreq': 'monthly', 'priority': '0.7', 'lastmod': '2026-08-25'},
+    {'loc': f'{BASE_URL}/blog/integraciya-telegram-s-amocrm', 'changefreq': 'monthly', 'priority': '0.7', 'lastmod': '2026-08-25'},
+    {'loc': f'{BASE_URL}/blog/integraciya-sajta-s-crm', 'changefreq': 'monthly', 'priority': '0.7', 'lastmod': '2026-08-25'},
+    {'loc': f'{BASE_URL}/blog/integraciya-crm-s-api', 'changefreq': 'monthly', 'priority': '0.7', 'lastmod': '2026-08-25'},
+    {'loc': f'{BASE_URL}/blog/integraciya-crm-s-google-sheets', 'changefreq': 'monthly', 'priority': '0.7', 'lastmod': '2026-08-25'},
+    # Блог — статьи: Telegram-боты (новые)
+    {'loc': f'{BASE_URL}/blog/telegram-bot-s-crm', 'changefreq': 'monthly', 'priority': '0.7', 'lastmod': '2026-08-25'},
+    {'loc': f'{BASE_URL}/blog/telegram-bot-s-bazoj-dannyh', 'changefreq': 'monthly', 'priority': '0.7', 'lastmod': '2026-08-25'},
+    # Блог — статьи: Парсинг маркетплейсов (новые)
+    {'loc': f'{BASE_URL}/blog/monitoring-ostatkov-tovarov', 'changefreq': 'monthly', 'priority': '0.7', 'lastmod': '2026-08-25'},
+    {'loc': f'{BASE_URL}/blog/monitoring-nalichiya-tovara', 'changefreq': 'monthly', 'priority': '0.7', 'lastmod': '2026-08-25'},
+    {'loc': f'{BASE_URL}/blog/sbor-kartochek-tovarov', 'changefreq': 'monthly', 'priority': '0.7', 'lastmod': '2026-08-25'},
+    {'loc': f'{BASE_URL}/blog/sbor-dannyh-s-marketplejsov', 'changefreq': 'monthly', 'priority': '0.7', 'lastmod': '2026-08-25'},
+    {'loc': f'{BASE_URL}/blog/monitoring-cen-wildberries-ozon', 'changefreq': 'monthly', 'priority': '0.7', 'lastmod': '2026-08-25'},
+    # Блог — статьи: Парсинг данных (новые)
+    {'loc': f'{BASE_URL}/blog/monitoring-cen-konkurentov', 'changefreq': 'monthly', 'priority': '0.7', 'lastmod': '2026-08-25'},
+    {'loc': f'{BASE_URL}/blog/vygruzka-tovarov-s-sajta-v-excel', 'changefreq': 'monthly', 'priority': '0.7', 'lastmod': '2026-08-25'},
+    {'loc': f'{BASE_URL}/blog/perenos-tovarov-s-sajta', 'changefreq': 'monthly', 'priority': '0.7', 'lastmod': '2026-08-25'},
+    {'loc': f'{BASE_URL}/blog/otslezhivanie-izmenenij-na-sajte', 'changefreq': 'monthly', 'priority': '0.7', 'lastmod': '2026-08-25'},
+    {'loc': f'{BASE_URL}/blog/uvedomlenie-ob-izmenenii-ceny', 'changefreq': 'monthly', 'priority': '0.7', 'lastmod': '2026-08-25'},
+    {'loc': f'{BASE_URL}/blog/avtomaticheskij-sbor-tovarov-s-sajta', 'changefreq': 'monthly', 'priority': '0.7', 'lastmod': '2026-08-25'},
+    {'loc': f'{BASE_URL}/blog/sbor-cen-konkurentov', 'changefreq': 'monthly', 'priority': '0.7', 'lastmod': '2026-08-25'},
     # Служебные
     {'loc': f'{BASE_URL}/privacy', 'changefreq': 'yearly', 'priority': '0.3'},
     {'loc': f'{BASE_URL}/llms.txt', 'changefreq': 'weekly', 'priority': '0.5'},
@@ -785,6 +883,8 @@ BLOG_CLUSTERS = [
         ("Telegram-бот для Wildberries", "/blog/telegram-bot-dlya-wildberries"),
         ("Telegram-бот рассылка", "/blog/telegram-bot-rassylka"),
         ("Telegram-бот с оплатой", "/blog/telegram-bot-s-oplatoj"),
+        ("Telegram-бот с CRM", "/blog/telegram-bot-s-crm"),
+        ("Telegram-бот с базой данных", "/blog/telegram-bot-s-bazoj-dannyh"),
     ]),
     ("Telegram-боты для бизнеса (по нишам)", [
         ("Telegram-боты для отраслей (хаб)", "/blog/telegram-boty-dlya-otraslej"),
@@ -851,6 +951,11 @@ BLOG_CLUSTERS = [
         ("Репрайсер Wildberries", "/blog/repricer-wildberries"),
         ("API Wildberries — руководство", "/blog/api-wildberries-rukovodstvo"),
         ("Аналитика маркетплейсов", "/blog/analitika-marketplejsov"),
+        ("Мониторинг остатков товаров", "/blog/monitoring-ostatkov-tovarov"),
+        ("Мониторинг наличия товара", "/blog/monitoring-nalichiya-tovara"),
+        ("Сбор карточек товаров", "/blog/sbor-kartochek-tovarov"),
+        ("Сбор данных с маркетплейсов", "/blog/sbor-dannyh-s-marketplejsov"),
+        ("Мониторинг цен Wildberries и Ozon", "/blog/monitoring-cen-wildberries-ozon"),
     ]),
     ("Лидогенерация", [
         ("Как найти клиентов в Telegram", "/blog/kak-najti-klientov-v-telegram"),
@@ -885,6 +990,20 @@ BLOG_CLUSTERS = [
         ("Программа для учёта производства", "/blog/programma-dlya-ucheta-proizvodstva"),
         ("Как ускорить загрузку сайта", "/blog/kak-uskorit-zagruzku-sajta"),
         ("AI-бот для обработки заявок", "/blog/ai-bot-dlya-obrabotki-zayavok"),
+        ("Автоматизация продаж", "/blog/avtomatizaciya-prodazh"),
+        ("Автоматизация Google Sheets", "/blog/avtomatizaciya-google-sheets"),
+        ("Автоматизация amoCRM", "/blog/avtomatizaciya-amocrm"),
+        ("Как автоматизировать приём заказов", "/blog/kak-avtomatizirovat-priem-zakazov"),
+        ("Автоматизация Bitrix24", "/blog/avtomatizaciya-bitrix24"),
+        ("Автоматизация продаж с помощью ИИ", "/blog/avtomatizaciya-prodazh-s-pomoshchyu-ii"),
+        ("Автоматизация сбора данных", "/blog/avtomatizaciya-sbora-dannyh"),
+        ("Автоматизация CRM системы", "/blog/avtomatizaciya-crm-sistemy"),
+        ("Автоматизация маркетплейсов", "/blog/avtomatizaciya-marketplejsov"),
+        ("Автоматизация Telegram", "/blog/avtomatizaciya-telegram"),
+        ("Автоматизация отчётности", "/blog/avtomatizaciya-otchjotnosti"),
+        ("Автоматизация Excel", "/blog/avtomatizaciya-excel"),
+        ("Автоматизация Google Sheets API", "/blog/avtomatizaciya-google-sheets-api"),
+        ("Как автоматизировать продажи в Telegram", "/blog/kak-avtomatizirovat-prodazhi-v-telegram"),
     ]),
     ("AI и нейросети", [
         ("ChatGPT для бизнеса", "/blog/chatgpt-dlya-biznesa"),
@@ -901,6 +1020,18 @@ BLOG_CLUSTERS = [
         ("Платформа для AI-агентов", "/blog/platforma-dlya-ii-agentov"),
         ("AI-агенты для малого бизнеса", "/blog/ii-agenty-dlya-malogo-biznesa"),
         ("n8n AI-агент", "/blog/n8n-ii-agent"),
+        ("ИИ-менеджер по продажам", "/blog/ii-menedzher-po-prodazham"),
+        ("ИИ-бот для продаж", "/blog/ii-bot-dlya-prodazh"),
+        ("AI-агент для продаж (ИИ)", "/blog/ai-agent-dlya-prodazh"),
+        ("ИИ-менеджер для бизнеса", "/blog/ii-menedzher-dlya-biznesa"),
+        ("Голосовой ИИ-менеджер", "/blog/golosovoj-ii-menedzher"),
+        ("ИИ-оператор", "/blog/ii-operator"),
+        ("ИИ-консультант на сайт", "/blog/ii-konsultant-na-sajt"),
+        ("ИИ-бот для поддержки клиентов", "/blog/ii-bot-dlya-podderzhki-klientov"),
+        ("AI чат-бот для сайта", "/blog/ai-chat-bot-dlya-sajta"),
+        ("ИИ обработка заявок", "/blog/ii-obrabotka-zayavok"),
+        ("ИИ анализ звонков", "/blog/ii-analiz-zvonkov"),
+        ("ИИ обработка сообщений клиентов", "/blog/ii-obrabotka-soobschenij-klientov"),
     ]),
     ("API и интеграции", [
         ("Разработка REST API", "/blog/razrabotka-rest-api"),
@@ -909,6 +1040,12 @@ BLOG_CLUSTERS = [
         ("API-интеграция с 1С", "/blog/api-integraciya-1s"),
         ("FastAPI для разработки API", "/blog/fastapi-dlya-api"),
         ("Интеграция API с Яндекс", "/blog/integraciya-api-s-yandex"),
+        ("Интеграция Telegram с Bitrix24", "/blog/integraciya-telegram-s-bitrix24"),
+        ("Интеграция ChatGPT с сайтом", "/blog/integraciya-chatgpt-s-sajtom"),
+        ("Интеграция Telegram с amoCRM", "/blog/integraciya-telegram-s-amocrm"),
+        ("Интеграция сайта с CRM", "/blog/integraciya-sajta-s-crm"),
+        ("Интеграция CRM с API", "/blog/integraciya-crm-s-api"),
+        ("Интеграция CRM с Google Sheets", "/blog/integraciya-crm-s-google-sheets"),
     ]),
     ("Python-разработка", [
         ("Python-разработка под ключ", "/blog/python-razrabotka-pod-klyuch"),
@@ -931,6 +1068,13 @@ BLOG_CLUSTERS = [
         ("Парсинг данных", "/blog/parser-dannyh"),
         ("Парсинг отзывов", "/blog/parser-otzyvov"),
         ("Мониторинг рекламы конкурентов", "/blog/monitoring-reklamy-konkurentov"),
+        ("Мониторинг цен конкурентов", "/blog/monitoring-cen-konkurentov"),
+        ("Выгрузка товаров с сайта в Excel", "/blog/vygruzka-tovarov-s-sajta-v-excel"),
+        ("Перенос товаров с сайта", "/blog/perenos-tovarov-s-sajta"),
+        ("Отслеживание изменений на сайте", "/blog/otslezhivanie-izmenenij-na-sajte"),
+        ("Уведомление об изменении цены", "/blog/uvedomlenie-ob-izmenenii-ceny"),
+        ("Автоматический сбор товаров с сайта", "/blog/avtomaticheskij-sbor-tovarov-s-sajta"),
+        ("Сбор цен конкурентов", "/blog/sbor-cen-konkurentov"),
     ]),
     ("API-интеграции", [
         ("Интеграция API маркетплейсов", "/blog/integraciya-api-marketplejsov"),
