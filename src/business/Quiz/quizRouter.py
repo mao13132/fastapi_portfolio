@@ -21,6 +21,7 @@ from src.business.Contact.telegram import (
     get_msk_now,
 )
 from settings import CLICK_IN_TG
+from src.business.Notifications.notification_service import notify_new_quiz
 import aiohttp
 
 logger = logging.getLogger(__name__)
@@ -151,6 +152,28 @@ async def submit_quiz(request: Request, answers: dict):
         except Exception as e:
             logger.error(f"Telegram quiz notification failed: {e}")
             # Не пробрасываем — результат уже сохранён
+
+    # 2.5. Email-уведомление (НЕКРИТИЧНО)
+    if useragent and 'bot' not in str(useragent).lower():
+        try:
+            quiz_answers = answers.get("answers", [])
+            contact = answers.get("contact", "-")
+            answers_dict = {}
+            for i, item in enumerate(quiz_answers):
+                if isinstance(item, dict):
+                    q = item.get("question", item.get("q", f"Вопрос {i+1}"))
+                    a = item.get("answer", item.get("a", str(item)))
+                    answers_dict[q] = a
+                else:
+                    answers_dict[f"Вопрос {i+1}"] = str(item)
+
+            answers_dict["Контакт"] = contact
+            answers_dict["Источник"] = answers.get("source", "-")
+            answers_dict["URL"] = answers.get("url", "-")
+
+            await notify_new_quiz(answers=answers_dict, ip=ip)
+        except Exception as e:
+            logger.error(f"Email quiz notification failed: {e}")
 
     # 3. Всегда возвращаем успех клиенту
     return {"status": "success", "result": result}

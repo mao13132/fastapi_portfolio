@@ -52,3 +52,20 @@ CLICK_HOT_MIN_VISITS = 3        # Минимум визитов
 CLICK_HOT_MIN_TIME = 300        # Минимальное суммарное время на сайте (секунд, 5 мин)
 
 BASE_URL = os.getenv('BASE_URL', 'https://dima-razrab.com')
+
+# =============================================
+# Настройки Email (SMTP) — для уведомлений
+# =============================================
+EMAIL_ENABLED = os.getenv('EMAIL_ENABLED', 'false').lower() in ('true', '1', 'yes')
+EMAIL_HOST = os.getenv('EMAIL_HOST', 'smtp.yandex.ru')
+EMAIL_PORT = int(os.getenv('EMAIL_PORT', '465'))
+EMAIL_USE_SSL = os.getenv('EMAIL_USE_SSL', 'true').lower() in ('true', '1', 'yes')
+EMAIL_USERNAME = os.getenv('EMAIL_USERNAME', '')
+EMAIL_PASSWORD = os.getenv('EMAIL_PASSWORD', '')
+EMAIL_FROM = os.getenv('EMAIL_FROM', '') or os.getenv('EMAIL_USERNAME', '')
+EMAIL_FROM_NAME = os.getenv('EMAIL_FROM_NAME', 'Разработка Лиды')
+EMAIL_RECIPIENTS = [
+    addr.strip()
+    for addr in os.getenv('EMAIL_RECIPIENTS', '').split(',')
+    if addr.strip()
+]

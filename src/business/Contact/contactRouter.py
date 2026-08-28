@@ -19,6 +19,7 @@ from src.business.Contact.telegram import (
     format_contact_message,
     format_contact_message_legacy,
 )
+from src.business.Notifications.notification_service import notify_new_order
 
 logger = logging.getLogger(__name__)
 
@@ -91,6 +92,19 @@ async def send_order(request: Request, data: ContactModel):
     except Exception as e:
         logger.error(f"Telegram notification failed: {e}")
         # Не пробрасываем — заявка уже сохранена
+
+    # 3.5. Email-уведомление (НЕКРИТИЧНО)
+    try:
+        await notify_new_order(
+            type_order="Заявка с сайта",
+            name=data.name,
+            phone=data.phone or "-",
+            telegram=data.telegram,
+            text=data.text,
+            ip=ip_address,
+        )
+    except Exception as e:
+        logger.error(f"Email notification failed: {e}")
 
     # 4. Всегда возвращаем успех клиенту
     return {'status': 'ok'}
