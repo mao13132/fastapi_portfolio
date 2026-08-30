@@ -5,6 +5,7 @@
 # Version   Date        Info
 # 1.0       2023    Initial Version
 # 2.0       2026    Attribution support, graceful error handling
+# 3.0       2026    Centralized notifications via notification_service
 #
 # ---------------------------------------------
 import logging
@@ -14,11 +15,6 @@ from fastapi import APIRouter, Request
 from pydantic import BaseModel
 
 from src.business.Contact.ContactService import ContactService
-from src.business.Contact.telegram import (
-    send_formatted_message,
-    format_contact_message,
-    format_contact_message_legacy,
-)
 from src.business.Notifications.notification_service import notify_new_order
 
 logger = logging.getLogger(__name__)
@@ -69,42 +65,25 @@ async def send_order(request: Request, data: ContactModel):
     except Exception:
         ip_address = '-'
 
-    # 3. Формируем и отправляем Telegram-уведомление (НЕКРИТИЧНО)
-    try:
-        # Конвертируем Pydantic модель в dict для форматирования
-        data_dict = data.model_dump()
-        # attribution конвертируем отдельно, исключая None
-        if data_dict.get("attribution"):
-            data_dict["attribution"] = {
-                k: v for k, v in data_dict["attribution"].items()
-                if v is not None
-            }
+    # 3. Подготавливаем данные для Telegram-форматирования
+    data_dict = data.model_dump()
+    if data_dict.get("attribution"):
+        data_dict["attribution"] = {
+            k: v for k, v in data_dict["attribution"].items()
+            if v is not None
+        }
 
-        if data.attribution:
-            # Новый формат с attribution
-            msg = format_contact_message(data_dict, ip_address)
-        else:
-            # Старый формат без attribution (обратная совместимость)
-            msg = format_contact_message_legacy(data_dict, ip_address)
+    # 4. Запускаем ВСЕ уведомления (email + Telegram) в фоне — fire-and-forget
+    await notify_new_order(
+        type_order="Заявка с сайта",
+        name=data.name,
+        phone=data.phone or "-",
+        telegram_user=data.telegram,
+        text=data.text,
+        ip=ip_address,
+        data_dict=data_dict,
+        has_attribution=bool(data.attribution),
+    )
 
-        await send_formatted_message(msg)
-
-    except Exception as e:
-        logger.error(f"Telegram notification failed: {e}")
-        # Не пробрасываем — заявка уже сохранена
-
-    # 3.5. Email-уведомление (НЕКРИТИЧНО)
-    try:
-        await notify_new_order(
-            type_order="Заявка с сайта",
-            name=data.name,
-            phone=data.phone or "-",
-            telegram=data.telegram,
-            text=data.text,
-            ip=ip_address,
-        )
-    except Exception as e:
-        logger.error(f"Email notification failed: {e}")
-
-    # 4. Всегда возвращаем успех клиенту
+    # 5. Всегда возвращаем успех клиенту (не ждём отправки уведомлений)
     return {'status': 'ok'}

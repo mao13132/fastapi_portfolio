@@ -5,23 +5,18 @@
 # Version   Date        Info
 # 1.0       2023    Initial Version
 # 2.0       2026    Attribution support, graceful error handling, new formatting
+# 3.0       2026    Centralized notifications via notification_service
 #
 # ---------------------------------------------
 import logging
-from typing import List, Dict, Any, Optional
+from typing import Optional
 
 from fastapi import APIRouter, HTTPException, Request
 from pydantic import BaseModel
 
-from .QuizService import QuizService, QuizResultService
-from src.business.Contact.telegram import (
-    send_formatted_message,
-    format_quiz_message,
-    split_message,
-    get_msk_now,
-)
-from settings import CLICK_IN_TG
+from .QuizService import QuizService
 from src.business.Notifications.notification_service import notify_new_quiz
+from settings import CLICK_IN_TG
 import aiohttp
 
 logger = logging.getLogger(__name__)
@@ -30,20 +25,6 @@ quizRouter = APIRouter(
     prefix="/quiz",
     tags=["quiz"]
 )
-
-
-class IQuiz(BaseModel):
-    id: int
-    title: str
-    description: str
-    data: dict
-
-
-class IQuizResult(BaseModel):
-    id: int
-    quiz_id: int
-    answers: dict
-    created_at: str
 
 
 @quizRouter.get('/all')
@@ -68,11 +49,6 @@ async def get_quiz(data: InQuiz):
         raise HTTPException(status_code=400, detail='Викторина не найдена')
 
     return quiz
-
-
-class InQuizSubmit(BaseModel):
-    quiz_id: int
-    answers: dict
 
 
 async def get_ip_info(ip: str) -> Optional[dict]:
@@ -118,22 +94,22 @@ async def submit_quiz(request: Request, answers: dict):
         ip=ip,
     )
 
-    # 2. Отправляем Telegram-уведомление (НЕКРИТИЧНО)
-    if CLICK_IN_TG and useragent and 'bot' not in str(useragent).lower():
+    # 2. Подготавливаем данные и запускаем ВСЕ уведомления в фоне
+    if useragent and 'bot' not in str(useragent).lower():
         try:
-            # Получаем IP info
+            # Получаем IP info для Telegram
             ip_info = await get_ip_info(ip)
 
-            # Извлекаем attribution из ответа (если есть)
+            # Извлекаем attribution
             attribution = answers.get("attribution")
 
-            # Извлекаем контакт и ответы для форматирования
+            # Извлекаем контакт и ответы
             contact = answers.get("contact", "-")
             answers_list = answers.get("answers", [])
             source = answers.get("source", "")
             url = answers.get("url", "")
 
-            # Форматируем по новому шаблону
+            # Данные для Telegram-форматирования
             quiz_data = {
                 "contact": contact,
                 "answers": answers_list,
@@ -141,25 +117,9 @@ async def submit_quiz(request: Request, answers: dict):
                 "url": url,
             }
 
-            msg = format_quiz_message(
-                quiz_data,
-                attribution=attribution,
-                ip_info=ip_info,
-            )
-
-            await send_formatted_message(msg)
-
-        except Exception as e:
-            logger.error(f"Telegram quiz notification failed: {e}")
-            # Не пробрасываем — результат уже сохранён
-
-    # 2.5. Email-уведомление (НЕКРИТИЧНО)
-    if useragent and 'bot' not in str(useragent).lower():
-        try:
-            quiz_answers = answers.get("answers", [])
-            contact = answers.get("contact", "-")
+            # Данные для Email-шаблона
             answers_dict = {}
-            for i, item in enumerate(quiz_answers):
+            for i, item in enumerate(answers_list):
                 if isinstance(item, dict):
                     q = item.get("question", item.get("q", f"Вопрос {i+1}"))
                     a = item.get("answer", item.get("a", str(item)))
@@ -168,12 +128,21 @@ async def submit_quiz(request: Request, answers: dict):
                     answers_dict[f"Вопрос {i+1}"] = str(item)
 
             answers_dict["Контакт"] = contact
-            answers_dict["Источник"] = answers.get("source", "-")
-            answers_dict["URL"] = answers.get("url", "-")
+            answers_dict["Источник"] = source or "-"
+            answers_dict["URL"] = url or "-"
 
-            await notify_new_quiz(answers=answers_dict, ip=ip)
+            # Запускаем ВСЕ уведомления (email + Telegram) в фоне — fire-and-forget
+            await notify_new_quiz(
+                answers_dict=answers_dict,
+                ip=ip,
+                quiz_data=quiz_data,
+                attribution=attribution,
+                ip_info=ip_info,
+                send_telegram=CLICK_IN_TG,
+            )
+
         except Exception as e:
-            logger.error(f"Email quiz notification failed: {e}")
+            logger.error(f"Ошибка подготовки уведомлений о квизе: {e}")
 
-    # 3. Всегда возвращаем успех клиенту
+    # 3. Всегда возвращаем успех клиенту (не ждём отправки уведомлений)
     return {"status": "success", "result": result}

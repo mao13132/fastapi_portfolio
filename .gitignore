@@ -6,3 +6,4 @@ venv/
 src/.env
 media/
 temp/
+lead_errors.log
