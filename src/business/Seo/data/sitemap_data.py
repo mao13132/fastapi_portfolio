@@ -18,6 +18,9 @@ SITEMAP_STATIC_URLS = [
     {'loc': f'{BASE_URL}/lidogeneraciya-telegram', 'changefreq': 'monthly', 'priority': '0.8', 'lastmod': '2026-08-02'},
     {'loc': f'{BASE_URL}/kalkulyator-stoimosti', 'changefreq': 'monthly', 'priority': '0.7', 'lastmod': '2026-08-05'},
     {'loc': f'{BASE_URL}/razrabotka-wordpress', 'changefreq': 'monthly', 'priority': '0.9', 'lastmod': '2026-08-18'},
+    {'loc': f'{BASE_URL}/razrabotka-sajtov', 'changefreq': 'monthly', 'priority': '0.9', 'lastmod': '2026-09-02'},
+    # Landing page
+    {'loc': f'{BASE_URL}/telegram-mini-app', 'changefreq': 'weekly', 'priority': '0.9', 'lastmod': '2026-09-06'},
     # Блог — главная и хабы
     {'loc': f'{BASE_URL}/blog', 'changefreq': 'weekly', 'priority': '0.8', 'lastmod': '2026-08-18'},
     {'loc': f'{BASE_URL}/blog/freelanser', 'changefreq': 'weekly', 'priority': '0.8', 'lastmod': '2026-08-18'},
@@ -32,6 +35,7 @@ SITEMAP_STATIC_URLS = [
     {'loc': f'{BASE_URL}/blog/razrabotka-api', 'changefreq': 'weekly', 'priority': '0.8'},
     {'loc': f'{BASE_URL}/blog/mobilnye-prilozheniya', 'changefreq': 'weekly', 'priority': '0.8'},
     {'loc': f'{BASE_URL}/blog/veb-razrabotka', 'changefreq': 'weekly', 'priority': '0.8'},
+    {'loc': f'{BASE_URL}/blog/razrabotka-sajtov', 'changefreq': 'weekly', 'priority': '0.8'},
     # Блог — статьи: Telegram-боты
     {'loc': f'{BASE_URL}/blog/telegram-bot-dlya-biznesa', 'changefreq': 'monthly', 'priority': '0.8', 'lastmod': '2026-08-02'},
     {'loc': f'{BASE_URL}/blog/stoimost-razrabotki', 'changefreq': 'monthly', 'priority': '0.7', 'lastmod': '2026-08-02'},
@@ -171,6 +175,13 @@ SITEMAP_STATIC_URLS = [
     {'loc': f'{BASE_URL}/blog/razrabotka-crm-erp', 'changefreq': 'monthly', 'priority': '0.7', 'lastmod': '2026-08-05'},
     {'loc': f'{BASE_URL}/blog/razrabotka-crm-dlya-yuridicheskoj-kompanii', 'changefreq': 'monthly', 'priority': '0.7', 'lastmod': '2026-08-15'},
     # Блог — статьи: Веб-разработка
+    {'loc': f'{BASE_URL}/blog/razrabotka-sajta-na-zakaz', 'changefreq': 'monthly', 'priority': '0.7'},
+    {'loc': f'{BASE_URL}/blog/sozdanie-sajta', 'changefreq': 'monthly', 'priority': '0.7'},
+    {'loc': f'{BASE_URL}/blog/skolko-stoit-sozdat-sajt', 'changefreq': 'monthly', 'priority': '0.7'},
+    {'loc': f'{BASE_URL}/blog/razrabotka-lendinga', 'changefreq': 'monthly', 'priority': '0.7'},
+    {'loc': f'{BASE_URL}/blog/razrabotka-internet-magazina-pod-klyuch', 'changefreq': 'monthly', 'priority': '0.7'},
+    {'loc': f'{BASE_URL}/blog/zakazat-razrabotku-sajta', 'changefreq': 'monthly', 'priority': '0.7'},
+    {'loc': f'{BASE_URL}/blog/seo-optimizaciya-sajta', 'changefreq': 'monthly', 'priority': '0.7'},
     {'loc': f'{BASE_URL}/blog/sajty-na-zakaz', 'changefreq': 'monthly', 'priority': '0.7', 'lastmod': '2026-08-05'},
     {'loc': f'{BASE_URL}/blog/sozdanie-lendinga', 'changefreq': 'monthly', 'priority': '0.7', 'lastmod': '2026-08-05'},
     {'loc': f'{BASE_URL}/blog/razrabotka-sajta-pod-klyuch-veb', 'changefreq': 'monthly', 'priority': '0.7', 'lastmod': '2026-08-05'},
@@ -372,6 +383,10 @@ SITEMAP_STATIC_URLS = [
     {'loc': f'{BASE_URL}/blog/uvedomlenie-ob-izmenenii-ceny', 'changefreq': 'monthly', 'priority': '0.7', 'lastmod': '2026-08-25'},
     {'loc': f'{BASE_URL}/blog/avtomaticheskij-sbor-tovarov-s-sajta', 'changefreq': 'monthly', 'priority': '0.7', 'lastmod': '2026-08-25'},
     {'loc': f'{BASE_URL}/blog/sbor-cen-konkurentov', 'changefreq': 'monthly', 'priority': '0.7', 'lastmod': '2026-08-25'},
+    # Новые статьи Mini App
+    {'loc': f'{BASE_URL}/blog/telegram-mini-app-vs-mobilnoe-prilozhenie', 'changefreq': 'monthly', 'priority': '0.7', 'lastmod': '2026-09-06'},
+    {'loc': f'{BASE_URL}/blog/mini-app-dlya-salona-krasoty', 'changefreq': 'monthly', 'priority': '0.7', 'lastmod': '2026-09-06'},
+    {'loc': f'{BASE_URL}/blog/mini-app-dlya-dostavki-edy', 'changefreq': 'monthly', 'priority': '0.7', 'lastmod': '2026-09-06'},
     # Блог — статьи: Telegram-боты (35 новых)
     {'loc': f'{BASE_URL}/blog/ai-bot-telegram', 'changefreq': 'monthly', 'priority': '0.7', 'lastmod': '2026-08-26'},
     {'loc': f'{BASE_URL}/blog/chatgpt-bot-telegram', 'changefreq': 'monthly', 'priority': '0.7', 'lastmod': '2026-08-26'},

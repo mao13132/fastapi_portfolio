@@ -31,6 +31,9 @@ class AttributionModel(BaseModel):
 
 class ClickProps(BaseModel):
     url: Optional[str] = None
+    # Реальный источник перехода (document.referrer с фронтенда).
+    # Приоритетнее HTTP Referer header, т.к. Nginx может не пробрасывать его.
+    referer: Optional[str] = None
     utm_source: Optional[str] = None
     utm_medium: Optional[str] = None
     utm_campaign: Optional[str] = None
@@ -75,15 +78,24 @@ async def send_order(request: Request, data: ClickProps):
     except Exception:
         ip_address = '-'
 
-    # КРИТИЧНО: HTTP Referer POST-запроса = текущая страница, а НЕ Google/Yandex.
-    # Реальный referrer (откуда пришёл пользователь) передаётся фронтендом
-    # через document.referrer в attribution.entry.referrer
-    referer = ""
-    if data.attribution and data.attribution.entry and isinstance(data.attribution.entry, dict):
-        referer = data.attribution.entry.get("referrer", "") or ""
+    # КРИТИЧНО: приоритет — referer из тела запроса (document.referrer с фронтенда),
+    # fallback — HTTP Referer header. Фронтенд передаёт document.referrer
+    # напрямую в теле, т.к. Nginx может не пробрасывать HTTP Referer header.
+    referer = data.referer or ""
     if not referer:
-        # Fallback: HTTP Referer (может быть текущая страница — лучше чем ничего)
         referer = request.headers.get("referer", "")
+
+    # DEBUG: логируем все данные для диагностики рефералов
+    logger.info(
+        f"🔍 [CLICK DEBUG] "
+        f"url={url} | "
+        f"data.referer={data.referer!r} | "
+        f"http_referer={request.headers.get('referer', '')!r} | "
+        f"final_referer={referer!r} | "
+        f"utm_source={data.utm_source!r} | "
+        f"attribution_entry_referrer="
+        f"{(data.attribution.entry.get('referrer') if data.attribution and data.attribution.entry and isinstance(data.attribution.entry, dict) else 'N/A')!r}"
+    )
 
     # 1. Парсим SEO-данные (отказоустойчиво)
     seo_data = parse_all_seo_data(referer=referer, user_agent=user_agent, url=url)

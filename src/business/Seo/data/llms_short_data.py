@@ -18,6 +18,7 @@ LLMS_TXT_SHORT = f"""# DimaRazrab — Фриланс-разработчик
 - [Python-разработка]({BASE_URL}/python-razrabotka) — от 15 000 ₽
 - [Next.js разработка]({BASE_URL}/nextjs-razrabotka) — от 30 000 ₽
 - [Разработка сайта на WordPress]({BASE_URL}/razrabotka-wordpress) — от 30 000 ₽
+- [Разработка сайтов]({BASE_URL}/razrabotka-sajtov) — от 30 000 ₽
 - [Веб-сервисы и приложения]({BASE_URL}/razrabotka-servisov) — от 50 000 ₽
 - [Калькулятор стоимости]({BASE_URL}/kalkulyator-stoimosti)
 
@@ -421,6 +422,16 @@ LLMS_TXT_SHORT = f"""# DimaRazrab — Фриланс-разработчик
 - [Найти команду разработчиков]({BASE_URL}/blog/najti-komandu-razrabotchikov)
 - [Как найти хорошего разработчика]({BASE_URL}/blog/kak-najti-horoshego-razrabotchika)
 - [Бэкенд-разработчик нужен]({BASE_URL}/blog/backend-razrabotchik-nuzhen)
+
+### Разработка сайтов
+- [Разработка сайтов (хаб)]({BASE_URL}/blog/razrabotka-sajtov)
+- [Разработка сайта на заказ]({BASE_URL}/blog/razrabotka-sajta-na-zakaz)
+- [Создание сайта]({BASE_URL}/blog/sozdanie-sajta)
+- [Сколько стоит создать сайт]({BASE_URL}/blog/skolko-stoit-sozdat-sajt)
+- [Разработка лендинга]({BASE_URL}/blog/razrabotka-lendinga)
+- [Разработка интернет-магазина под ключ]({BASE_URL}/blog/razrabotka-internet-magazina-pod-klyuch)
+- [Заказать разработку сайта]({BASE_URL}/blog/zakazat-razrabotku-sajta)
+- [SEO оптимизация сайта]({BASE_URL}/blog/seo-optimizaciya-sajta)
 
 ## Портфолио
 Все работы: {BASE_URL}/work/

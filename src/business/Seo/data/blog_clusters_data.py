@@ -391,4 +391,13 @@ BLOG_CLUSTERS = [
         ("Как найти хорошего разработчика", "/blog/kak-najti-horoshego-razrabotchika"),
         ("Бэкенд-разработчик нужен", "/blog/backend-razrabotchik-nuzhen"),
     ]),
+    ("Разработка сайтов", [
+        ("Разработка сайта на заказ", "/blog/razrabotka-sajta-na-zakaz"),
+        ("Создание сайта", "/blog/sozdanie-sajta"),
+        ("Сколько стоит создать сайт", "/blog/skolko-stoit-sozdat-sajt"),
+        ("Разработка лендинга", "/blog/razrabotka-lendinga"),
+        ("Разработка интернет-магазина под ключ", "/blog/razrabotka-internet-magazina-pod-klyuch"),
+        ("Заказать разработку сайта", "/blog/zakazat-razrabotku-sajta"),
+        ("SEO оптимизация сайта", "/blog/seo-optimizaciya-sajta"),
+    ]),
 ]
