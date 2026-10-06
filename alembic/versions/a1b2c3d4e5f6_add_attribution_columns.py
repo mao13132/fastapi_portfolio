@@ -52,7 +52,7 @@ def upgrade() -> None:
     _add_column_if_not_exists('contact', sa.Column('visit_count', sa.Integer(), nullable=True))
     _add_column_if_not_exists('contact', sa.Column('first_visit', sa.DateTime(), nullable=True))
     _add_column_if_not_exists('contact', sa.Column('journey_pages', sa.Integer(), nullable=True))
-    _add_column_if_not_exists('contact', sa.Column('total_time_on_site', sa.Integer(), nullable=True))
+    _add_column_if_not_exists('contact', sa.Column('total_time_on_site', sa.BigInteger(), nullable=True))
 
     # --- CRM ---
     _add_column_if_not_exists('contact', sa.Column('lead_source', sa.String(100), nullable=True))

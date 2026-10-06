@@ -7,7 +7,7 @@
 # 2.0       2026    Added attribution columns (utm_*, yclid, gclid, device, visits, journey)
 #
 # ---------------------------------------------
-from sqlalchemy import Integer, Column, String, Text, Float, JSON, DateTime
+from sqlalchemy import Integer, BigInteger, Column, String, Text, Float, JSON, DateTime
 
 from settings import Base
 
@@ -48,7 +48,7 @@ class Contact(Base):
     visit_count = Column(Integer, nullable=True)
     first_visit = Column(DateTime, nullable=True)
     journey_pages = Column(Integer, nullable=True)
-    total_time_on_site = Column(Integer, nullable=True)
+    total_time_on_site = Column(BigInteger, nullable=True)
 
     # --- Источник / CRM ---
     lead_source = Column(String(100), nullable=True)

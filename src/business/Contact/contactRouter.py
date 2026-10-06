@@ -65,7 +65,7 @@ class ContactModel(BaseModel):
 
 
 def _safe_parse_datetime(value: Optional[str]) -> Optional[datetime]:
-    """Безопасно парсит строку ISO в datetime."""
+    """Безопасно парсит строку ISO в naive datetime (без timezone)."""
     if not value:
         return None
     try:
@@ -73,7 +73,11 @@ def _safe_parse_datetime(value: Optional[str]) -> Optional[datetime]:
         v = value.replace("Z", "+00:00")
         if "." in v:
             v = v.split(".")[0] + "+00:00" if "+" not in v else v
-        return datetime.fromisoformat(v)
+        dt = datetime.fromisoformat(v)
+        # Сбрасываем timezone чтобы совместить с TIMESTAMP WITHOUT TIME ZONE
+        if dt.tzinfo is not None:
+            dt = dt.replace(tzinfo=None)
+        return dt
     except Exception:
         return None
 
@@ -126,8 +130,13 @@ def _extract_attribution_fields(attribution: Optional[AttributionModel], user_ag
     # Journey — количество страниц и общее время
     journey = attribution.journey or []
     result["journey_pages"] = len(journey)
-    total_time = sum(p.get("timeOnPage", 0) for p in journey if isinstance(p, dict))
-    result["total_time_on_site"] = total_time if total_time > 0 else None
+    total_time_ms = sum(p.get("timeOnPage", 0) for p in journey if isinstance(p, dict))
+    # Фронтенд шлёт миллисекунды — конвертируем в секунды, капаем на 24 часа
+    if total_time_ms > 0:
+        total_time_sec = total_time_ms // 1000
+        result["total_time_on_site"] = min(total_time_sec, 86400)
+    else:
+        result["total_time_on_site"] = None
 
     # User-Agent
     result["user_agent"] = user_agent or None
