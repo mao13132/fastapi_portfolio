@@ -143,6 +143,7 @@ async def submit_quiz(request: Request, answers: dict):
                     "answers": answers_list,
                     "source": source,
                     "url": url,
+                    "user_agent": useragent,
                 }
                 msg = format_quiz_message(quiz_data, attribution=attribution, ip_info=ip_info)
                 await send_formatted_message(msg)

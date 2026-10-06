@@ -241,13 +241,127 @@ def format_form_info(attribution: Optional[dict]) -> str:
 
 
 # ============================================================
+# Рекламные параметры (UTM / Click IDs)
+# ============================================================
+
+def format_advertising(attribution: Optional[dict]) -> str:
+    """Форматирует блок рекламных параметров (UTM, yclid, gclid)."""
+    if not attribution:
+        return ""
+
+    # UTM-поля могут быть на верхнем уровне attribution ИЛИ в entry
+    utm_source = attribution.get("utm_source") or (attribution.get("entry") or {}).get("utm_source")
+    utm_medium = attribution.get("utm_medium") or (attribution.get("entry") or {}).get("utm_medium")
+    utm_campaign = attribution.get("utm_campaign") or (attribution.get("entry") or {}).get("utm_campaign")
+    utm_term = attribution.get("utm_term") or (attribution.get("entry") or {}).get("utm_term")
+    utm_content = attribution.get("utm_content") or (attribution.get("entry") or {}).get("utm_content")
+    yclid = attribution.get("yclid")
+    gclid = attribution.get("gclid")
+
+    # Если нет ни UTM, ни click IDs — не показываем блок
+    if not any([utm_source, utm_medium, utm_campaign, utm_term, utm_content, yclid, gclid]):
+        return ""
+
+    lines = ["📣 РЕКЛАМА"]
+
+    # Определяем тип рекламы
+    if yclid:
+        label = "Яндекс.Директ"
+    elif gclid:
+        label = "Google Ads"
+    elif utm_source:
+        label = utm_source.upper()
+    else:
+        label = ""
+
+    if label:
+        lines.append(f"  Источник: {label}")
+
+    # source / medium
+    if utm_source or utm_medium:
+        parts = [p for p in [utm_source, utm_medium] if p]
+        lines.append(f"  Канал: {' / '.join(parts)}")
+
+    # Кампания
+    if utm_campaign:
+        lines.append(f"  Кампания: {utm_campaign}")
+
+    # Ключевое слово
+    if utm_term:
+        lines.append(f"  Ключ: {utm_term}")
+
+    # Объявление ID
+    if utm_content:
+        lines.append(f"  Объявление ID: {utm_content}")
+
+    # Click IDs
+    if yclid:
+        lines.append(f"  Yclid: {yclid}")
+    if gclid:
+        lines.append(f"  Gclid: {gclid}")
+
+    return "\n".join(lines)
+
+
+def format_device_block(attribution: Optional[dict]) -> str:
+    """Форматирует блок устройства для нового формата."""
+    if not attribution or not attribution.get("device"):
+        return ""
+
+    d = attribution["device"]
+    lines = ["📱 УСТРОЙСТВО"]
+
+    if d.get("screen"):
+        lines.append(f"  Экран: {d['screen']}")
+    elif d.get("screen", {}).get("width"):
+        lines.append(f"  Экран: {d['screen']['width']}x{d['screen']['height']}")
+
+    if d.get("platform"):
+        lines.append(f"  Платформа: {d['platform']}")
+    if d.get("language"):
+        lines.append(f"  Язык: {d['language']}")
+
+    # Старый формат (browser/os)
+    if d.get("browser"):
+        lines.append(f"  Браузер: {d['browser']}")
+    if d.get("os"):
+        lines.append(f"  ОС: {d['os']}")
+
+    return "\n".join(lines)
+
+
+def format_visits_block(attribution: Optional[dict]) -> str:
+    """Форматирует блок визитов для нового формата."""
+    if not attribution:
+        return ""
+
+    visits_count = attribution.get("visits")
+    first_visit = attribution.get("firstVisit")
+    last_visit = attribution.get("lastVisit")
+
+    if not any([visits_count, first_visit, last_visit]):
+        return ""
+
+    lines = ["📊 ВИЗИТЫ"]
+
+    if visits_count:
+        lines.append(f"  Всего визитов: {visits_count}")
+    if first_visit:
+        lines.append(f"  Первый визит: {_to_msk_time(first_visit)}")
+    if last_visit:
+        lines.append(f"  Последний визит: {_to_msk_time(last_visit)}")
+
+    return "\n".join(lines)
+
+
+# ============================================================
 # Форматирование сообщений по шаблонам
 # ============================================================
 
 def format_contact_message(data: dict, ip_address: str = "-") -> str:
     """
-    Форматирует сообщение для заявки /contact по шаблону из ТЗ.
-    data — словарь с полями: name, telegram, phone, email, text, url, attribution
+    Форматирует подробное сообщение для заявки /contact.
+    6 блоков: Контакт, Задача, Реклама, Устройство, Визиты, Путь.
     """
     name = data.get("name", "-")
     telegram = data.get("telegram", "-")
@@ -256,53 +370,80 @@ def format_contact_message(data: dict, ip_address: str = "-") -> str:
     text = data.get("text", "-")
     url = data.get("url", "")
     attribution = data.get("attribution")
+    user_agent = data.get("user_agent", "")
 
     lines = [
-        "🆕 Новая заявка",
+        "🆕 НОВАЯ ЗАЯВКА",
         "",
-        f"👤 Имя: {name}",
-        f"📱 Контакт: {telegram}",
+        # --- Блок 1: КОНТАКТ ---
+        "👤 КОНТАКТ",
+        f"  Имя: {name}",
+        f"  Telegram: {telegram}",
     ]
-
     if phone:
-        lines.append(f"📞 Телефон: {phone}")
+        lines.append(f"  Телефон: {phone}")
     if email:
-        lines.append(f"📧 Email: {email}")
+        lines.append(f"  Email: {email}")
 
-    lines.append(f"📝 Задача: {text}")
+    # --- Блок 2: ЗАДАЧА ---
+    lines.append("")
+    lines.append("💬 ЗАДАЧА")
+    lines.append(f"  {text}")
 
     if url:
-        lines.append(f"🔗 Страница: {url}")
+        lines.append("")
+        lines.append("🌐 СТРАНИЦА")
+        lines.append(f"  {url}")
 
-    lines.append(f"🕐 Время: {get_msk_now()}")
-
-    # Attribution sections
+    # --- Блок 3: РЕКЛАМА (UTM / Click IDs) ---
     if attribution:
+        adv_str = format_advertising(attribution)
+        if adv_str:
+            lines.append("")
+            lines.append(adv_str)
+
+        # --- Блок 4: УСТРОЙСТВО ---
+        dev_str = format_device_block(attribution)
+        if dev_str:
+            lines.append("")
+            lines.append(dev_str)
+
+        # --- Блок 5: ВИЗИТЫ ---
+        vis_str = format_visits_block(attribution)
+        if vis_str:
+            lines.append("")
+            lines.append(vis_str)
+
+        # --- Блок 6: ПУТЬ КЛИЕНТА ---
         journey_str = format_journey(attribution)
         if journey_str:
             lines.append("")
             lines.append(journey_str)
 
-        device_str = format_device(attribution)
-        if device_str:
-            lines.append(f"  {device_str}")
+        # Источник входа
+        entry = attribution.get("entry") or {}
+        if entry.get("referrer"):
+            lines.append("")
+            lines.append("🔗 ИСТОЧНИК ВХОДА")
+            lines.append(f"  Реферер: {entry['referrer']}")
 
-        entry_str = format_entry(attribution)
-        if entry_str:
-            lines.append(entry_str)
-
-        visits_str = format_visits(attribution)
-        if visits_str:
-            lines.append(visits_str)
-
+        # Форма (если есть)
         form_str = format_form_info(attribution)
         if form_str:
             lines.append("")
             lines.append(form_str)
 
-    # IP (доп. информация)
+    # User-Agent
+    if user_agent:
+        lines.append("")
+        lines.append(f"🖥 User-Agent: {user_agent[:120]}")
+
+    # IP
     if ip_address and ip_address != "-":
-        lines.append(f"💻 IP: {ip_address}")
+        lines.append(f"🌍 IP: {ip_address}")
+
+    lines.append("")
+    lines.append(f"⏰ Время заявки: {get_msk_now()}")
 
     return "\n".join(lines)
 
@@ -310,27 +451,28 @@ def format_contact_message(data: dict, ip_address: str = "-") -> str:
 def format_quiz_message(quiz_data: dict, attribution: Optional[dict] = None,
                         ip_info: Optional[dict] = None) -> str:
     """
-    Форматирует сообщение для заявки /quiz по шаблону из ТЗ.
-    quiz_data — словарь с полями из запроса.
+    Форматирует подробное сообщение для заявки /quiz.
     """
     contact = quiz_data.get("contact", "-")
     answers_list = quiz_data.get("answers", [])
     source = quiz_data.get("source", "")
     url = quiz_data.get("url", "")
+    user_agent = quiz_data.get("user_agent", "")
 
     # Если attribution передан отдельно — используем его, иначе из quiz_data
     if attribution is None:
         attribution = quiz_data.get("attribution")
 
     lines = [
-        "🎯 Новая заявка из квиза",
+        "🎯 НОВАЯ ЗАЯВКА ИЗ КВИЗА",
         "",
         f"📱 Контакт: {contact}",
     ]
 
     # Ответы на вопросы квиза
     if answers_list:
-        lines.append("📋 Ответы:")
+        lines.append("")
+        lines.append("📋 ОТВЕТЫ:")
         emojis = ["1️⃣", "2️⃣", "3️⃣", "4️⃣", "5️⃣", "6️⃣", "7️⃣", "8️⃣", "9️⃣"]
         for i, answer in enumerate(answers_list, 1):
             if isinstance(answer, dict):
@@ -347,39 +489,53 @@ def format_quiz_message(quiz_data: dict, attribution: Optional[dict] = None,
     if source:
         lines.append(f"📂 Источник: {source}")
 
-    lines.append(f"🕐 Время: {get_msk_now()}")
-
-    # Attribution sections
+    # --- Реклама (UTM / Click IDs) ---
     if attribution:
+        adv_str = format_advertising(attribution)
+        if adv_str:
+            lines.append("")
+            lines.append(adv_str)
+
+        # --- Устройство ---
+        dev_str = format_device_block(attribution)
+        if dev_str:
+            lines.append("")
+            lines.append(dev_str)
+
+        # --- Визиты ---
+        vis_str = format_visits_block(attribution)
+        if vis_str:
+            lines.append("")
+            lines.append(vis_str)
+
+        # --- Путь клиента ---
         journey_str = format_journey(attribution)
         if journey_str:
             lines.append("")
             lines.append(journey_str)
 
-        device_str = format_device(attribution)
-        if device_str:
-            lines.append(f"  {device_str}")
+    # User-Agent
+    if user_agent:
+        lines.append("")
+        lines.append(f"🖥 User-Agent: {user_agent[:120]}")
 
-        entry_str = format_entry(attribution)
-        if entry_str:
-            lines.append(entry_str)
-
-        visits_str = format_visits(attribution)
-        if visits_str:
-            lines.append(visits_str)
-
-    # IP info
+    # IP info (геолокация)
     if ip_info:
         lines.append("")
-        lines.append(f"📍 Гео по IP:")
+        lines.append("🌍 ГЕОЛОКАЦИЯ (по IP)")
+        if ip_info.get("query"):
+            lines.append(f"  IP: {ip_info['query']}")
         if ip_info.get("country"):
-            lines.append(f"  • Страна: {ip_info['country']}")
+            lines.append(f"  Страна: {ip_info['country']}")
         if ip_info.get("regionName"):
-            lines.append(f"  • Регион: {ip_info['regionName']}")
+            lines.append(f"  Регион: {ip_info['regionName']}")
         if ip_info.get("city"):
-            lines.append(f"  • Город: {ip_info['city']}")
+            lines.append(f"  Город: {ip_info['city']}")
         if ip_info.get("isp"):
-            lines.append(f"  • Провайдер: {ip_info['isp']}")
+            lines.append(f"  Провайдер: {ip_info['isp']}")
+
+    lines.append("")
+    lines.append(f"⏰ Время заявки: {get_msk_now()}")
 
     return "\n".join(lines)
 

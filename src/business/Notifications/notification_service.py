@@ -47,6 +47,7 @@ async def _send_order_notifications(
     data_dict: dict = None,
     has_attribution: bool = False,
     send_telegram: bool = True,
+    attribution: dict = None,
 ) -> None:
     """
     Фоновая задача — отправка уведомлений о новой заявке через все каналы.
@@ -62,7 +63,22 @@ async def _send_order_notifications(
         from src.business.Notifications.email_sender import send_email_notification
         from src.business.Notifications.templates import render_order_email
 
-        subject = f"Новая заявка: {type_order} — {name}"
+        subject = f"📬 Новая заявка: {text[:60] if text else name}"
+
+        # Извлекаем UTM из attribution для email
+        utm_data = {}
+        if attribution:
+            utm_data = {
+                k: attribution.get(k)
+                for k in ["utm_source", "utm_medium", "utm_campaign", "utm_term", "utm_content", "yclid", "gclid"]
+                if attribution.get(k)
+            }
+            # Fallback: UTM из entry
+            entry = attribution.get("entry") or {}
+            for k in ["utm_source", "utm_medium", "utm_campaign", "utm_term", "utm_content"]:
+                if not utm_data.get(k) and entry.get(k):
+                    utm_data[k] = entry[k]
+
         html_body = render_order_email(
             type_order=type_order,
             name=name,
@@ -70,6 +86,7 @@ async def _send_order_notifications(
             telegram=telegram_user,
             text=text,
             ip=ip,
+            utm_data=utm_data or None,
         )
         result = await asyncio.to_thread(send_email_notification, subject, html_body)
         logger.info(f"Email уведомление о заявке: {result}")
@@ -111,6 +128,7 @@ async def notify_new_order(
     data_dict: dict = None,
     has_attribution: bool = False,
     send_telegram: bool = True,
+    attribution: dict = None,
 ) -> None:
     """
     Запуск уведомлений о заявке в фоне (fire-and-forget).
@@ -125,6 +143,7 @@ async def notify_new_order(
         ip: IP-адрес клиента (опционально)
         data_dict: Словарь данных для форматирования Telegram (опционально)
         has_attribution: Есть ли attribution в данных (для выбора формата)
+        attribution: Словарь attribution для UTM в email
     """
     asyncio.create_task(
         _send_order_notifications(
@@ -137,6 +156,7 @@ async def notify_new_order(
             data_dict=data_dict,
             has_attribution=has_attribution,
             send_telegram=send_telegram,
+            attribution=attribution,
         )
     )
 

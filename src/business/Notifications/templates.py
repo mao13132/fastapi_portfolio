@@ -90,9 +90,10 @@ def render_order_email(
     telegram: str = None,
     text: str = None,
     ip: str = None,
+    utm_data: dict = None,
 ) -> str:
     """
-    Шаблон письма для новой заявки.
+    Шаблон письма для новой заявки с UTM-метками.
 
     Args:
         type_order: Тип заявки (например, "Контактная форма", "Квиз")
@@ -101,6 +102,7 @@ def render_order_email(
         telegram: Telegram клиента (опционально)
         text: Текст сообщения (опционально)
         ip: IP-адрес клиента (опционально)
+        utm_data: Словарь с UTM-метками (опционально)
 
     Returns:
         Полный HTML-документ
@@ -117,6 +119,32 @@ def render_order_email(
     if ip:
         rows += _field_row("🌐 IP-адрес", ip)
 
+    # --- Блок UTM-меток ---
+    utm_section = ""
+    if utm_data:
+        utm_rows = ""
+        utm_labels = {
+            "utm_source": "Источник",
+            "utm_medium": "Канал",
+            "utm_campaign": "Кампания",
+            "utm_term": "Ключевое слово",
+            "utm_content": "Объявление ID",
+            "yclid": "Yclid",
+            "gclid": "Gclid",
+        }
+        for key, label in utm_labels.items():
+            val = utm_data.get(key)
+            if val:
+                utm_rows += _field_row(f"🏷 {label}", str(val))
+
+        if utm_rows:
+            utm_section = f"""
+            <h3 style="color:#374151; font-size:16px; margin:25px 0 10px 0;">📣 Рекламные метки</h3>
+            <table width="100%" cellpadding="0" cellspacing="0" style="border:1px solid #e5e7eb; border-radius:6px; overflow:hidden;">
+                {utm_rows}
+            </table>
+            """
+
     content = f"""
     <p style="color:#374151; font-size:15px; margin:0 0 20px 0;">
         Поступила новая заявка на сайте!
@@ -124,6 +152,7 @@ def render_order_email(
     <table width="100%" cellpadding="0" cellspacing="0" style="border:1px solid #e5e7eb; border-radius:6px; overflow:hidden;">
         {rows}
     </table>
+    {utm_section}
     """
 
     return _base_wrapper("📬 Новая заявка", content, color="#2563eb")
