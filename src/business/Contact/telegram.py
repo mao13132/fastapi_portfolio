@@ -803,7 +803,8 @@ def format_click_message(url: str, attribution: Optional[dict] = None,
                          utm_source: Optional[str] = None,
                          ip_address: str = "-",
                          is_hot: bool = False,
-                         referer: str = "") -> str:
+                         referer: str = "",
+                         user_agent: str = "") -> str:
     """
     Форматирует сообщение для /click.
     Если is_hot=True — заголовок «🔥 Горячий визит», иначе «📊 Новый клик».
@@ -857,6 +858,9 @@ def format_click_message(url: str, attribution: Optional[dict] = None,
 
     if referer:
         lines.append(f"🔀 Реферер: {referer}")
+
+    if user_agent:
+        lines.append(f"🖥 User-Agent: {user_agent[:150]}")
 
     if ip_address and ip_address != "-":
         lines.append(f"💻 IP: {ip_address}")
